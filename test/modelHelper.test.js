@@ -25,14 +25,21 @@ describe('Model Helper Tests', () => {
 
   it('Verify container block and child models are assembled correctly', () => {
     const modelHelper = new ModelHelper('Vehicles', models, definition, filters);
-    assert(modelHelper.groups.length === 4);
+    assert(modelHelper.groups.length === 5);
     // block model (vehicles)
+    assert(modelHelper.groups[0].fieldGroup.fields.length === 1);
     assert(modelHelper.groups[0].fieldGroup.fields[0].fields.length === 1);
+
     // plane
-    assert(modelHelper.groups[1].fieldGroup.fields.length === 2);
+    assert(modelHelper.groups[1].fieldGroup.fields.length === 3);
+
     // train
     assert(modelHelper.groups[2].fieldGroup.fields.length === 3);
-    // car
-    assert(modelHelper.groups[3].fieldGroup.fields.length === 4);
+
+    // planewithclass
+    assert(modelHelper.groups[3].fieldGroup.fields.length === 3);
+
+    // trainwithclass
+    assert(modelHelper.groups[4].fieldGroup.fields.length === 3);
   });
 });
