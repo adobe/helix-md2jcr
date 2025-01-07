@@ -10,7 +10,8 @@
       {
         "component": "text",
         "name": "classes",
-        "label": "Classes"
+        "label": "Classes",
+        "multi": true
       }
     ]
   },
@@ -28,9 +29,9 @@
         "label": "Field 2"
       },
       {
-        "component": "multiselect",
-        "name": "classes",
-        "label": "Classes"
+        "component": "richtext",
+        "name": "field3",
+        "label": "Field 3"
       }
     ]
   },
@@ -55,7 +56,33 @@
     ]
   },
   {
-    "id": "car",
+    "id": "planewithclass",
+    "fields": [
+      {
+        "component": "text",
+        "name": "field1",
+        "label": "Field 1"
+      },
+      {
+        "component": "richtext",
+        "name": "field2",
+        "label": "Field 2"
+      },
+      {
+        "component": "richtext",
+        "name": "field3",
+        "label": "Field 3"
+      },
+      {
+        "component": "text",
+        "name": "classes",
+        "label": "Classes",
+        "multi": true
+      }
+    ]
+  },
+  {
+    "id": "trainwithclass",
     "fields": [
       {
         "component": "text",
@@ -65,7 +92,7 @@
       {
         "component": "text",
         "name": "field2",
-        "label": "Field 3"
+        "label": "Field 2"
       },
       {
         "component": "text",
@@ -74,8 +101,8 @@
       },
       {
         "component": "text",
-        "name": "field4",
-        "label": "Field 4"
+        "name": "classes",
+        "label": "Classes"
       }
     ]
   }

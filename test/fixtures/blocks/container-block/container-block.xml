@@ -3,14 +3,15 @@
   <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
       <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
-        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="types" filter="vehicles" model="vehicles" name="Vehicles" title="Planes, Trains, and Automobiles">
-          <item_0 sling:resourceType="core/franklin/components/block/v1/block/item" name="Plane" model="plane" classes="[small, private]" field1="Field 1" field2="&lt;p&gt;Field &lt;em&gt;2&lt;/em&gt;&lt;/p&gt;"></item_0>
-          <item_1 sling:resourceType="core/franklin/components/block/v1/block/item" name="Train" model="train" field1="Field 1" field2="Field 2" field3="Field 3"></item_1>
-          <item_2 sling:resourceType="core/franklin/components/block/v1/block/item" name="Car" model="car" field1="Field 1" field2="Field 2" field3="Field 3" field4="Field 4"></item_2>
-          <item_3 sling:resourceType="core/franklin/components/block/v1/block/item" name="Train" model="train" field1="Field 1" field2="Field 2" field3="Field 3"></item_3>
-          <item_4 sling:resourceType="core/franklin/components/block/v1/block/item" name="Car" model="car" field1="Field 1" field2="Field 2" field3="Field 3"></item_4>
-          <item_5 sling:resourceType="core/franklin/components/block/v1/block/item" name="Plane" model="plane" classes="[small, private]" field1="Field 1" field2="&lt;p&gt;&lt;strong&gt;Text&lt;/strong&gt; goes here&lt;/p&gt;"></item_5>
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="[zoom]" filter="vehicles" model="vehicles" name="Vehicles" title="Planes, Trains, and Automobiles">
+          <item_0 sling:resourceType="core/franklin/components/block/v1/block/item" name="Plane" model="plane" field1="Field 1" field2="&lt;p&gt;Field 2&lt;/p&gt;" field3="&lt;p&gt;Field 3&lt;/p&gt;"></item_0>
+          <item_1 sling:resourceType="core/franklin/components/block/v1/block/item" name="Plane" model="plane" field1="Field 1" field2="&lt;p&gt;Field 2&lt;/p&gt;" field3="&lt;p&gt;Field 3&lt;/p&gt;"></item_1>
         </block>
+        <block_1 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="[classy, vroom]" filter="vehicles" model="vehicles" name="VehiclesWithClass" title="Planes, Trains, and Automobiles">
+          <item_0 sling:resourceType="core/franklin/components/block/v1/block/item" name="PlaneWithClass" model="planewithclass" classes="[x, a]" field1="Field 1" field2="&lt;p&gt;Field 2&lt;/p&gt;" field3="&lt;p&gt;Field 3&lt;/p&gt;"></item_0>
+          <item_1 sling:resourceType="core/franklin/components/block/v1/block/item" name="TrainWithClass" model="trainwithclass" classes="large" field1="Field 1" field2="Field 2" field3="Field 3"></item_1>
+          <item_2 sling:resourceType="core/franklin/components/block/v1/block/item" name="TrainWithClass" model="trainwithclass" classes="small" field1="Field 1" field2="Field 2" field3="Field 3"></item_2>
+        </block_1>
       </section>
     </root>
   </jcr:content>

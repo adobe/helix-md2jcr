@@ -8,13 +8,13 @@
   {
     "id": "section",
     "components": [
-      "cards"
+      "vehicles"
     ]
   },
   {
     "id": "vehicles",
     "components": [
-      "plane", "train", "car"
+      "plane", "train", "trainwithclass", "planewithclass"
     ]
   }
 ]

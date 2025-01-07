@@ -42,7 +42,7 @@ function buildPageMetadata(table, models) {
     const field = getField(model, key);
     if (field) {
       // if the field is an image then we need to dig into the row to find the image
-      if (field.component === 'reference') {
+      if (find(row.children[1], { type: 'image' })) {
         const { url } = image.getProperties(row);
         metadata['xwalk:imageReference'] = url;
       } else if (link.supports(row)) {

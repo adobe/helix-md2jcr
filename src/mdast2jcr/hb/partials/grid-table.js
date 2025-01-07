@@ -50,14 +50,15 @@ function getBlockDetails(mdast, definition) {
     const match = toString(textNode).match(regex);
 
     if (match) {
+      const blockName = match.groups.blockName.trim();
+      // try to locate the model name by inspecting the definition file
+      const modelId = getModelId(definition, blockName);
+
       const block = {
         name: match.groups.blockName.trim(),
         classes: match.groups.classes ? match.groups.classes.split(',')
           .map((c) => c.trim()) : [],
       };
-
-      // try to locate the model name by inspecting the definition file
-      const modelId = getModelId(definition, block.name);
 
       if (modelId) {
         block.modelId = modelId;
@@ -66,6 +67,11 @@ function getBlockDetails(mdast, definition) {
       } else if (block.name.toLowerCase() === 'section metadata') {
         block.modelId = 'section-metadata';
       }
+
+      if (!block.modelId) {
+        throw new Error(`The block '${block.name}' does not have a model associated with it. Please check your definitions file.`);
+      }
+
       return block;
     }
   }
@@ -200,10 +206,9 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
   // the first cells is the header row, so we skip it
   // const nodes = findAll(mdast, (node) => node.type === 'gtCell', true);
   const rows = findAll(mdast, (node) => node.type === 'gtRow', false);
-  if (mode !== 'blockItem') {
-    rows.shift();
-  } else {
-    const classesField = getField(model, 'classes');
+  let classesField;
+  if (mode === 'blockItem') {
+    classesField = getField(model, 'classes');
     // if our model defines a classes field then dig out the classes from the first cell
     if (classesField) {
       // if we are a block item we need to look at the first cell to see if it has any class
@@ -213,17 +218,17 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
       const textValue = toString(firstCell);
       const classes = textValue.split(',').map((c) => c.trim());
 
-      // discard the component name leaving only the block option names (classes names)
-      if (classes.length > 1) {
-        classes.shift();
-      }
+      // discard the component name leaving only the block option names (class names)
+      classes.shift();
 
       // if we are left with any classes to add to the block item, then add them
       if (classes.length > 0) {
-        properties.classes = (classesField.component === 'multiselect')
+        properties.classes = classesField?.multi === true
           ? `[${classes.join(', ')}]` : classes.join(', ');
       }
     }
+  } else {
+    rows.shift();
   }
 
   const modelFields = fieldsCloned.map((group) => group.fields).flat();
@@ -237,7 +242,7 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
     let fieldGroup = fieldsCloned[index];
 
     let nodes;
-    if (mode === 'blockItem') {
+    if (mode === 'blockItem' && classesField) {
       ([, ...nodes] = findAll(row, (node) => node.type === 'gtCell', true));
     } else {
       nodes = findAll(row, (node) => node.type === 'gtCell', true);
@@ -255,6 +260,34 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
       const field = fieldResolver.resolve(wrapped, fieldGroup);
       extractPropertiesForNode(field, wrapped, properties);
     } else {
+      if (fieldGroup.fields.length < nodes.length) {
+        let startIndex = -1;
+        let endIndex = -1;
+        const pWrapper = {
+          type: 'xxx',
+          children: [],
+        };
+        nodes.forEach((node, i) => {
+          if (find(node, { type: 'image' })) {
+            endIndex = i;
+            return;
+          }
+          if (node.type === 'paragraph') {
+            if (startIndex === -1) {
+              startIndex = i;
+            }
+          }
+          if (startIndex !== -1) {
+            pWrapper.children.push(node);
+          }
+        });
+
+        // we only rearrange if we need to if we found an image
+        if (endIndex !== -1) {
+          nodes.splice(0, endIndex - startIndex, pWrapper);
+        }
+      }
+
       nodes.forEach((node) => {
         if (mode === 'blockItem') {
           fieldGroup = fieldsCloned.shift();
@@ -292,7 +325,7 @@ function extractBlockHeaderProperties(models, definition, mdast) {
     const classesField = getField(model, 'classes');
 
     if (blockDetails.classes.length > 0 && classesField) {
-      props.classes = (classesField.component === 'multiselect')
+      props.classes = (classesField.multi === true)
         ? `[${blockDetails.classes.join(', ')}]` : blockDetails.classes.join(', ');
     }
   }
@@ -312,7 +345,16 @@ function getBlockItems(mdast, modelHelper, definitions, allowedComponents) {
 
   rows.forEach((row) => {
     const cellText = toString(row.children[0]);
-    const componentId = cellText.split(',').shift().trim();
+
+    // the first cell may be defined as the component id (with optional classes)
+    let componentId = cellText.split(',').shift().trim();
+
+    // if we can't find the component id in the allowed components it means
+    // the user has not specified what component to use therefore we fall back
+    // to the first allowed component.
+    if (allowedComponents.indexOf(componentId) === -1) {
+      [componentId] = allowedComponents;
+    }
 
     // check to see if we can use this component
     if (allowedComponents.includes(componentId)) {
@@ -359,6 +401,10 @@ function gridTablePartial(context) {
 
   // now that we have the name of the block, we can find the associated model
   const model = findModelById(models, blockHeaderProperties.model);
+
+  if (!model && blockHeaderProperties.model !== 'section-metadata' && blockHeaderProperties.model !== 'page-metadata') {
+    throw new Error(`Unable to locate the model for '${blockHeaderProperties.name}' component. Please check the models file to see if one is defined for the component.`);
+  }
 
   let component;
   let mode = 'simple';

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "paragraph",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "p_1"
+      },
+      {
+        "component": "reference",
+        "name": "p_2"
+      },
+      {
+        "component": "text",
+        "name": "p_2Alt"
+      },
+      {
+        "component": "text",
+        "name": "p_3"
+      },
+      {
+        "component": "text",
+        "name": "classes"
+      }
+    ]
+  }
+]

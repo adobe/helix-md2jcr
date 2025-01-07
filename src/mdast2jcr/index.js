@@ -87,7 +87,7 @@ export default async function mdast2jcr(mdast, options = {}) {
     lineSeparator: '\n',
   });
 
-  // console.log(xml);
+  console.log(xml);
 
   return xml;
 }
