@@ -1,0 +1,216 @@
+{
+  "definitions": [
+    {
+      "title": "Teaser",
+      "id": "teaser",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Teaser",
+              "model": "teaser",
+              "filter": "teaser"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Teaser Item",
+      "id": "teaser-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Teaser Item",
+              "model": "teaser-item",
+              "teaser_titleType": "h2"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "teaser",
+      "fields": [
+        {
+          "component": "select",
+          "name": "classes",
+          "value": "",
+          "label": "Teaser Style",
+          "valueType": "string",
+          "maxSize": 2,
+          "options": [
+            {
+              "name": "Default",
+              "value": "plain"
+            },
+            {
+              "name": "Featured",
+              "value": "featured"
+            },
+            {
+              "name": "List",
+              "value": "list"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teaser-item",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "alignment",
+          "value": "img-right",
+          "label": "Teaser Variation",
+          "valueType": "string",
+          "maxSize": 2,
+          "options": [
+            {
+              "name": "Image Alignment",
+              "children": [
+                {
+                  "name": "Image/Video Right - Content Left",
+                  "value": "img-right"
+                },
+                {
+                  "name": "Image/Video Left - Content Right",
+                  "value": "img-left"
+                }
+              ]
+            },
+            {
+              "name": "Video Styles",
+              "children": [
+                {
+                  "name": "Default",
+                  "value": "default"
+                },
+                {
+                  "name": "Lightweight Embed",
+                  "value": "light"
+                },
+                {
+                  "name": "Auto Play",
+                  "value": "autoplay"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "component": "custom-asset-namespace:custom-asset",
+          "name": "teaser_img",
+          "label": "Image",
+          "multi": false,
+          "configUrl": "/content/ups.resource/tools/asset-selector/image.config.json",
+          "valueType": "string"
+        },
+        {
+          "component": "custom-asset-namespace:custom-asset-mimetype",
+          "valueType": "string",
+          "name": "teaser_imgMimeType"
+        },
+        {
+          "component": "text",
+          "name": "teaser_imgAlt",
+          "label": "Alt Text"
+        },
+        {
+          "component": "text",
+          "name": "teaser_video",
+          "placeholder": "https://www.youtube.com/watch?v=BocxsbRLBUE",
+          "label": "Video url",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "teaser_title",
+          "label": "Title"
+        },
+        {
+          "component": "select",
+          "name": "teaser_titleType",
+          "label": "Title Type",
+          "value": "h2",
+          "options": [
+            {
+              "name": "h2",
+              "value": "h2"
+            },
+            {
+              "name": "h3",
+              "value": "h3"
+            }
+          ]
+        },
+        {
+          "component": "richtext",
+          "name": "teaser_description",
+          "label": "Description"
+        },
+        {
+          "component": "aem-content",
+          "name": "teaser_cta1",
+          "description": "Please select an internal path or provide an external URL (starting with http:// or https://)",
+          "label": "CTA Link"
+        },
+        {
+          "component": "text",
+          "name": "teaser_cta1Text",
+          "label": "CTA Text"
+        },
+        {
+          "component": "select",
+          "name": "teaser_cta1Type",
+          "label": "CTA Type",
+          "value": "primary",
+          "options": [
+            {
+              "...": "../../../models/partials/_button-types.json#/options"
+            }
+          ]
+        },
+        {
+          "component": "aem-content",
+          "name": "teaser_cta2",
+          "description": "Please select an internal path or provide an external URL (starting with http:// or https://)",
+          "label": "CTA Link"
+        },
+        {
+          "component": "text",
+          "name": "teaser_cta2Text",
+          "label": "CTA Text"
+        },
+        {
+          "component": "select",
+          "name": "teaser_cta2Type",
+          "label": "CTA Type",
+          "value": "secondary",
+          "options": [
+            {
+              "...": "../../../models/partials/_button-types.json#/options"
+            }
+          ]
+        },
+        {
+          "component": "richtext",
+          "name": "teaser_footNote",
+          "label": "Footnote"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "teaser",
+      "components": ["teaser-item"]
+    }
+  ]
+}

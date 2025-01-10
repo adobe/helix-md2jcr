@@ -151,7 +151,7 @@ function extractPropertiesForNode(field, currentNode, properties) {
 
     // if the node is a code block then don't strip out the newlines
     properties[field.name] = find(currentNode, { type: 'code' }) ? value : stripNewlines(value);
-  } else if (field.component === 'reference') {
+  } else if (find(currentNode, { type: 'image' })) {
     const imageNode = find(currentNode, { type: 'image' });
     const { url } = image.getProperties(imageNode);
     properties[field.name] = url;
@@ -252,9 +252,12 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
     if (mode === 'keyValue') {
       extractKeyValueProperties(row, model, fieldResolver, fieldGroup, properties);
     } else {
+      if (mode === 'blockItem') {
+        fieldGroup = fieldsCloned.shift();
+      }
       while (nodes.length > 0) {
         const node = nodes.shift();
-        if (mode === 'blockItem') {
+        if (mode === 'blockItem' && fieldGroup.fields.length === 0) {
           fieldGroup = fieldsCloned.shift();
         }
         const field = fieldResolver.resolve(node, fieldGroup);

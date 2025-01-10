@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
+  <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
+    <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" filter="teaser" model="teaser" name="Teaser">
+          <item_0 sling:resourceType="core/franklin/components/block/v1/block/item" name="Teaser Item" model="teaser-item" teaser_titleType="h2" alignment="[default]" teaser_img="https://delivery-p55671-e392469.adobeaemcloud.com/adobe/assets/urn:aaid:aem:2107978b-29fd-4a32-ae47-a324c70653cd/as/1035368_GettyImages-627472157_super.jpg?w=960&h=540" teaser_imgAlt="Woman sitting in a chair smiles while looking at the computer and a paper bill." teaser_imgMimeType="image/unknown" teaser_title="Go Paperless" teaser_description="&lt;p&gt;If you have a shipping account that is six, eight, or nine digits long, enrol in the UPS Invoicing Centre and save a tree.&lt;/p&gt;&lt;p&gt;&lt;a href&#x3D;&quot;https://billing.ups.com/home&quot;&gt;Log In&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;&lt;a href&#x3D;&quot;https://wwwapps.ups.com/doapp/SignUpOpenAccount?loc&#x3D;en_ES&amp;#x26;returnto&#x3D;https://billing.ups.com/home&quot;&gt;Sign Up&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;&lt;p&gt;If you have a 10-digit account number, please call the number on your invoice to pay your bill. You won’t be able to enrol in the Billing Centre.&lt;/p&gt;"></item_0>
+        </block>
+      </section>
+    </root>
+  </jcr:content>
+</jcr:root>
