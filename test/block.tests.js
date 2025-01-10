@@ -74,4 +74,8 @@ describe('md2jcr Tests', () => {
   it('section-metadata', async () => {
     await testBlock('section-metadata');
   });
+
+  it('ups-feature-list', async () => {
+    await testBlock('ups-feature-list');
+  });
 });

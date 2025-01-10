@@ -11,7 +11,6 @@
  */
 
 /* eslint-disable no-param-reassign */
-
 import Handlebars from 'handlebars';
 import xmlFormatter from 'xml-formatter';
 import { splitSection, unwrapImages as unwrapElements, wrapParagraphs } from './utils.js';
@@ -87,7 +86,9 @@ export default async function mdast2jcr(mdast, options = {}) {
     lineSeparator: '\n',
   });
 
-  console.log(xml);
+  if (process.env.NODE_ENV === 'debug') {
+    console.log(xml);
+  }
 
   return xml;
 }

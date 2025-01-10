@@ -1,0 +1,170 @@
+{
+  "definitions": [
+    {
+      "title": "Feature List",
+      "id": "feature-list",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Feature List",
+              "filter": "feature-list",
+              "model": "feature-list",
+              "collapsible": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "List Item",
+      "id": "list-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "List Item",
+              "model": "list-item"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "feature-list",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "value": ["custom-bullet", "vertical-icon"],
+          "label": "Feature List Styles",
+          "valueType": "string",
+          "maxSize": 2,
+          "options": [
+            {
+              "name": "Bullet Type",
+              "children": [
+                {
+                  "name": "Check Icon",
+                  "value": "custom-bullet"
+                },
+                {
+                  "name": "Default Bullet",
+                  "value": "bullet"
+                },
+                {
+                  "name": "No Bullet",
+                  "value": "no-bullet"
+                }
+              ]
+            },
+            {
+              "name": "Icon Placement",
+              "children": [
+                {
+                  "name": "Vertical",
+                  "value": "vertical-icon"
+                },
+                {
+                  "name": "Horizontal",
+                  "value": "horizontal-icon"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "component": "boolean",
+          "name": "collapsible",
+          "label": "Collapsible"
+        },
+        {
+          "component": "aem-content",
+          "name": "feature-list_link",
+          "label": "First CTA Link"
+        },
+        {
+          "component": "text",
+          "name": "feature-list_linkText",
+          "label": "First CTA Text"
+        },
+        {
+          "component": "select",
+          "name": "feature-list_linkType",
+          "label": "First CTA Type",
+          "value": "",
+          "options": [
+            {
+              "...": "../../../models/partials/_button-types.json#/options"
+            }
+          ]
+        },
+        {
+          "component": "aem-content",
+          "name": "feature-list_secondlink",
+          "label": "Second CTA Link"
+        },
+        {
+          "component": "text",
+          "name": "feature-list_secondlinkText",
+          "label": "Second CTA Text"
+        },
+        {
+          "component": "select",
+          "name": "feature-list_secondlinkType",
+          "label": "Second CTA Type",
+          "value": "secondary",
+          "options": [
+            {
+              "...": "../../../models/partials/_button-types.json#/options"
+            }
+          ]
+        },
+        {
+          "component": "richtext",
+          "name": "footnote",
+          "label": "Footnote"
+        }
+      ]
+    },
+    {
+      "id": "list-item",
+      "fields": [
+        {
+          "component": "custom-asset-namespace:custom-asset",
+          "valueType": "string",
+          "name": "listItem_icon",
+          "label": "Icon",
+          "configUrl": "/content/ups.resource/tools/asset-selector/image.config.json"
+        },
+        {
+          "component": "custom-asset-namespace:custom-asset-mimetype",
+          "valueType": "string",
+          "name": "listItem_iconMimeType"
+        },
+        {
+          "component": "text",
+          "name": "listItem_iconText",
+          "label": "Alt Text"
+        },
+        {
+          "component": "richtext",
+          "name": "listItem_description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "feature-list",
+      "components": [
+        "list-item"
+      ]
+    }
+  ]
+}

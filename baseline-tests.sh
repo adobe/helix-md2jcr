@@ -24,8 +24,16 @@ fi
 # Iterate over each .md file
 for MD_FILE in $MD_FILES; do
   # Execute the Node.js script with the .md file as an argument
+  echo "*******************************************************************************"
   echo "Processing $MD_FILE..."
-  node "$NODE_SCRIPT" "$MD_FILE"
+  echo "*******************************************************************************"
+  echo ""
+
+  if [ "$1" == "-d" ]; then
+    NODE_ENV=debug node "$NODE_SCRIPT" "$MD_FILE"
+  else
+    node "$NODE_SCRIPT" "$MD_FILE"
+  fi
 
   # Check if the Node.js script executed successfully
   if [ $? -ne 0 ]; then

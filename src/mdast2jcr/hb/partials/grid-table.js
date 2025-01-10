@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 import { find } from 'unist-util-find';
+import { remove } from 'unist-util-remove';
+import { is } from 'unist-util-is';
 import { toString } from 'mdast-util-to-string';
 import Handlebars from 'handlebars';
 import { toHast } from 'mdast-util-to-hast';
@@ -226,6 +228,7 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
       }
     }
   } else {
+    // get rid of the header row, no need for that
     rows.shift();
   }
 
@@ -233,7 +236,7 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
   const fieldResolver = new FieldGroupFieldResolver(component);
 
   for (const [index, row] of rows.entries()) {
-    if (modelFields.length === index) {
+    if (modelFields.length === index || fieldsCloned.length === index) {
       break;
     }
 
@@ -327,7 +330,7 @@ function getBlockItems(mdast, modelHelper, definitions, allowedComponents) {
 
   const items = [];
   // get all rows after the header that are more than one cell wide
-  const rows = findAll(mdast, (node) => node.type === 'gtRow' && node.children.length > 1, false);
+  const rows = findAll(mdast, (node) => node.type === 'gtRow', false);
 
   rows.forEach((row) => {
     const cellText = toString(row.children[0]);
@@ -433,7 +436,25 @@ function gridTablePartial(context) {
   const sorted = Object.entries(properties).sort(sortJcrProperties);
   const attributesStr = sorted.map(([k, v]) => `${k}="${v}"`).join(' ');
 
+  // *****************************************************
+  // Component Block Processing
+  // *****************************************************
+  // 1. In this section attempt to locate the associated model for the block.
+  // 2. Trim the mdast nodes to only be relevant for the child block.
+  // 3. Then getBlockitems will process the mdast nodes and return the block items.
   const allowedComponents = filters.find((f) => f.id === component.filterId)?.components || [];
+  // collect all rows
+  const blockRows = findAll(mdast, (node) => node.type === 'gtRow', true);
+  // the fieldGroup (parent model) determines the expected number of rows in the table
+  // so we can remove the rows that belong to the parent and leave only the
+  // relevant rows for the child
+  const removed = blockRows.splice(0, fieldGroup.fields.length + 1);
+
+  // remove the elements from the mdast tree that match the items in the removed array
+  removed.forEach((r) => {
+    remove(mdast, (n) => is(n, r));
+  });
+
   const blockItems = getBlockItems(mdast, modelHelper, definition, allowedComponents) || [];
 
   return `<block${uniqueName} ${attributesStr}>${blockItems.length > 0 ? blockItems.join('\n') : ''}</block${uniqueName}>`;

@@ -9,17 +9,42 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-import { readFile } from 'fs/promises';
+import { readFile, stat } from 'fs/promises';
 import { resolve } from 'path';
 
 export async function loadBlockResources(spec) {
-  const modelFile = await readFile(resolve(__testdir, `fixtures/blocks/${spec}`, `${spec}-models.json`), 'utf-8');
-  const definitionFile = await readFile(resolve(__testdir, `fixtures/blocks/${spec}`, `${spec}-definitions.json`), 'utf-8');
-  const filtersFile = await readFile(resolve(__testdir, `fixtures/blocks/${spec}`, `${spec}-filters.json`), 'utf-8');
+  let modelJson;
+  let definitionJson;
+  let filtersJson;
 
-  const modelJson = JSON.parse(modelFile);
-  const definitionJson = JSON.parse(definitionFile);
-  const filtersJson = JSON.parse(filtersFile);
+  const blockDefinitionsPath = resolve(__testdir, `fixtures/blocks/${spec}`, `_${spec}.json`);
+
+  try {
+    await stat(blockDefinitionsPath);
+    const blockDefinitionFile = await readFile(blockDefinitionsPath, 'utf-8');
+    const json = JSON.parse(blockDefinitionFile);
+    modelJson = json.models;
+    definitionJson = {
+      groups: [
+        {
+          title: 'Blocks',
+          id: 'blocks',
+          components: [
+            ...json.definitions,
+          ],
+        },
+      ],
+    };
+    filtersJson = json.filters;
+  } catch (err) {
+    const modelFile = await readFile(resolve(__testdir, `fixtures/blocks/${spec}`, `${spec}-models.json`), 'utf-8');
+    const definitionFile = await readFile(resolve(__testdir, `fixtures/blocks/${spec}`, `${spec}-definitions.json`), 'utf-8');
+    const filtersFile = await readFile(resolve(__testdir, `fixtures/blocks/${spec}`, `${spec}-filters.json`), 'utf-8');
+
+    modelJson = JSON.parse(modelFile);
+    definitionJson = JSON.parse(definitionFile);
+    filtersJson = JSON.parse(filtersFile);
+  }
 
   return {
     models: modelJson,

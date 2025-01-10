@@ -52,13 +52,38 @@ async function convert(mdFile, decodeXML = false) {
   const base = path.basename(mdFile, '.md');
   const fileJcrXML = path.resolve(dir, `${base}.xml`);
   const decodedXML = path.resolve(dir, `${base}-decoded.xml`);
-  const modelFile = path.resolve(dir, `${base}-models.json`);
-  const definitionFile = path.resolve(dir, `${base}-definitions.json`);
-  const filtersFile = path.resolve(dir, `${base}-filters.json`);
 
-  const modelJson = await readJsonFile(modelFile);
-  const definitionJson = await readJsonFile(definitionFile);
-  const filtersJson = await readJsonFile(filtersFile);
+  let modelJson;
+  let definitionJson;
+  let filtersJson;
+
+  const blockDefinitionsPath = path.resolve(dir, `_${base}.json`);
+
+  // check to see if the blockFiles exists
+  try {
+    await stat(blockDefinitionsPath);
+    const blockDefinitionFile = await readJsonFile(path.resolve(dir, `_${base}.json`));
+    modelJson = blockDefinitionFile.models;
+    definitionJson = {
+      groups: [
+        {
+          title: 'Blocks',
+          id: 'blocks',
+          components: [
+            ...blockDefinitionFile.definitions,
+          ],
+        },
+      ],
+    };
+    filtersJson = blockDefinitionFile.filters;
+  } catch (err) {
+    const modelFile = path.resolve(dir, `${base}-models.json`);
+    const definitionFile = path.resolve(dir, `${base}-definitions.json`);
+    const filtersFile = path.resolve(dir, `${base}-filters.json`);
+    modelJson = await readJsonFile(modelFile);
+    definitionJson = await readJsonFile(definitionFile);
+    filtersJson = await readJsonFile(filtersFile);
+  }
 
   const md = await readFile(mdFile, 'utf-8');
 
