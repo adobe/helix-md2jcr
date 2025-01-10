@@ -49,7 +49,9 @@ class ModelHelper {
     const model = this.models.find((m) => m.id === component.modelId);
 
     // this FieldGroup is for the main model
-    this.groups.push({ modelId: model.id, fieldGroup: new FieldGroup(model) });
+    if (model) {
+      this.groups.push({ modelId: model?.id || undefined, fieldGroup: new FieldGroup(model) });
+    }
 
     // if the component has a filter, then get the associated model and create a FieldGroup for it
     if (component.filterId) {

@@ -70,10 +70,6 @@ function getBlockDetails(mdast, definition) {
         block.modelId = 'section-metadata';
       }
 
-      if (!block.modelId) {
-        throw new Error(`The block '${block.name}' does not have a model associated with it. Please check your definitions file.`);
-      }
-
       return block;
     }
   }
@@ -308,7 +304,9 @@ function extractBlockHeaderProperties(models, definition, mdast) {
   const props = {};
 
   props.name = blockDetails.name;
-  props.model = blockDetails.modelId;
+  if (blockDetails.modelId) {
+    props.model = blockDetails.modelId;
+  }
 
   const model = findModelById(models, blockDetails.modelId);
 
@@ -399,10 +397,6 @@ function gridTablePartial(context) {
   // now that we have the name of the block, we can find the associated model
   const model = findModelById(models, blockHeaderProperties.model);
 
-  if (!model && blockHeaderProperties.model !== 'section-metadata' && blockHeaderProperties.model !== 'page-metadata') {
-    throw new Error(`Unable to locate the model for '${blockHeaderProperties.name}' component. Please check the models file to see if one is defined for the component.`);
-  }
-
   let component;
   let mode = 'simple';
 
@@ -424,6 +418,9 @@ function gridTablePartial(context) {
     ...blockHeaderProperties,
   };
 
+  let blockProperties = '';
+  let fieldGroup;
+
   const modelHelper = new ModelHelper(
     blockHeaderProperties.name,
     models,
@@ -431,13 +428,22 @@ function gridTablePartial(context) {
     filters,
   );
 
-  const fieldGroup = modelHelper.getModelFieldGroup(model.id);
-  extractProperties(mdast, model, mode, component, fieldGroup.fields, properties);
+  // it is possible that a block (Accordion) does not have a model, but the
+  // child component will, which will be handled in the Component Block Processing
+  // section
+  if (model) {
+    fieldGroup = modelHelper.getModelFieldGroup(model.id);
+    extractProperties(mdast, model, mode, component, fieldGroup.fields, properties);
 
-  // sort all the properties so that they are in a consistent order
-  // helpful for debugging and xml readability
-  const sorted = Object.entries(properties).sort(sortJcrProperties);
-  const attributesStr = sorted.map(([k, v]) => `${k}="${v}"`).join(' ');
+    // sort all the properties so that they are in a consistent order
+    // helpful for debugging and xml readability
+    const sorted = Object.entries(properties).sort(sortJcrProperties);
+    blockProperties = sorted.map(([k, v]) => `${k}="${v}"`).join(' ');
+  } else {
+    // because we have no model we expect the block to have a filter with a component that does
+    // so that means we can remove the header row from the mdast tree
+    remove(mdast, (n) => is(n, { type: 'gtHeader' }));
+  }
 
   // *****************************************************
   // Component Block Processing
@@ -451,16 +457,17 @@ function gridTablePartial(context) {
   // the fieldGroup (parent model) determines the expected number of rows in the table
   // so we can remove the rows that belong to the parent and leave only the
   // relevant rows for the child
-  const removed = blockRows.splice(0, fieldGroup.fields.length + 1);
-
-  // remove the elements from the mdast tree that match the items in the removed array
-  removed.forEach((r) => {
-    remove(mdast, (n) => is(n, r));
-  });
+  if (model) {
+    const removed = blockRows.splice(0, fieldGroup.fields.length + 1);
+    // remove the elements from the mdast tree that match the items in the removed array
+    removed.forEach((r) => {
+      remove(mdast, (n) => is(n, r));
+    });
+  }
 
   const blockItems = getBlockItems(mdast, modelHelper, definition, allowedComponents) || [];
 
-  return `<block${uniqueName} ${attributesStr}>${blockItems.length > 0 ? blockItems.join('\n') : ''}</block${uniqueName}>`;
+  return `<block${uniqueName} ${blockProperties}>${blockItems.length > 0 ? blockItems.join('\n') : ''}</block${uniqueName}>`;
 }
 
 export default gridTablePartial;

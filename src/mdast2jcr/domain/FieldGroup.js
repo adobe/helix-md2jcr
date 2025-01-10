@@ -71,6 +71,9 @@ class FieldGroup {
           } else {
             // find the field in the group that has a name that starts with the field.name
             const collapsedField = groupObj.fields.find((item) => field.name.startsWith(item.name));
+            if (!collapsedField) {
+              throw new Error(`Unable to find the collapsed field for field: ${field.name}`);
+            }
             collapsedField.collapsed = collapsedField.collapsed || [];
             collapsedField.collapsed.push(field);
           }

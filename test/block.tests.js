@@ -75,7 +75,19 @@ describe('md2jcr Tests', () => {
     await testBlock('section-metadata');
   });
 
+  it('ups-accordion', async () => {
+    await testBlock('ups-accordion');
+  });
+
   it('ups-feature-list', async () => {
     await testBlock('ups-feature-list');
+  });
+
+  it('ups-teaser', async () => {
+    await testBlock('ups-teaser');
+  });
+
+  it('ups-title', async () => {
+    await testBlock('ups-title');
   });
 });
