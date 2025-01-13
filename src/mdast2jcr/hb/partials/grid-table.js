@@ -150,7 +150,7 @@ function extractPropertiesForNode(field, currentNode, properties) {
   } else if (find(currentNode, { type: 'image' })) {
     const imageNode = find(currentNode, { type: 'image' });
     const { url } = image.getProperties(imageNode);
-    properties[field.name] = url;
+    properties[field.name] = encodeHTMLEntities(url);
     collapseField(field.name, fields, imageNode, null, properties);
   } else {
     const linkNode = find(currentNode, { type: 'link' });
