@@ -38,4 +38,5 @@
 | [](http://www.adobe.com)                              |
 +-------------------------------------------------------+
 
-[image0]: https://localhost/image.jpg
+[image0]: https://localhost/image.jpg?width=300&height=200
+```
