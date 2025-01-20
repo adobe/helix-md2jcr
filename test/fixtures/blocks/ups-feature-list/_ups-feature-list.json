@@ -135,11 +135,6 @@
       "id": "list-item",
       "fields": [
         {
-          "component": "richtext",
-          "name": "listItem_description",
-          "label": "Description"
-        },
-        {
           "component": "custom-asset-namespace:custom-asset",
           "valueType": "string",
           "name": "listItem_icon",
@@ -155,6 +150,11 @@
           "component": "text",
           "name": "listItem_iconText",
           "label": "Alt Text"
+        },
+        {
+          "component": "richtext",
+          "name": "description",
+          "label": "Description"
         }
       ]
     }
