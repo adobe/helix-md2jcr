@@ -49,6 +49,10 @@ class FieldGroupFieldResolver {
    */
   resolve(node, fieldGroup) {
     const { fields } = fieldGroup;
+    if (fields === undefined) {
+      // throw an Error indicating the issue
+      throw new Error(`Field group ${fieldGroup.name} does not have any fields defined.`);
+    }
 
     let foundField = fields.find((field) => {
       if (node.type === 'heading' && field.collapsed?.find((c) => c.name.endsWith('Type'))) {

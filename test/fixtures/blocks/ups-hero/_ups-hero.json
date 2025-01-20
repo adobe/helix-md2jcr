@@ -1,0 +1,232 @@
+{
+  "definitions": [
+    {
+      "title": "Hero",
+      "id": "hero",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Hero",
+              "model": "hero",
+              "hero_headlineType": "h1"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "hero",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Hero Style",
+          "maxSize": 2,
+          "options": [
+            {
+              "name": "Video Styles",
+              "children": [
+                {
+                  "name": "Default",
+                  "value": "default"
+                },
+                {
+                  "name": "Lightweight Embed",
+                  "value": "light"
+                },
+                {
+                  "name": "Auto Play",
+                  "value": "autoplay"
+                }
+              ]
+            },
+            {
+              "name": "Background Arc Style",
+              "children": [
+                {
+                  "name": "UPS Teal",
+                  "value": "ups-teal"
+                },
+                {
+                  "name": "UPS Red",
+                  "value": "ups-red"
+                },
+                {
+                  "name": "Roadie Coral",
+                  "value": "roadie-coral"
+                },
+                {
+                  "name": "Ware2Go Orange",
+                  "value": "ware2go-orange"
+                },
+                {
+                  "name": "Happy Returns",
+                  "value": "happy-returns"
+                },
+                {
+                  "name": "Coyote",
+                  "value": "coyote"
+                },
+                {
+                  "name": "UPS Green",
+                  "value": "ups-green"
+                },
+                {
+                  "name": "Roadie",
+                  "value": "roadie"
+                },
+                {
+                  "name": "UPS Store Light Blue",
+                  "value": "ups-store-light-blue"
+                },
+                {
+                  "name": "UPS Store Blue",
+                  "value": "ups-store-blue"
+                },
+                {
+                  "name": "UPS Blue",
+                  "value": "ups-blue"
+                },
+                {
+                  "name": "UPS Healthcare Blue",
+                  "value": "ups-healthcare-blue"
+                },
+                {
+                  "name": "Ware2Go",
+                  "value": "ware2go"
+                },
+                {
+                  "name": "UPS Brown",
+                  "value": "ups-brown"
+                },
+                {
+                  "name": "UPS Dark Brown",
+                  "value": "ups-dark-brown"
+                },
+                {
+                  "name": "UPS Gray",
+                  "value": "ups-gray"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "hero_headline",
+          "label": "Headline text"
+        },
+        {
+          "component": "select",
+          "name": "hero_headlineType",
+          "value": "h1",
+          "label": "Headline Type",
+          "hidden": true
+        },
+        {
+          "component": "custom-asset-namespace:custom-asset",
+          "name": "hero_img",
+          "label": "Image",
+          "multi": false,
+          "configUrl": "/content/ups.resource/tools/asset-selector/image.config.json",
+          "valueType": "string"
+        },
+        {
+          "component": "custom-asset-namespace:custom-asset-mimetype",
+          "valueType": "string",
+          "name": "hero_imgMimeType"
+        },
+        {
+          "component": "text",
+          "name": "hero_imgAlt",
+          "label": "Alt Text"
+        },
+        {
+          "component": "custom-asset-namespace:custom-asset",
+          "name": "hero_logo",
+          "label": "Logo Image",
+          "multi": false,
+          "configUrl": "/content/ups.resource/tools/asset-selector/image.config.json",
+          "valueType": "string"
+        },
+        {
+          "component": "custom-asset-namespace:custom-asset-mimetype",
+          "valueType": "string",
+          "name": "hero_logoMimeType"
+        },
+        {
+          "component": "text",
+          "name": "hero_logoAlt",
+          "label": "Logo Alt Text"
+        },
+        {
+          "component": "text",
+          "name": "hero_video",
+          "placeholder": "https://www.youtube.com/watch?v=BocxsbRLBUE",
+          "label": "Video url",
+          "multi": false
+        },
+
+        {
+          "component": "richtext",
+          "name": "hero_description",
+          "label": "Description"
+        },
+        {
+          "component": "aem-content",
+          "name": "hero_cta1",
+          "label": "CTA Link",
+          "description": "Please select an internal path or provide an external URL (starting with http:// or https://)"
+        },
+        {
+          "component": "text",
+          "name": "hero_cta1Text",
+          "label": "CTA Text"
+        },
+        {
+          "component": "select",
+          "name": "hero_cta1Type",
+          "label": "CTA Type",
+          "value": "primary",
+          "options": [
+            {
+              "...": "../../../models/partials/_button-types.json#/options"
+            }
+          ]
+        },
+        {
+          "component": "aem-content",
+          "name": "hero_cta2",
+          "label": "CTA Link",
+          "description": "Please select an internal path or provide an external URL (starting with http:// or https://)"
+        },
+        {
+          "component": "text",
+          "name": "hero_cta2Text",
+          "label": "CTA Text"
+        },
+        {
+          "component": "select",
+          "name": "hero_cta2Type",
+          "label": "CTA Type",
+          "value": "primary",
+          "options": [
+            {
+              "...": "../../../models/partials/_button-types.json#/options"
+            }
+          ]
+        },
+        {
+          "component": "richtext",
+          "name": "footNote",
+          "label": "Footnote"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

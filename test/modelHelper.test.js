@@ -42,4 +42,15 @@ describe('Model Helper Tests', () => {
     // trainwithclass
     assert(modelHelper.groups[4].fieldGroup.fields.length === 3);
   });
+
+  it('Verify field order is correct', async () => {
+    // eslint-disable-next-line no-shadow
+    const { models, definitions, filters } = await loadBlockResources('fields-out-of-order', true);
+
+    assert.throws(() => {
+      // eslint-disable-next-line no-new
+      new ModelHelper('hero', models, definitions, filters);
+    }, "Error: Warning in model 'hero': Fields with suffixes should follow their base field.\n"
+      + "  - Field 'hero_headlineType' appears before its base field 'hero_headline'.");
+  });
 });

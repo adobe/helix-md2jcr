@@ -27,11 +27,46 @@ class ModelHelper {
    */
   constructor(blockName, models, definition, filters) {
     this.blockName = blockName;
+    this._checkFieldOrder(models);
     this.models = models;
     this.definition = definition;
     this.filters = filters;
     this.groups = [];
     this._groupModelFields();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  _checkFieldOrder(models) {
+    const suffixes = ['Alt', 'MimeType', 'Type', 'Text', 'Title'];
+
+    models.forEach((model) => {
+      const seenBaseFields = new Set();
+      let warningGenerated = false;
+      const warnings = [];
+
+      model.fields.forEach((field) => {
+        const suffixMatch = suffixes.find((suffix) => field.name.endsWith(suffix));
+        const baseName = suffixMatch ? field.name.slice(0, -suffixMatch.length) : field.name;
+
+        if (suffixMatch) {
+          // This is a suffix field, we need to check if its base field exists
+          if (!seenBaseFields.has(baseName)) {
+            if (!warningGenerated) {
+              warnings.push(`Warning in model '${model.id}': Fields with suffixes should follow their base field.`);
+              warningGenerated = true;
+            }
+            warnings.push(`  - Field '${field.name}' appears before its base field '${baseName}'.`);
+          }
+        } else {
+          // This is a base field, add it to seenBaseFields
+          seenBaseFields.add(baseName);
+        }
+      });
+
+      if (warningGenerated) {
+        throw new Error(warnings.join('\n'));
+      }
+    });
   }
 
   /**
