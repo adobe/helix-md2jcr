@@ -7,7 +7,6 @@
         <block_1 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="two" description="&lt;p&gt;Rich text &lt;code&gt;code&lt;/code&gt;&lt;/p&gt;" image="https://localhost/image.jpg?width=300&amp;height=200" imageAlt="Alt text goes here" link="http://www.adobe.com" linkText="Adobe" model="hero" name="Hero"></block_1>
         <block_2 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" image="https://localhost/image.jpg?width=300&amp;height=200" imageAlt="Alt text goes here" link="http://www.adobe.com" linkText="Adobe" model="hero" name="Hero"></block_2>
         <block_3 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" description="&lt;p&gt;&lt;a href&#x3D;&quot;www.google.com&quot;&gt;Google&lt;/a&gt;&lt;/p&gt;" image="https://localhost/image.jpg?width=300&amp;height=200" imageAlt="Alt text goes here" link="http://www.adobe.com" model="hero" name="Hero"></block_3>
-        <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;"/>
       </section>
     </root>
   </jcr:content>
