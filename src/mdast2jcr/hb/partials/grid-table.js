@@ -238,50 +238,55 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
 
     let fieldGroup = fieldsCloned[index];
 
-    let nodes;
+    // gather all the cells from the row
+    const cells = findAll(row, (node) => node.type === 'gtCell', false);
+
+    // if we are block and our first cell is a class field then skip it
     if (mode === 'blockItem' && classesField) {
-      ([, ...nodes] = findAll(row, (node) => node.type === 'gtCell', true));
-    } else {
-      nodes = findAll(row, (node) => node.type === 'gtCell', true);
+      cells.shift();
     }
 
     if (mode === 'keyValue') {
       extractKeyValueProperties(row, model, fieldResolver, fieldGroup, properties);
     } else {
-      if (mode === 'blockItem') {
-        fieldGroup = fieldsCloned.shift();
-      }
-      while (nodes.length > 0) {
-        const node = nodes.shift();
-        if (mode === 'blockItem' && fieldGroup.fields.length === 0) {
+      // for each cell in the row, process the nodes that exist in the cell
+      for (const cell of cells) {
+        if (mode === 'blockItem') {
           fieldGroup = fieldsCloned.shift();
         }
-        const field = fieldResolver.resolve(node, fieldGroup);
-        let pWrapper;
-        if (field.component === 'richtext') {
-          pWrapper = {
-            type: 'wrapper',
-            children: [node],
-          };
 
-          let searching = true;
+        const nodes = cell.children;
 
-          while (searching) {
-            const n = nodes.shift();
-            if (!n) break;
+        while (nodes.length > 0) {
+          const node = nodes.shift();
 
-            if (find(n, { type: 'image' })) {
-              nodes.unshift(n);
-              searching = false;
+          const field = fieldResolver.resolve(node, fieldGroup);
+          let pWrapper;
+          if (field.component === 'richtext') {
+            pWrapper = {
+              type: 'wrapper',
+              children: [node],
+            };
+
+            let searching = true;
+
+            while (searching) {
+              const n = nodes.shift();
+              if (!n) break;
+
+              if (find(n, { type: 'image' })) {
+                nodes.unshift(n);
+                searching = false;
+              }
+              if (searching) {
+                pWrapper.children.push(n);
+              }
             }
-            if (searching) {
-              pWrapper.children.push(n);
-            }
+          } else {
+            pWrapper = node;
           }
-        } else {
-          pWrapper = node;
+          extractPropertiesForNode(field, pWrapper, properties);
         }
-        extractPropertiesForNode(field, pWrapper, properties);
       }
     }
   }
