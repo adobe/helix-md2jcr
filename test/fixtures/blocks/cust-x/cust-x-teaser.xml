@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
+  <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
+    <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" filter="teaser" model="teaser" name="Teaser">
+          <item_0 sling:resourceType="core/franklin/components/block/v1/block/item" name="Teaser Item" model="teaser-item" teaser_titleType="h2" alignment="[default]" teaser_img="https://www.adobe.com/images/super.jpg?w=960&amp;h=540" teaser_imgAlt="Man looking at himself." teaser_imgMimeType="image/unknown" teaser_title="Go Paperless" teaser_description="&lt;p&gt;If you have a purchasing account that is six, eight, or nine digits long, enrol in the Invoicing Centre and&lt;br&gt; save a tree.&lt;/p&gt;&lt;p&gt;[Log In](&lt;a href&#x3D;&quot;https://billing.adobe.com/home&quot;&gt;https://billing.adobe.com/home&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;&lt;a href&#x3D;&quot;https://adobe.com/signup&quot;&gt;Sign Up&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;&lt;p&gt;If you have a 10-digit account number, please call the number on your invoice to pay your bill. You won’t be able to enrol in the Billing Centre.&lt;/p&gt;"></item_0>
+        </block>
+      </section>
+    </root>
+  </jcr:content>
+</jcr:root>

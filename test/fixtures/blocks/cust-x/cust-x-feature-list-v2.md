@@ -14,12 +14,12 @@
 |               | _[\+34 91 745 64 00](tel:34917456400)_              |
 |               |                                                     |
 |               | When calling, please select option 5 for Invoicing  |
-|               | Support or you may send an email to <esfcr@ups.com> |
+|               | Support or you may send an email to <abc@adobe.com> |
 |               |                                                     |
 |               | For Import enquiries, please select option 6 when   |
 |               | calling.                                            |
 +---------------+-----------------------------------------------------+
 |               | **Technical Support**                               |
 |               |                                                     |
-|               | _[\+34 91 745 98 77](tel:34917459877)_              |
+|               | _[\+12 23 45 67 89](tel:123456789)_                 |
 +---------------+-----------------------------------------------------+

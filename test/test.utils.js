@@ -15,17 +15,16 @@ import { resolve } from 'path';
 /**
  * Load block resources from the fixtures.
  * @param spec the name of the block
- * @param unit if true, load from the unit folder instead of the blocks folder
+ * @param folder the folder where the md is located
  * @return {Promise<{models, definition: {groups: [{title: string,
  * id: string, components: *[]}]}, filters}>}
  */
-export async function loadBlockResources(spec, unit = false) {
+export async function loadBlockResources(spec, folder) {
   let modelJson;
   let definitionJson;
   let filtersJson;
-  const unitFolder = unit ? 'unit' : 'blocks';
 
-  const blockDefinitionsPath = resolve(__testdir, `fixtures/${unitFolder}/${spec}`, `_${spec}.json`);
+  const blockDefinitionsPath = resolve(__testdir, `${folder}`, `_${spec}.json`);
 
   try {
     await stat(blockDefinitionsPath);
@@ -45,9 +44,9 @@ export async function loadBlockResources(spec, unit = false) {
     };
     filtersJson = json.filters;
   } catch (err) {
-    const modelFile = await readFile(resolve(__testdir, `fixtures/${unitFolder}/${spec}`, `${spec}-models.json`), 'utf-8');
-    const definitionFile = await readFile(resolve(__testdir, `fixtures/${unitFolder}/${spec}`, `${spec}-definitions.json`), 'utf-8');
-    const filtersFile = await readFile(resolve(__testdir, `fixtures/${unitFolder}/${spec}`, `${spec}-filters.json`), 'utf-8');
+    const modelFile = await readFile(resolve(__testdir, folder, `${spec}-models.json`), 'utf-8');
+    const definitionFile = await readFile(resolve(__testdir, folder, `${spec}-definitions.json`), 'utf-8');
+    const filtersFile = await readFile(resolve(__testdir, folder, `${spec}-filters.json`), 'utf-8');
 
     modelJson = JSON.parse(modelFile);
     definitionJson = JSON.parse(definitionFile);

@@ -109,7 +109,7 @@
           "valueType": "string",
           "name": "image",
           "label": "Image",
-          "configUrl": "/content/ups.resource/tools/asset-selector/image.config.json"
+          "configUrl": "/content/adobe.resource/tools/asset-selector/image.config.json"
         },
         {
           "component": "text",
@@ -128,7 +128,7 @@
           "valueType": "string",
           "name": "icon",
           "label": "Icon",
-          "configUrl": "/content/ups.resource/tools/asset-selector/image.config.json",
+          "configUrl": "/content/adobe.resource/tools/asset-selector/image.config.json",
           "condition": { "===": [{"var" : "icon_boolean"}, true] }
         },
         {

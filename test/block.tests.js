@@ -13,81 +13,108 @@
 import { loadBlockResources } from './test.utils.js';
 import { test } from './test-base.js';
 
-async function testBlock(spec) {
-  const { models, definition, filters } = await loadBlockResources(spec);
-  await test(`blocks/${spec}/${spec}`, { models, definition, filters });
+async function testBlock(spec, folder) {
+  // split the spec by a / to find the name and the folder
+  const { models, definition, filters } = await loadBlockResources(spec, `fixtures/${folder}`);
+  await test(`${folder}/${spec}`, { models, definition, filters });
 }
 
 describe('md2jcr Tests', () => {
-  it('block', async () => {
-    await testBlock('block');
+  /**
+   * The suite of core block unit tests.
+   */
+  describe('core', () => {
+    const folder = 'blocks/core';
+
+    it('block', async () => {
+      await testBlock('block', `${folder}/block`);
+    });
+
+    it('container-block', async () => {
+      await testBlock('container-block', `${folder}/container-block`);
+    });
+
+    it('grouping', async () => {
+      await testBlock('grouping', `${folder}/grouping`);
+    });
+
+    it('grouping-with-defaults', async () => {
+      await testBlock('grouping-with-defaults', `${folder}/grouping-with-defaults`);
+    });
+
+    it('hero', async () => {
+      await testBlock('hero', `${folder}/hero`);
+    });
+
+    it('hero-richtext', async () => {
+      await testBlock('hero-richtext', `${folder}/hero-richtext`);
+    });
+
+    it('key-value', async () => {
+      await testBlock('key-value', `${folder}/key-value`);
+    });
+
+    it('metadata', async () => {
+      await testBlock('metadata', `${folder}/metadata`);
+    });
+
+    it('metadata-expanded', async () => {
+      await testBlock('metadata-expanded', `${folder}/metadata-expanded`);
+    });
+
+    it('multi-cell', async () => {
+      await testBlock('multi-cell', `${folder}/multi-cell`);
+    });
+
+    it('paragraph', async () => {
+      await testBlock('paragraph', `${folder}/paragraph`);
+    });
+
+    it('richtext', async () => {
+      await testBlock('richtext', `${folder}/richtext`);
+    });
+
+    it('richtext-greedy', async () => {
+      await testBlock('richtext-greedy', `${folder}/richtext-greedy`);
+    });
+
+    it('section-metadata', async () => {
+      await testBlock('section-metadata', `${folder}/section-metadata`);
+    });
   });
 
-  it('container-block', async () => {
-    await testBlock('container-block');
-  });
+  /**
+   * Customer X block unit tests.
+   */
+  describe('cust-x', () => {
+    const folder = 'blocks/cust-x';
 
-  it('grouping', async () => {
-    await testBlock('grouping');
-  });
+    it('cust-x-accordion', async () => {
+      await testBlock('cust-x-accordion', folder);
+    });
 
-  it('grouping-with-defaults', async () => {
-    await testBlock('grouping-with-defaults');
-  });
+    it('cust-x-cards', async () => {
+      await testBlock('cards', folder);
+    });
 
-  it('hero', async () => {
-    await testBlock('hero');
-  });
+    it('cust-x-feature-list', async () => {
+      await testBlock('cust-x-feature-list', folder);
+    });
 
-  it('hero-richtext', async () => {
-    await testBlock('hero-richtext');
-  });
+    it('cust-x-feature-list-v2', async () => {
+      await testBlock('cust-x-feature-list-v2', folder);
+    });
 
-  it('key-value', async () => {
-    await testBlock('key-value');
-  });
+    it('cust-x-hero', async () => {
+      await testBlock('cust-x-hero', folder);
+    });
 
-  it('metadata', async () => {
-    await testBlock('metadata');
-  });
+    it('cust-x-teaser', async () => {
+      await testBlock('cust-x-teaser', folder);
+    });
 
-  it('metadata-expanded', async () => {
-    await testBlock('metadata-expanded');
-  });
-
-  it('multi-cell', async () => {
-    await testBlock('multi-cell');
-  });
-
-  it('paragraph', async () => {
-    await testBlock('paragraph');
-  });
-
-  it('richtext', async () => {
-    await testBlock('richtext');
-  });
-
-  it('richtext-greedy', async () => {
-    await testBlock('richtext-greedy');
-  });
-
-  it('section-metadata', async () => {
-    await testBlock('section-metadata');
-  });
-
-  it('ups-accordion', async () => {
-    await testBlock('ups-accordion');
-  });
-
-  it('ups-feature-list', async () => {
-    await testBlock('ups-feature-list');
-  });
-
-  it('ups-teaser', async () => {
-    await testBlock('ups-teaser');
-  });
-
-  it('ups-title', async () => {
-    await testBlock('ups-title');
+    it('cust-x-title', async () => {
+      await testBlock('cust-x-title', folder);
+    });
   });
 });

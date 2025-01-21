@@ -3,7 +3,7 @@
   <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
       <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
-        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="align-center" model="ups-title" name="Ups Title" title="More Billing Tools" titleType="h2"></block>
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="align-center" model="custom-title" name="Custom Title" title="More Billing Tools" titleType="h2"></block>
       </section>
     </root>
   </jcr:content>

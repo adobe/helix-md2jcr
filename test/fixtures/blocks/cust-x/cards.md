@@ -5,17 +5,17 @@
 |      |       |      |                                                                                                                                              |
 |      |       |      | Incorporate billing information into your existing EDI infrastructure.                                                                       |
 |      |       |      |                                                                                                                                              |
-|      |       |      | [Go To EDI](/content/ups-pt/es/en/business-solutions/expand-your-online-business/upgrade-digital-technology/ups-electronic-data-interchange) |
+|      |       |      | [Go To EDI](/link/goes/here)                                                                                                                 |
 +------+-------+------+----------------------------------------------------------------------------------------------------------------------------------------------+
 | []() | false | []() | ### View Bill                                                                                                                                |
 |      |       |      |                                                                                                                                              |
-|      |       |      | This legacy tool allows you to view, download and print billing invoices or UPS Billing Data files.                                          |
+|      |       |      | This legacy tool allows you to view, download and print billing invoices or Billing Data files.                                              |
 |      |       |      |                                                                                                                                              |
-|      |       |      | [Go To View Bill](/viewbill/invoices?loc=en_ES)                                                                                              |
+|      |       |      | [Go To View Bill](/viewbill/invoices)                                                                                                        |
 +------+-------+------+----------------------------------------------------------------------------------------------------------------------------------------------+
 | []() | false | []() | ### Billing Data Dictionary                                                                                                                  |
 |      |       |      |                                                                                                                                              |
 |      |       |      | Access sample files, data dictionary, header row, charge code descriptions, and XML schema.                                                  |
 |      |       |      |                                                                                                                                              |
-|      |       |      | [Download Now](https://filexfer.ups.com/pub/ups/bat_guides/UserGuide_us_en.zip)                                                              |
+|      |       |      | [Download Now](https://www.adobbe.com/download)                                                                                              |
 +------+-------+------+----------------------------------------------------------------------------------------------------------------------------------------------+
