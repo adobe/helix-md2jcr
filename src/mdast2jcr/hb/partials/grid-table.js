@@ -425,6 +425,10 @@ function gridTablePartial(context) {
     return '';
   } else {
     component = getComponentByTitle(definition, blockHeaderProperties.name);
+    if (component === undefined) {
+      // we could possibly do a case-insensitive lookup?
+      throw new Error(`The component '${blockHeaderProperties.name}' does not exist. Check the spelling of the component name.`);
+    }
     mode = component.keyValue ? 'keyValue' : 'simple';
   }
 
