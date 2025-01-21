@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
+  <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
+    <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="text, services" filter="cards" model="cards" name="Cards">
+          <item_0 sling:resourceType="core/franklin/components/block/v1/block/item" name="Card" model="card" card_titleType="h3" image="" iconBoolean="false" icon="" card_title="Electronic Data Interchange (EDI) View Bill" card_description="&lt;p&gt;Incorporate billing information into your existing EDI infrastructure.&lt;/p&gt;&lt;p&gt;&lt;a href&#x3D;&quot;/content/ups-pt/es/en/business-solutions/expand-your-online-business/upgrade-digital-technology/ups-electronic-data-interchange&quot;&gt;Go To EDI&lt;/a&gt;&lt;/p&gt;"></item_0>
+          <item_1 sling:resourceType="core/franklin/components/block/v1/block/item" name="Card" model="card" card_titleType="h3" image="" iconBoolean="false" icon="" card_title="View Bill" card_description="&lt;p&gt;This legacy tool allows you to view, download and print billing invoices or UPS Billing Data files.&lt;/p&gt;&lt;p&gt;&lt;a href&#x3D;&quot;/viewbill/invoices?loc&#x3D;en_ES&quot;&gt;Go To View Bill&lt;/a&gt;&lt;/p&gt;"></item_1>
+          <item_2 sling:resourceType="core/franklin/components/block/v1/block/item" name="Card" model="card" card_titleType="h3" image="" iconBoolean="false" icon="" card_title="Billing Data Dictionary" card_description="&lt;p&gt;Access sample files, data dictionary, header row, charge code descriptions, and XML schema.&lt;/p&gt;&lt;p&gt;&lt;a href&#x3D;&quot;https://filexfer.ups.com/pub/ups/bat_guides/UserGuide_us_en.zip&quot;&gt;Download Now&lt;/a&gt;&lt;/p&gt;"></item_2>
+        </block>
+      </section>
+    </root>
+  </jcr:content>
+</jcr:root>

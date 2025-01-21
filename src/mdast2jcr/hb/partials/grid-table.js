@@ -267,6 +267,11 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
             const node = nodes.shift();
 
             // give the field group (all fields to the resolver)
+            if (fieldGroup === undefined) {
+              console.warn(`No field group for ${model.id}`);
+              return;
+            }
+
             const field = fieldResolver.resolve(node, fieldGroup);
             let pWrapper;
             if (field.component === 'richtext') {
