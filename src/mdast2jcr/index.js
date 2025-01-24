@@ -86,9 +86,5 @@ export default async function mdast2jcr(mdast, options = {}) {
     lineSeparator: '\n',
   });
 
-  if (process.env.NODE_ENV === 'debug') {
-    console.log(xml);
-  }
-
   return xml;
 }

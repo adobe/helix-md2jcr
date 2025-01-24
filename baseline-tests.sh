@@ -1,5 +1,34 @@
 #!/bin/bash
 
+# create a function that prints the usage of the script
+usage() {
+  echo "Usage: $0 [-v] [-d]"
+  echo "  -v: Verbose mode"
+  echo "  -d: Decode output mode"
+  exit 1
+}
+
+# verify that the command arguments are only -v or -d if any other commands are found exit with an error. If -d is present but -v is not present, exit with an error.
+while getopts ":vd" opt; do
+  case ${opt} in
+    v )
+      VERBOSE="true"
+      ;;
+    d )
+      DECODE="true"
+      ;;
+    \? )
+      echo "Invalid option: $OPTARG" 1>&2
+      usage
+      ;;
+    : )
+      echo "Invalid option: $OPTARG requires an argument" 1>&2
+      usage
+      ;;
+  esac
+done
+
+
 # Set the root directory to search for .md files
 MD_DIR="test/fixtures"
 
@@ -21,19 +50,22 @@ if [ -z "$MD_FILES" ]; then
   exit 1
 fi
 
+ARGS=""
+[ "$VERBOSE" = "true" ] && ARGS="$ARGS -v"
+[ "$DECODE" = "true" ] && ARGS="$ARGS -d"
+
 # Iterate over each .md file
 for MD_FILE in $MD_FILES; do
-  # Execute the Node.js script with the .md file as an argument
-  echo "*******************************************************************************"
-  echo "Processing $MD_FILE..."
-  echo "*******************************************************************************"
-  echo ""
+  # if VERBOSE is true then echo a new line
+  [ "$VERBOSE" = "true" ] && echo
 
-  if [ "$1" == "-d" ]; then
-    NODE_ENV=debug node "$NODE_SCRIPT" "$MD_FILE"
-  else
-    node "$NODE_SCRIPT" "$MD_FILE"
-  fi
+  # Execute the Node.js script with the .md file as an argument
+  echo "Processing $MD_FILE..."
+
+  # if VERBOSE is true then echo a new line
+  [ "$VERBOSE" = "true" ] && echo
+
+  node "$NODE_SCRIPT" "$MD_FILE" $ARGS
 
   # Check if the Node.js script executed successfully
   if [ $? -ne 0 ]; then
@@ -41,5 +73,6 @@ for MD_FILE in $MD_FILES; do
     exit 1
   fi
 done
+
 
 echo "All .md files have been processed successfully."

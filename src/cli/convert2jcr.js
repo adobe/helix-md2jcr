@@ -39,11 +39,12 @@ async function readJsonFile(filePath) {
 /**
  * Convert a markdown file to JCR XML.
  * @param mdFile {string} The path to the markdown file.
+ * @param verbose - if true the XML will be printed to the console.
  * @param decodeXML - if true a file with the decoded XML will be created.
  * @returns {Promise<void>} A promise that resolves when the conversion is
  * complete, or rejects if the file is not a markdown file.
  */
-async function convert(mdFile, decodeXML = false) {
+async function convert(mdFile, verbose = false, decodeXML = false) {
   if (!mdFile.endsWith('.md')) {
     return Promise.reject(new Error('File must be a markdown file'));
   }
@@ -51,7 +52,6 @@ async function convert(mdFile, decodeXML = false) {
   const dir = path.dirname(mdFile);
   const base = path.basename(mdFile, '.md');
   const fileJcrXML = path.resolve(dir, `${base}.xml`);
-  const decodedXML = path.resolve(dir, `${base}-decoded.xml`);
 
   let modelJson;
   let definitionJson;
@@ -96,8 +96,12 @@ async function convert(mdFile, decodeXML = false) {
 
   const xml = await md2jcr(md, opts);
 
-  if (decodeXML) {
-    writeFile(decodedXML, decode(xml));
+  if (verbose) {
+    if (!decodeXML) {
+      console.log(xml);
+    } else if (decodeXML) {
+      console.log(decode(xml));
+    }
   }
 
   return writeFile(fileJcrXML, xml);
@@ -115,13 +119,16 @@ async function run(inPath) {
 
   const files = [];
   if ((await stat(dirOrFilePath)).isDirectory()) {
-    files.push(...await readdir(dirOrFilePath));
+    const items = await readdir(dirOrFilePath);
+    items
+      .filter((item) => item.endsWith('.md'))
+      .forEach((item) => files.push(path.resolve(dirOrFilePath, item)));
   } else {
     files.push(dirOrFilePath);
   }
 
   for (const file of files) {
-    await convert(file, process.argv.includes('-d'));
+    await convert(file, process.argv.includes('-v'), process.argv.includes('-d'));
   }
 }
 
