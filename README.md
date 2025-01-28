@@ -23,7 +23,7 @@ npm install @adobe/helix-md2jcr
 ```
 
 ## Converting Markdown to JCR Nodes
-Running the following command will generate a XML file with the JCR structure alongside of the input file.
+Running the following command will generate an XML file with the JCR structure alongside of the input file.
 
 For example generating xml for the simple.md file, run:
 ```bash
