@@ -29,6 +29,8 @@ import image from './supports/image.js';
 import FieldGroupFieldResolver from '../../domain/FieldGroupFieldResolver.js';
 import ModelHelper from '../../domain/ModelHelper.js';
 
+/* eslint-disable no-console */
+
 /**
  * @typedef {import('../../index.d.ts').FieldDef} Field
  * @typedef {import('../../index.d.ts').DefinitionDef} Definition
@@ -250,9 +252,9 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
       extractKeyValueProperties(row, model, fieldResolver, fieldGroup, properties);
     } else {
       // for each cell in the row, process the nodes that exist in the cell
-      let processsing = false;
+      let processing = false;
       for (const cell of cells) {
-        if (mode === 'blockItem' && !processsing) {
+        if (mode === 'blockItem' && !processing) {
           fieldGroup = fieldsCloned.shift();
         }
 
@@ -260,7 +262,7 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
         if (nodes.length === 0) {
           // throw away the field that was associated with the cell
           fieldGroup.fields.shift();
-          processsing = true;
+          processing = true;
           // if there are no nodes in the cell, then we need to skip it
         } else {
           while (nodes.length > 0) {
