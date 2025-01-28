@@ -4,7 +4,6 @@
   "description": "Helix Service that converts markdown to JCR content structure",
   "main": "src/index.js",
   "type": "module",
-  "private": "false",
   "scripts": {
     "test": "c8 mocha 'test/*.tests.js'",
     "lint": "eslint .",
