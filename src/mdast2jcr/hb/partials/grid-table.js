@@ -458,16 +458,16 @@ function gridTablePartial(context) {
   if (model) {
     fieldGroup = modelHelper.getModelFieldGroup(model.id);
     extractProperties(mdast, model, mode, component, fieldGroup.fields, properties);
-
-    // sort all the properties so that they are in a consistent order
-    // helpful for debugging and xml readability
-    const sorted = Object.entries(properties).sort(sortJcrProperties);
-    blockProperties = sorted.map(([k, v]) => `${k}="${v}"`).join(' ');
   } else {
     // because we have no model we expect the block to have a filter with a component that does
     // so that means we can remove the header row from the mdast tree
     remove(mdast, (n) => is(n, { type: 'gtHeader' }));
   }
+
+  // sort all the properties so that they are in a consistent order
+  // helpful for debugging and xml readability
+  const sorted = Object.entries(properties).sort(sortJcrProperties);
+  blockProperties = sorted.map(([k, v]) => `${k}="${v}"`).join(' ');
 
   // *****************************************************
   // Component Block Processing
