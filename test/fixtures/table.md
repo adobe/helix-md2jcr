@@ -1,0 +1,27 @@
+# Sample Table
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Occupation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Alice</td>
+            <td>28</td>
+            <td>Engineer</td>
+        </tr>
+        <tr>
+            <td>Bob</td>
+            <td>34</td>
+            <td>Designer</td>
+        </tr>
+        <tr>
+            <td>Charlie</td>
+            <td>25</td>
+            <td>Developer</td>
+        </tr>
+    </tbody>
+</table>

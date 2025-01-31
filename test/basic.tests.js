@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
+import assert from 'assert';
 import { test } from './test-base.js';
 
 describe('md2jcr Tests', () => {
@@ -39,5 +40,15 @@ describe('md2jcr Tests', () => {
 
   it('converts a document with default-content', async () => {
     await test('default-content-only');
+  });
+
+  it('tables are not supported', async () => {
+    await assert.rejects(
+      test('table'),
+      {
+        name: 'UnsupportedElementError',
+        message: 'Element \'table\' is currently not supported. Please open an issue for us and describe your use case.',
+      },
+    );
   });
 });

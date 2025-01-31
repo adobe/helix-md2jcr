@@ -52,14 +52,7 @@ class Component {
 
   /* eslint-disable no-unused-vars */
   get defaultFields() {
-    // remove the fields that are listed below, but keep the rest as default fields
-    // to be added to the block
-    const {
-      'key-value': keyValue,
-      ...rest
-    } = this._template;
-
-    return rest;
+    return this._template;
   }
 }
 
