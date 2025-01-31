@@ -26,10 +26,9 @@ import imagePartial from './hb/partials/image.js';
 import encodeHelper from './hb/helpers/encode-helper.js';
 import whichPartialHelper from './hb/helpers/which-partial-helper.js';
 import gridTablePartial from './hb/partials/grid-table.js';
-import blockQuotePartial from './hb/partials/blockquote.js';
-import tablePartial from './hb/partials/table.js';
 import pageHelper from './hb/helpers/page-helper.js';
 import pageTemplate from './templates/page-template.js';
+import unsupportedPartial from './hb/partials/unsupported.js';
 
 /**
  * Converts a markdown AST to JCR XML.  This function is the main entry point
@@ -53,8 +52,7 @@ export default async function mdast2jcr(mdast, options = {}) {
   Handlebars.registerPartial('emphasis', emphasisPartial);
   Handlebars.registerPartial('paragraphWrapper', paragraphWrapperPartial);
   Handlebars.registerPartial('gridTable', gridTablePartial);
-  Handlebars.registerPartial('blockquote', blockQuotePartial); // TODO
-  Handlebars.registerPartial('table', tablePartial); // TODO
+  Handlebars.registerPartial('unsupported', unsupportedPartial);
 
   Handlebars.registerHelper('whichPartial', whichPartialHelper);
   Handlebars.registerHelper('encode', encodeHelper);

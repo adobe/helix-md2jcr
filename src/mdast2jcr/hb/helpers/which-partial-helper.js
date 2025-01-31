@@ -9,14 +9,17 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+
+import Handlebars from 'handlebars';
+
 /**
  * Partial Resolver will return the partial helper that's associated with the
- * type.
+ * type. If no partial is found, it will return the unsupported partial.
  * @param type the type of partial
  * @returns {string} the partial type
  */
 function whichPartialHelper(type) {
-  return type;
+  return Handlebars.partials[type] || Handlebars.partials.unsupported;
 }
 
 export default whichPartialHelper;
