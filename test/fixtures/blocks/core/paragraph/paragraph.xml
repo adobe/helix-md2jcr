@@ -3,7 +3,7 @@
   <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
       <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
-        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="greedy" model="paragraph" name="Paragraph" p_1="&lt;p&gt;All text up to image is included:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;console.log(&quot;hello&quot;)
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="greedy" model="paragraph" modelFields="[p_1, p_2, p_2Alt, p_3]" name="Paragraph" p_1="&lt;p&gt;All text up to image is included:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;console.log(&quot;hello&quot;)
                     &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;a href&#x3D;&quot;www.google.com&quot;&gt;Google&lt;/a&gt;&lt;/p&gt;" p_2="http://localhost/1.jpg" p_2Alt="Image" p_3="After image there's more text"></block>
       </section>
     </root>

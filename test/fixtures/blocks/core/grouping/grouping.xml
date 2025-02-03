@@ -3,7 +3,7 @@
   <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
       <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
-        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" image="https://main--hubblehomes-com--aemsites.hlx.page/media_18bd35bfabf1ee9ca848b5f6ee811b9429fe8d39e.jpeg#width=1920&amp;height=800" model="teaser" name="Teaser" teaserText_description="Join us in this ask me everything session ..." teaserText_subtitle="Adobe Experience Cloud" teaserText_title="Welcome to AEM" teaserText_titleType="h2"></block>
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" image="https://main--hubblehomes-com--aemsites.hlx.page/media_18bd35bfabf1ee9ca848b5f6ee811b9429fe8d39e.jpeg#width=1920&amp;height=800" model="teaser" modelFields="[image, teaserText_subtitle, teaserText_title, teaserText_titleType, teaserText_description]" name="Teaser" teaserText_description="Join us in this ask me everything session ..." teaserText_subtitle="Adobe Experience Cloud" teaserText_title="Welcome to AEM" teaserText_titleType="h2"></block>
       </section>
     </root>
   </jcr:content>

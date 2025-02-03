@@ -18,7 +18,7 @@ import { toHast } from 'mdast-util-to-hast';
 import { toHtml } from 'hast-util-to-html';
 import { getComponentById, getComponentByTitle, getModelId } from '../../domain/Definitions.js';
 import {
-  findModelById, getField,
+  findModelById, getField, getModelFields,
 } from '../../domain/Models.js';
 import { findAll } from '../../utils/mdast.js';
 import link from './supports/link.js';
@@ -371,8 +371,13 @@ function getBlockItems(mdast, modelHelper, definitions, allowedComponents) {
       const fieldGroup = modelHelper.getModelFieldGroup(componentId);
       if (fieldGroup) {
         const component = getComponentById(definitions, componentId);
-        const properties = { ...component.defaultFields };
+        const properties = {
+          ...component.defaultFields,
+          modelFields: `[${getModelFields(fieldGroup.model)}]`,
+        };
+
         extractProperties(row, fieldGroup.model, 'blockItem', component, fieldGroup.fields, properties);
+
         items.push(`<item_${items.length} sling:resourceType="core/franklin/components/block/v1/block/item" name="${fieldGroup.model.id}" ${Object.entries(properties).map(([k, v]) => `${k}="${v}"`).join(' ')}></item_${items.length}>`);
       }
     } else {
@@ -441,6 +446,10 @@ function gridTablePartial(context) {
     ...component.defaultFields,
     ...blockHeaderProperties,
   };
+
+  if (model) {
+    properties.modelFields = `[${getModelFields(model)}]`;
+  }
 
   let blockProperties = '';
   let fieldGroup;

@@ -40,7 +40,22 @@ function getField(model, fieldName) {
   return model.fields.find((field) => field.name === fieldName);
 }
 
+/**
+ * Return a comma-separated list of fields in the model.
+ * @param model
+ * @return {string}
+ */
+function getModelFields(model) {
+  const fields = model.fields
+    .map((f) => f.name)
+    .filter((f) => f !== 'classes')
+    .join(', ');
+
+  return fields;
+}
+
 export {
   getField,
   findModelById,
+  getModelFields,
 };

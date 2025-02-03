@@ -3,7 +3,7 @@
   <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
       <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
-        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" model="property_test" name="Property Test" prop1="prop1_value" prop2="prop2_value" text="Title"></block>
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" model="property_test" modelFields="[text]" name="Property Test" prop1="prop1_value" prop2="prop2_value" text="Title"></block>
       </section>
     </root>
   </jcr:content>
