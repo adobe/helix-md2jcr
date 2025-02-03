@@ -13,12 +13,23 @@ import Handlebars from 'handlebars';
 import { find } from 'unist-util-find';
 import { toString } from 'mdast-util-to-string';
 import { findAll } from '../../utils/mdast.js';
+import { findModelById, getModelFields } from '../../domain/Models.js';
 
 function sectionHelper(index, children, options) {
+  const {
+    models,
+  } = options.data.root;
+
   const attributes = {
     'sling:resourceType': 'core/franklin/components/section/v1/section',
     'jcr:primaryType': 'nt:unstructured',
   };
+
+  const model = findModelById(models, 'section-metadata');
+  if (model) {
+    const fields = getModelFields(model);
+    attributes.modelFields = `[${fields}]`;
+  }
 
   const uniqueName = Handlebars.helpers.nameHelper.call(this, 'section');
 

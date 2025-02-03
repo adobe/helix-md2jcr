@@ -1,7 +1,22 @@
 [
   {
-    "id": "empty",
+    "id": "section-metadata",
     "fields": [
+      {
+        "component": "text",
+        "name": "style",
+        "label": "Style"
+      },
+      {
+        "component": "text",
+        "name": "order",
+        "label": "Order"
+      },
+      {
+        "component": "text",
+        "name": "location",
+        "label": "Location"
+      }
     ]
   }
 ]

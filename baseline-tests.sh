@@ -65,7 +65,7 @@ for MD_FILE in $MD_FILES; do
   # if VERBOSE is true then echo a new line
   [ "$VERBOSE" = "true" ] && echo
 
-  node "$NODE_SCRIPT" "$MD_FILE" $ARGS
+  node "$NODE_SCRIPT" "$MD_FILE" $ARGS 2>/dev/null
 
   # Check if the Node.js script executed successfully
   if [ $? -ne 0 ]; then
