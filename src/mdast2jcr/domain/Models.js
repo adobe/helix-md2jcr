@@ -46,12 +46,10 @@ function getField(model, fieldName) {
  * @return {string}
  */
 function getModelFields(model) {
-  const fields = model.fields
+  return model.fields
     .map((f) => f.name)
     .filter((f) => f !== 'classes')
     .join(', ');
-
-  return fields;
 }
 
 export {

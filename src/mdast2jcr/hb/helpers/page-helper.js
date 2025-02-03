@@ -11,7 +11,7 @@
  */
 import { find } from 'unist-util-find';
 import { toString } from 'mdast-util-to-string';
-import { findModelById, getField } from '../../domain/Models.js';
+import { findModelById, getField, getModelFields } from '../../domain/Models.js';
 import { findAll } from '../../utils/mdast.js';
 import { encodeHTMLEntities, stripNewlines } from '../../utils.js';
 import link from '../partials/supports/link.js';
@@ -65,6 +65,11 @@ function buildPageMetadata(table, models) {
     const mappedKey = aemMapping[key] || key;
     mappedMetadata[mappedKey] = value;
   });
+
+  if (model) {
+    const fields = getModelFields(model);
+    mappedMetadata.modelFields = `[${fields}]`;
+  }
 
   return mappedMetadata;
 }
