@@ -3,7 +3,7 @@
   <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent" jcr:title="Writing for the 21st Century Classroom | Learning A-Z" jcr:description="Preparing students for writing in today’s technology-driven world with the best instructional practices and most useful learning experiences." og:url="https://www.adobe.com" cq:tags="[learning,education]" non-multi="cars, planes" checkbox-group="[true]" multiselect="[a,b,c,d]" forced-multi="[a,b,c,d]">
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
       <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
-        <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="Example for Metadata block" type="h1"/>
+        <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Example for Metadata block" type="h1"/>
         <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;This is an example of a metadata block.&lt;/p&gt;"/>
       </section>
     </root>

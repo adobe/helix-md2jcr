@@ -3,20 +3,20 @@
   <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
       <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
-        <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="simple headings" type="h1"/>
+        <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="simple headings" type="h1"/>
         <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Some text&lt;/p&gt;"/>
-        <title_1 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="heading 2" type="h2"/>
+        <title_1 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="heading 2" type="h2"/>
         <text_1 sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;h3&gt;heading 3&lt;/h3&gt;&lt;h4&gt;heading 4&lt;/h4&gt;&lt;h5&gt;heading 5&lt;/h5&gt;"/>
-        <title_2 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="headings with extra styles" type="h1"/>
-        <title_3 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="heading with a HTML link &lt;a href&#x3D;&quot;https://adobe.com&quot;&gt;Adobe&lt;/a&gt;." type="h2"/>
-        <title_4 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="heading with a MD link &lt;a href&#x3D;&quot;https://adobe.com&quot;&gt;Adobe&lt;/a&gt;." type="h2"/>
-        <title_5 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="heading with bold format &lt;strong&gt;Bold&lt;/strong&gt;" type="h2"/>
-        <title_6 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="heading with italic format &lt;em&gt;Italic&lt;/em&gt;" type="h2"/>
-        <title_7 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="heading with italic format &lt;em&gt;Italic&lt;/em&gt; and &lt;strong&gt;Bold&lt;/strong&gt;" type="h2"/>
-        <title_8 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="&lt;strong&gt;100% bold heading&lt;/strong&gt;" type="h2"/>
-        <title_9 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="&lt;em&gt;100% italic heading&lt;/em&gt;" type="h2"/>
-        <title_10 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="heading with &lt;code&gt;code&lt;/code&gt;" type="h2"/>
-        <title_11 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" jcr:title="heading with HTML some text" type="h2"/>
+        <title_2 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="headings with extra styles" type="h1"/>
+        <title_3 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="heading with a HTML link &lt;a href&#x3D;&quot;https://adobe.com&quot;&gt;Adobe&lt;/a&gt;." type="h2"/>
+        <title_4 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="heading with a MD link &lt;a href&#x3D;&quot;https://adobe.com&quot;&gt;Adobe&lt;/a&gt;." type="h2"/>
+        <title_5 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="heading with bold format &lt;strong&gt;Bold&lt;/strong&gt;" type="h2"/>
+        <title_6 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="heading with italic format &lt;em&gt;Italic&lt;/em&gt;" type="h2"/>
+        <title_7 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="heading with italic format &lt;em&gt;Italic&lt;/em&gt; and &lt;strong&gt;Bold&lt;/strong&gt;" type="h2"/>
+        <title_8 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="&lt;strong&gt;100% bold heading&lt;/strong&gt;" type="h2"/>
+        <title_9 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="&lt;em&gt;100% italic heading&lt;/em&gt;" type="h2"/>
+        <title_10 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="heading with &lt;code&gt;code&lt;/code&gt;" type="h2"/>
+        <title_11 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="heading with HTML some text" type="h2"/>
       </section>
     </root>
   </jcr:content>
