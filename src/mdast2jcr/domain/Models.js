@@ -51,7 +51,7 @@ function getModelFields(model) {
   return model.fields
     .map((f) => f.name)
     .filter((f) => f !== 'classes')
-    .join(', ');
+    .join(',');
 }
 
 export {

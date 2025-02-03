@@ -79,7 +79,7 @@ describe('Models Utility Test', () => {
         { name: 'content', type: 'string' },
       ],
     };
-    const expectedFields = 'title, description, content';
+    const expectedFields = 'title,description,content';
 
     const result = getModelFields(model);
     assert.strictEqual(result, expectedFields);
@@ -93,7 +93,7 @@ describe('Models Utility Test', () => {
         { name: 'content', type: 'string' },
       ],
     };
-    const expectedFields = 'title, content';
+    const expectedFields = 'title,content';
 
     const result = getModelFields(model);
     assert.strictEqual(result, expectedFields);

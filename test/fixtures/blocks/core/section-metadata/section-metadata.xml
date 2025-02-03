@@ -2,8 +2,8 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
   <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
-      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured" modelFields="[style, order, location]" data-style="Dark" data-order="First" data-location="North"></section>
-      <section_1 sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured" modelFields="[style, order, location]" data-style="Light" data-order="Last" data-location="South"></section_1>
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured" modelFields="[style,order,location]" data-style="Dark" data-order="First" data-location="North"></section>
+      <section_1 sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured" modelFields="[style,order,location]" data-style="Light" data-order="Last" data-location="South"></section_1>
     </root>
   </jcr:content>
 </jcr:root>
