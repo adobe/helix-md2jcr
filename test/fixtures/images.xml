@@ -4,11 +4,11 @@
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
       <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
         <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="A test image with all" type="h1"/>
-        <image sling:resourceType="core/franklin/components/image/v1/image" jcr:primaryType="nt:unstructured" fileReference="/media_1dc0a2d290d791a050feb1e159746f52db392775a.jpeg" alt="Decorative double Helix"/>
+        <image sling:resourceType="core/franklin/components/image/v1/image" jcr:primaryType="nt:unstructured" image="/media_1dc0a2d290d791a050feb1e159746f52db392775a.jpeg" alt="Decorative double Helix"/>
         <title_1 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="A test image without alt text" type="h1"/>
-        <image_1 sling:resourceType="core/franklin/components/image/v1/image" jcr:primaryType="nt:unstructured" fileReference="/media_1dc0a2d290d791a050feb1e159746f52db392775a.jpeg" alt=""/>
+        <image_1 sling:resourceType="core/franklin/components/image/v1/image" jcr:primaryType="nt:unstructured" image="/media_1dc0a2d290d791a050feb1e159746f52db392775a.jpeg" alt=""/>
         <title_2 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="A test image inline" type="h1"/>
-        <image_2 sling:resourceType="core/franklin/components/image/v1/image" jcr:primaryType="nt:unstructured" fileReference="image.png" alt="Decorative double Helix"/>
+        <image_2 sling:resourceType="core/franklin/components/image/v1/image" jcr:primaryType="nt:unstructured" image="image.png" alt="Decorative double Helix"/>
       </section>
     </root>
   </jcr:content>

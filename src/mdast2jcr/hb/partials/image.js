@@ -18,7 +18,7 @@ function image(context) {
 
   const encoded = encodeHtml(url);
   return `<image${uniqueName} sling:resourceType="core/franklin/components/image/v1/image" 
-    jcr:primaryType="nt:unstructured" fileReference="${encoded}" alt="${alt}"/>\n`;
+    jcr:primaryType="nt:unstructured" image="${encoded}" alt="${alt}"/>\n`;
 }
 
 export default image;
