@@ -1,3 +1,38 @@
+## [1.0.13](https://github.com/adobe/helix-md2jcr/compare/v1.0.12...v1.0.13) (2025-02-18)
+
+
+### Bug Fixes
+
+* **sites-29333:** update image block to use image not fileReference ([#56](https://github.com/adobe/helix-md2jcr/issues/56)) ([8b9cf28](https://github.com/adobe/helix-md2jcr/commit/8b9cf28063986ba3591bdea0b8a1144073b89a85))
+
+## [1.0.12](https://github.com/adobe/helix-md2jcr/compare/v1.0.11...v1.0.12) (2025-02-11)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#52](https://github.com/adobe/helix-md2jcr/issues/52)) ([e76a236](https://github.com/adobe/helix-md2jcr/commit/e76a236f660e3bc7cca0e13da95d1883f328fce4))
+
+## [1.0.11](https://github.com/adobe/helix-md2jcr/compare/v1.0.10...v1.0.11) (2025-02-10)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#51](https://github.com/adobe/helix-md2jcr/issues/51)) ([22e980f](https://github.com/adobe/helix-md2jcr/commit/22e980f25d22f4f7dee10fe2886509c2e93c064a))
+
+## [1.0.10](https://github.com/adobe/helix-md2jcr/compare/v1.0.9...v1.0.10) (2025-02-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared-process-queue to v3.1.1 ([#49](https://github.com/adobe/helix-md2jcr/issues/49)) ([1ed757b](https://github.com/adobe/helix-md2jcr/commit/1ed757b2e8245de4c936a794812fe98c44e794f3))
+
+## [1.0.9](https://github.com/adobe/helix-md2jcr/compare/v1.0.8...v1.0.9) (2025-02-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared-process-queue to v3.1.0 ([#48](https://github.com/adobe/helix-md2jcr/issues/48)) ([d779bde](https://github.com/adobe/helix-md2jcr/commit/d779bde1286fee65ee3385c891aa5309697fb9ff))
+
 ## [1.0.8](https://github.com/adobe/helix-md2jcr/compare/v1.0.7...v1.0.8) (2025-02-04)
 
 
