@@ -105,6 +105,22 @@ describe('md2jcr Tests', () => {
     });
 
     /**
+     * The metadata-aem-mapping block test verifies that metadata fields are correctly
+     * mapped to their aem properties.
+     */
+    it('metadata-aem-mapping', async () => {
+      await testBlock('metadata-aem-mapping', `${folder}/metadata-aem-mapping`);
+    });
+
+    /**
+     * The metadata-aem-mapping-case block test verifies that metadata fields are correctly
+     * mapped to their aem properties if the case of the metadata field is uppercase.
+     */
+    it('metadata-aem-mapping', async () => {
+      await testBlock('metadata-aem-mapping-case', `${folder}/metadata-aem-mapping-case`);
+    });
+
+    /**
      * The multi-cell block test verifies that model grouping is correctly handled.
      * Where each model field that is grouped is in its own cell.
      */

@@ -13,11 +13,11 @@
     "fields": [
       {
         "component": "text",
-        "name": "title"
+        "name": "jcr:title"
       },
       {
         "component": "text",
-        "name": "description"
+        "name": "jcr:description"
       },
       {
         "component": "reference",

@@ -1,0 +1,49 @@
+{
+  "definitions": [
+    {
+      "title": "Section",
+      "id": "section",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "model": "section"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "page-metadata",
+      "fields": [
+        {
+          "component": "text",
+          "name": "jcr:title"
+        },
+        {
+          "component": "text",
+          "name": "jcr:description"
+        },
+        {
+          "component": "text",
+          "name": "cq:robotsTags"
+        },
+        {
+          "component": "aem-tag",
+          "name": "cq:canonicalUrl"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "main",
+      "components": [
+        "section"
+      ]
+    }
+  ]
+}

@@ -39,7 +39,14 @@ function buildPageMetadata(table, models) {
     const key = toString(cells[0]);
 
     // if the model has the field, then add it to the metadata
-    const field = getField(model, key);
+    let field;
+    if (Object.keys(aemMapping).includes(key.toLowerCase())) {
+      const aemValue = aemMapping[key.toLowerCase()];
+      field = getField(model, aemValue);
+    } else {
+      field = getField(model, key);
+    }
+
     if (field) {
       // if the field is an image then we need to dig into the row to find the image
       if (find(row.children[1], { type: 'image' })) {
@@ -59,13 +66,9 @@ function buildPageMetadata(table, models) {
     }
   });
 
-  // now go through the metadata and map the fields to aem fields
-  const mappedMetadata = {};
-  Object.entries(metadata).forEach(([key, value]) => {
-    const mappedKey = aemMapping[key] || key;
-    mappedMetadata[mappedKey] = value;
-  });
-
+  const mappedMetadata = { ...metadata };
+  // we need to add a property called modelFields for the Universal Editor
+  // that has all the fields for the model
   if (model) {
     const fields = getModelFields(model);
     mappedMetadata.modelFields = `[${fields}]`;
