@@ -192,4 +192,11 @@ describe('md2jcr Tests', () => {
       await testBlock('cust-x-title', folder);
     });
   });
+
+  describe('mystique', () => {
+    const folder = 'blocks/mystique/hero';
+    it('hero', async () => {
+      await testBlock('hero', folder);
+    });
+  });
 });

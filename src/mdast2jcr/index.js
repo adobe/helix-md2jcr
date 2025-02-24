@@ -29,6 +29,7 @@ import gridTablePartial from './hb/partials/grid-table.js';
 import pageHelper from './hb/helpers/page-helper.js';
 import pageTemplate from './templates/page-template.js';
 import unsupportedPartial from './hb/partials/unsupported.js';
+import sanitizeEds from './mdast-sanitize-eds.js';
 
 /**
  * Converts a markdown AST to JCR XML.  This function is the main entry point
@@ -40,6 +41,7 @@ import unsupportedPartial from './hb/partials/unsupported.js';
  * @returns {Promise<string>}
  */
 export default async function mdast2jcr(mdast, options = {}) {
+  mdast = sanitizeEds(mdast);
   mdast = sanitizeHtml(mdast);
   mdast = splitSection(mdast);
   mdast = unwrapElements(mdast);
