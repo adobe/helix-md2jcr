@@ -3,7 +3,7 @@
   <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
       <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
-        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" imageLargeScreen="http://localhost/image.jpg" imageLargeScreenAlt="large pic" imageSmallScreen="http://localhost/image2.jpg" imageSmallScreenAlt="small pic" model="hero" modelFields="[text,imageLargeScreen,imageLargeScreenAlt,imageSmallScreen,imageSmallScreenAlt]" name="Hero" text="&lt;p&gt;&lt;h1&gt;The Pure Difference&lt;/h1&gt;&lt;/p&gt;&lt;p&gt;High-quality supplements&lt;/p&gt;&lt;p&gt;&lt;a href&#x3D;&quot;/our-products/all-products.html&quot; title&#x3D;&quot;Shop Now&quot;&gt;Shop Now&lt;/a&gt;&lt;/p&gt;"></block>
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" imageLargeScreen="http://localhost/image.jpg" imageLargeScreenAlt="large pic" imageSmallScreen="http://localhost/image2.jpg" imageSmallScreenAlt="small pic" model="hero" modelFields="[text,imageLargeScreenAlt,imageLargeScreen,imageSmallScreen,imageSmallScreenAlt]" name="Hero" text="&lt;p&gt;&lt;h1&gt;The Pure Difference&lt;/h1&gt;&lt;/p&gt;&lt;p&gt;High-quality supplements&lt;/p&gt;&lt;p&gt;&lt;a href&#x3D;&quot;/our-products/all-products.html&quot; title&#x3D;&quot;Shop Now&quot;&gt;Shop Now&lt;/a&gt;&lt;/p&gt;"></block>
       </section>
     </root>
   </jcr:content>

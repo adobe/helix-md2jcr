@@ -194,9 +194,13 @@ describe('md2jcr Tests', () => {
   });
 
   describe('mystique', () => {
-    const folder = 'blocks/mystique/hero';
+    const folder = 'blocks/mystique';
     it('hero', async () => {
-      await testBlock('hero', folder);
+      await testBlock('hero/hero', folder);
+    });
+
+    it('teaser', async () => {
+      await testBlock('teaser/teaser', folder);
     });
   });
 });

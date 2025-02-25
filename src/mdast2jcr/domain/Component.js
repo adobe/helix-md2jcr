@@ -19,7 +19,7 @@ class Component {
    * Create a new Component.
    * @param {string} name
    * @param {string} id
-   * @param {object} template
+   * @param {Object} template
    */
   constructor(name, id, template) {
     this._template = template;
@@ -30,27 +30,50 @@ class Component {
     this._id = id;
   }
 
+  /**
+   * Get the ID for the component.
+   * @return {string}
+   */
   get id() {
     return this._id;
   }
 
+  /**
+   * Get the filter ID for the component.
+   * @return {string}
+   */
   get filterId() {
     return this._filterId;
   }
 
+  /**
+   * Get the model ID for the component.
+   * @return {string}
+   */
   get modelId() {
     return this._modelId;
   }
 
+  /**
+   * Return true or false if the component is a key-value component.
+   * @return {boolean}
+   */
   get keyValue() {
     return this._keyValue;
   }
 
+  /**
+   * Get the name of the component.
+   * @return {string}
+   */
   get name() {
     return this._name;
   }
 
-  /* eslint-disable no-unused-vars */
+  /**
+   * Return the component's default fields specified in the template section.
+   * @return {Object}
+   */
   get defaultFields() {
     return this._template;
   }

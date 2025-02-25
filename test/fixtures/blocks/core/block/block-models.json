@@ -3,6 +3,13 @@
     "id": "hero",
     "fields": [
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "image",
@@ -11,10 +18,10 @@
       },
       {
         "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Alt",
-        "value": ""
+        "name": "linkText",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
       },
       {
         "component": "richtext",
@@ -28,13 +35,6 @@
         "name": "link",
         "value": "",
         "label": "Link",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "linkText",
-        "value": "",
-        "label": "Text",
         "valueType": "string"
       },
       {

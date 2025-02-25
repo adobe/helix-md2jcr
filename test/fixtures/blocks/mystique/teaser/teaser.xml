@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
+  <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
+    <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="light, left, bg spectrum celery 700" cta1="http://www.adobe.com/plush/dogs" cta1Text="BUY NOW" cta1Type="primary" cta2="http://www.adobe.com/plush" cta2Text="See More" cta2Type="secondary" eyebrow="Eyebrow Goes Here" fileReference="![50 percent off discount price][image0]" longDescr="&lt;p&gt;The 50% discount will not last that long, get it while you can!&lt;/p&gt;" model="teaser" modelFields="[fileReference,fileReferenceAlt,eyebrow,title,titleType,longDescr,shortDescr,cta1Type,cta1Text,cta1,cta2Type,cta2Text,cta2]" name="Teaser" shortDescr="&lt;p&gt;While supplies last!&lt;/p&gt;" title="ROCK THIS!" titleType="h5"></block>
+      </section>
+    </root>
+  </jcr:content>
+</jcr:root>

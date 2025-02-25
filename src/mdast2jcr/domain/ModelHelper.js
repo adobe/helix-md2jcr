@@ -27,7 +27,7 @@ class ModelHelper {
    */
   constructor(blockName, models, definition, filters) {
     this.blockName = blockName;
-    this._checkFieldOrder(models);
+    this._fixFieldOrder(models);
     this.models = models;
     this.definition = definition;
     this.filters = filters;
@@ -35,37 +35,31 @@ class ModelHelper {
     this._groupModelFields();
   }
 
+  /**
+   * The field order in the models is not guaranteed to be correct.  This method will fix the order
+   * of the fields in the models so that the base field is followed by the suffix fields.
+   * @param {Array<Model>} models The models to fix the field order.
+   * @private {void}
+   */
   // eslint-disable-next-line class-methods-use-this
-  _checkFieldOrder(models) {
+  _fixFieldOrder(models) {
     const suffixes = ['Alt', 'MimeType', 'Type', 'Text', 'Title'];
 
     models.forEach((model) => {
-      const seenBaseFields = new Set();
-      let warningGenerated = false;
-      const warnings = [];
+      // collect the name of all the model fields that do not have a suffix
+      const baseFields = model.fields
+        .filter((field) => !suffixes.some((suffix) => field.name.endsWith(suffix)))
+        .map((field) => field.name);
 
-      model.fields.forEach((field) => {
-        const suffixMatch = suffixes.find((suffix) => field.name.endsWith(suffix));
-        const baseName = suffixMatch ? field.name.slice(0, -suffixMatch.length) : field.name;
-
-        if (suffixMatch) {
-          // This is a suffix field, we need to check if its base field exists
-          if (!seenBaseFields.has(baseName)) {
-            if (!warningGenerated) {
-              warnings.push(`Warning in model '${model.id}': Fields with suffixes should follow their base field.`);
-              warningGenerated = true;
-            }
-            warnings.push(`  - Field '${field.name}' appears before its base field '${baseName}'.`);
-          }
-        } else {
-          // This is a base field, add it to seenBaseFields
-          seenBaseFields.add(baseName);
-        }
-      });
-
-      if (warningGenerated) {
-        throw new Error(warnings.join('\n'));
-      }
+      // for each base field, find the associated fields with suffixes and update the model
+      // fixing the order so that we can later group things together
+      // eslint-disable-next-line no-param-reassign
+      model.fields = baseFields.flatMap((baseField) => [
+        // will return array with [field, fieldText, fieldType, etc]
+        model.fields.find((field) => field.name === baseField),
+        ...suffixes
+          .map((suffix) => model.fields.find((field) => field.name === `${baseField}${suffix}`))
+          .filter(Boolean)]);
     });
   }
 

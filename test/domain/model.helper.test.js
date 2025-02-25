@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
+import { expect } from 'chai';
 import assert from 'assert';
 import ModelHelper from '../../src/mdast2jcr/domain/ModelHelper.js';
 import { loadBlockResources } from '../test.utils.js';
@@ -45,17 +46,17 @@ describe('Model Helper Tests', () => {
 
   /**
    * Verify that the model helper can handle a model fields that are out of order.
-   * This test uses the fixtures/unit/fields-out-of-order.json file to test the
-   * model helper. There's no need for markdown for this scenario.
    */
-  it('Verify field order is correct', async () => {
+  it('Fix field order', async () => {
     // eslint-disable-next-line no-shadow
-    const { models, definitions, filters } = await loadBlockResources('fields-out-of-order', 'fixtures/unit/fields-out-of-order');
+    const { models, definition, filters } = await loadBlockResources('out-of-order', 'fixtures/unit-tests/out-of-order');
+    const modelHelper = new ModelHelper('Hero', models, definition, filters);
+    expect(modelHelper.groups[0].fieldGroup.fields.length).to.equal(1);
 
-    assert.throws(() => {
-      // eslint-disable-next-line no-new
-      new ModelHelper('hero', models, definitions, filters);
-    }, "Error: Warning in model 'hero': Fields with suffixes should follow their base field.\n"
-      + "  - Field 'hero_headlineType' appears before its base field 'hero_headline'.");
+    const heroField = modelHelper.groups[0].fieldGroup.fields[0].fields[0];
+
+    expect(heroField.name).to.equal('hero_img');
+    expect(heroField.collapsed[0].name).to.equal('hero_imgAlt');
+    expect(heroField.collapsed[1].name).to.equal('hero_imgMimeType');
   });
 });
