@@ -13,7 +13,7 @@ import Handlebars from 'handlebars';
 import { find } from 'unist-util-find';
 import { toString } from 'mdast-util-to-string';
 import { findAll } from '../../utils/mdast.js';
-import { findModelById, getModelFields } from '../../domain/Models.js';
+import { findModelById, getField, getModelFields } from '../../domain/Models.js';
 
 function sectionHelper(index, children, options) {
   const {
@@ -25,7 +25,7 @@ function sectionHelper(index, children, options) {
     'jcr:primaryType': 'nt:unstructured',
   };
 
-  const model = findModelById(models, 'section-metadata');
+  const model = findModelById(models, 'section');
   if (model) {
     const fields = getModelFields(model);
     attributes.modelFields = `[${fields}]`;
@@ -45,10 +45,12 @@ function sectionHelper(index, children, options) {
             const cells = findAll(row, (n) => n.type === 'gtCell', true);
             const key = toString(cells[0]);
             const value = toString(cells[1]);
-            if (key === 'Style') {
-              attributes.classes = value;
+            const field = getField(model, key);
+            if (field?.component === 'multiselect') {
+              const multiValue = value.split(',').map((s) => s.trim()).filter(Boolean);
+              attributes[key.toLowerCase().replaceAll(' ', '-')] = `[${multiValue.join(',')}]`;
             } else {
-              attributes[`data-${key.toLowerCase().replaceAll(' ', '-')}`] = value;
+              attributes[key.toLowerCase().replaceAll(' ', '-')] = value;
             }
           }
           break;

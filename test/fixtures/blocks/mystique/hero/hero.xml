@@ -2,7 +2,7 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
   <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
-      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured" modelFields="[style]">
         <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" image="https://experience-platform-mystique-deploy-ethos102-stage-88229c.stage.cloud.adobe.io/proxy-4b739f7f3d2b43009055c893cdf99ba8-4f279b4c398f4d1d98d4552e3cf521ca/assets/media_18c9c39f49c4050fb54d50b03085228a12a9b1666.png" model="hero" modelFields="[image,imageAlt,text]" name="Hero" text="&lt;p&gt;&lt;h1&gt;Say Hello to Effortless Webpage Creation!&lt;/h1&gt;&lt;/p&gt;"></block>
       </section>
     </root>

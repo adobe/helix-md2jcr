@@ -202,5 +202,9 @@ describe('md2jcr Tests', () => {
     it('teaser', async () => {
       await testBlock('teaser/teaser', folder);
     });
+
+    it('cards', async () => {
+      await testBlock('cards/cards', folder);
+    });
   });
 });
