@@ -9,6 +9,13 @@
           <item_2 sling:resourceType="core/franklin/components/block/v1/block/item" name="Card" model="card" modelFields="[image,text]" image="https://main--frescopa--aem-showcase.hlx.page/media_156701709609aa778c5d5860c4e1ab4eaeb098768.jpeg#width=5142&amp;height=3754" text="&lt;p&gt;&lt;h3&gt;Well, what did you think?&lt;/h3&gt;&lt;/p&gt;&lt;p&gt;After trying the first coffees we send, rate them on your MyBarista Profile. This will help us fine-tune your flavor profile so we can serve up only the stuff that will blow your mind. The more you help us dial it in, the better that cup will be for you.&lt;/p&gt;"></item_2>
         </block>
       </section>
+      <section_1 sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured" modelFields="[name,style]">
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" filter="cards" name="Cards">
+          <item_0 sling:resourceType="core/franklin/components/block/v1/block/item" name="Card" model="card" modelFields="[image,text]" image="https://main--frescopa--aem-showcase.hlx.page/media_1e5f3758518e2910fa837c9b8178ca4c1b136ee43.png#width=1360&amp;height=480" text="&lt;p&gt;&lt;h3&gt;Simplify Your Coffee Ritual&lt;/h3&gt;&lt;/p&gt;&lt;p&gt;Simply answer a few questions based on your preferences and identify your flavor profile. That’ll help us know what to recommend to you as you embark on your coffee journey.&lt;/p&gt;"></item_0>
+          <item_1 sling:resourceType="core/franklin/components/block/v1/block/item" name="Card" model="card" modelFields="[image,text]" image="https://main--frescopa--aem-showcase.hlx.page/media_16fa7d817129768acbadec4516d9525d0b452b33e.jpeg#width=5472&amp;height=3648" text="&lt;p&gt;&lt;h3&gt;Your first order. So exciting!&lt;/h3&gt;&lt;/p&gt;&lt;p&gt;After you complete your quiz and enroll in the MyBarista subscription program, we’ll ship your first curation to you within seven days. We can send it anywhere you’d like.&lt;/p&gt;"></item_1>
+          <item_2 sling:resourceType="core/franklin/components/block/v1/block/item" name="Card" model="card" modelFields="[image,text]" image="https://main--frescopa--aem-showcase.hlx.page/media_156701709609aa778c5d5860c4e1ab4eaeb098768.jpeg#width=5142&amp;height=3754" text="&lt;p&gt;&lt;h3&gt;Well, what did you think?&lt;/h3&gt;&lt;/p&gt;&lt;p&gt;After trying the first coffees we send, rate them on your MyBarista Profile. This will help us fine-tune your flavor profile so we can serve up only the stuff that will blow your mind. The more you help us dial it in, the better that cup will be for you.&lt;/p&gt;"></item_2>
+        </block>
+      </section_1>
     </root>
   </jcr:content>
 </jcr:root>

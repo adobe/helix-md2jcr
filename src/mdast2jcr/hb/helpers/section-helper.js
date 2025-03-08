@@ -45,12 +45,14 @@ function sectionHelper(index, children, options) {
             const cells = findAll(row, (n) => n.type === 'gtCell', true);
             const key = toString(cells[0]);
             const value = toString(cells[1]);
-            const field = getField(model, key);
-            if (field?.component === 'multiselect') {
-              const multiValue = value.split(',').map((s) => s.trim()).filter(Boolean);
-              attributes[key.toLowerCase().replaceAll(' ', '-')] = `[${multiValue.join(',')}]`;
-            } else {
-              attributes[key.toLowerCase().replaceAll(' ', '-')] = value;
+            if (key !== '' && value !== '') {
+              const field = getField(model, key);
+              if (field?.component === 'multiselect') {
+                const multiValue = value.split(',').map((s) => s.trim()).filter(Boolean);
+                attributes[key.toLowerCase().replaceAll(' ', '-')] = `[${multiValue.join(',')}]`;
+              } else {
+                attributes[key.toLowerCase().replaceAll(' ', '-')] = value;
+              }
             }
           }
           break;
