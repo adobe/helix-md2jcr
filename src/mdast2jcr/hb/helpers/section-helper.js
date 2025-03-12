@@ -45,7 +45,7 @@ function sectionHelper(index, children, options) {
             const cells = findAll(row, (n) => n.type === 'gtCell', true);
             const key = toString(cells[0]);
             const value = toString(cells[1]);
-            if (key !== '' && value !== '') {
+            if (key.trim() !== '' && value.trim() !== '') {
               const field = getField(model, key);
               if (field?.component === 'multiselect') {
                 const multiValue = value.split(',').map((s) => s.trim()).filter(Boolean);
