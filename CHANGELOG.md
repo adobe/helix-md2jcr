@@ -1,3 +1,38 @@
+## [1.1.12](https://github.com/adobe/helix-md2jcr/compare/v1.1.11...v1.1.12) (2025-04-10)
+
+
+### Bug Fixes
+
+* missing required primary type on block items ([#81](https://github.com/adobe/helix-md2jcr/issues/81)) ([e5d2139](https://github.com/adobe/helix-md2jcr/commit/e5d2139620fa00d76a4a051250e4c7eb9e0949a7))
+
+## [1.1.11](https://github.com/adobe/helix-md2jcr/compare/v1.1.10...v1.1.11) (2025-04-07)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#79](https://github.com/adobe/helix-md2jcr/issues/79)) ([5a97f57](https://github.com/adobe/helix-md2jcr/commit/5a97f57a98df50744ba14288cdbdb0dbcf87f504))
+
+## [1.1.10](https://github.com/adobe/helix-md2jcr/compare/v1.1.9...v1.1.10) (2025-03-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared-process-queue to v3.1.3 ([#76](https://github.com/adobe/helix-md2jcr/issues/76)) ([a6e5868](https://github.com/adobe/helix-md2jcr/commit/a6e5868a4bde0ffd7154ec61e7b8364dbde4cc13))
+
+## [1.1.9](https://github.com/adobe/helix-md2jcr/compare/v1.1.8...v1.1.9) (2025-03-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency xml-formatter to v3.6.5 ([#74](https://github.com/adobe/helix-md2jcr/issues/74)) ([d0b90df](https://github.com/adobe/helix-md2jcr/commit/d0b90dfe495faf7b1aa62aecf4654a12abd71c50))
+
+## [1.1.8](https://github.com/adobe/helix-md2jcr/compare/v1.1.7...v1.1.8) (2025-03-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/remark-gridtables to v3.0.12 ([#71](https://github.com/adobe/helix-md2jcr/issues/71)) ([d66d30b](https://github.com/adobe/helix-md2jcr/commit/d66d30b3205f3cf0f0ed878722e70ac21392bccc))
+
 ## [1.1.7](https://github.com/adobe/helix-md2jcr/compare/v1.1.6...v1.1.7) (2025-03-14)
 
 
