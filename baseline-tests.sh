@@ -2,20 +2,24 @@
 
 # create a function that prints the usage of the script
 usage() {
-  echo "Usage: $0 [-v] [-d]"
+  echo "Usage: $0 [-v] [-d] [-f file]"
   echo "  -v: Verbose mode"
   echo "  -d: Decode output mode"
+  echo "  -f: Specify a single file to process"
   exit 1
 }
 
-# verify that the command arguments are only -v or -d if any other commands are found exit with an error. If -d is present but -v is not present, exit with an error.
-while getopts ":vd" opt; do
+# verify that the command arguments are only -v, -d, or -f if any other commands are found exit with an error
+while getopts ":vdf:" opt; do
   case ${opt} in
     v )
       VERBOSE="true"
       ;;
     d )
       DECODE="true"
+      ;;
+    f )
+      SPECIFIC_FILE="$OPTARG"
       ;;
     \? )
       echo "Invalid option: $OPTARG" 1>&2
@@ -27,7 +31,6 @@ while getopts ":vd" opt; do
       ;;
   esac
 done
-
 
 # Set the root directory to search for .md files
 MD_DIR="test/fixtures"
@@ -41,6 +44,31 @@ if [ ! -d "$MD_DIR" ]; then
   exit 1
 fi
 
+ARGS=""
+[ "$VERBOSE" = "true" ] && ARGS="$ARGS -v"
+[ "$DECODE" = "true" ] && ARGS="$ARGS -d"
+
+# If a specific file is provided, process only that file
+if [ -n "$SPECIFIC_FILE" ]; then
+  if [ ! -f "$SPECIFIC_FILE" ]; then
+    echo "File $SPECIFIC_FILE does not exist."
+    exit 1
+  fi
+  
+  echo "Processing $SPECIFIC_FILE..."
+  [ "$VERBOSE" = "true" ] && echo
+  
+  node "$NODE_SCRIPT" "$SPECIFIC_FILE" $ARGS 2>/dev/null
+  
+  if [ $? -ne 0 ]; then
+    echo "Error processing $SPECIFIC_FILE with $NODE_SCRIPT."
+    exit 1
+  fi
+  
+  echo "File processed successfully."
+  exit 0
+fi
+
 # Find all .md files recursively in the directory
 MD_FILES=$(find "$MD_DIR" -type f -name "*.md")
 
@@ -49,10 +77,6 @@ if [ -z "$MD_FILES" ]; then
   echo "No .md files found in $MD_DIR or its subdirectories."
   exit 1
 fi
-
-ARGS=""
-[ "$VERBOSE" = "true" ] && ARGS="$ARGS -v"
-[ "$DECODE" = "true" ] && ARGS="$ARGS -d"
 
 # Iterate over each .md file
 for MD_FILE in $MD_FILES; do
@@ -73,6 +97,5 @@ for MD_FILE in $MD_FILES; do
     exit 1
   fi
 done
-
 
 echo "All .md files have been processed successfully."

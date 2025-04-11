@@ -188,16 +188,41 @@ function extractKeyValueProperties(row, model, fieldResolver, fieldGroup, proper
   }
 }
 
-/**
- * Given a row, a component, and a model, extract the properties from the row
- * @param {object} mdast - the mdast tree.
- * @param {Model} model - the model.
- * @param {string} mode - the mode either 'keyValue' or 'simple'.
- * @param {Component} component - the component.
- * @param fields - the field grouping object.
- * @param properties
- * @return {{}} - the properties
- */
+function processCell(cell, fieldGroup, fieldResolver, properties) {
+  const cellChildren = cell.children;
+  if (cellChildren.length !== 0) {
+    while (cellChildren.length > 0) {
+      const node = cellChildren.shift();
+      const field = fieldResolver.resolve(node, fieldGroup);
+      let pWrapper;
+      if (field.component === 'richtext') {
+        pWrapper = {
+          type: 'wrapper',
+          children: [node],
+        };
+
+        let searching = true;
+
+        while (searching) {
+          const n = cellChildren.shift();
+          if (!n) break;
+
+          if (find(n, { type: 'image' })) {
+            cellChildren.unshift(n);
+            searching = false;
+          }
+          if (searching) {
+            pWrapper.children.push(n);
+          }
+        }
+      } else {
+        pWrapper = node;
+      }
+      extractPropertiesForNode(field, pWrapper, properties);
+    }
+  }
+}
+
 function extractProperties(mdast, model, mode, component, fields, properties) {
   const fieldsCloned = structuredClone(fields);
 
@@ -251,57 +276,11 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
     if (mode === 'keyValue') {
       extractKeyValueProperties(row, model, fieldResolver, fieldGroup, properties);
     } else {
-      // for each cell in the row, process the nodes that exist in the cell
-      let processing = false;
       for (const cell of cells) {
-        if (mode === 'blockItem' && !processing) {
+        if (mode === 'blockItem') {
           fieldGroup = fieldsCloned.shift();
         }
-
-        const nodes = cell.children;
-        if (nodes.length === 0) {
-          // throw away the field that was associated with the cell
-          fieldGroup.fields.shift();
-          processing = true;
-          // if there are no nodes in the cell, then we need to skip it
-        } else {
-          while (nodes.length > 0) {
-            const node = nodes.shift();
-
-            // give the field group (all fields to the resolver)
-            if (fieldGroup === undefined) {
-              console.warn(`No field group for ${model.id}`);
-              return;
-            }
-
-            const field = fieldResolver.resolve(node, fieldGroup);
-            let pWrapper;
-            if (field.component === 'richtext') {
-              pWrapper = {
-                type: 'wrapper',
-                children: [node],
-              };
-
-              let searching = true;
-
-              while (searching) {
-                const n = nodes.shift();
-                if (!n) break;
-
-                if (find(n, { type: 'image' })) {
-                  nodes.unshift(n);
-                  searching = false;
-                }
-                if (searching) {
-                  pWrapper.children.push(n);
-                }
-              }
-            } else {
-              pWrapper = node;
-            }
-            extractPropertiesForNode(field, pWrapper, properties);
-          }
-        }
+        processCell(cell, fieldGroup, fieldResolver, properties, mode);
       }
     }
   }
