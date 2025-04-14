@@ -37,7 +37,7 @@
       "fields": [
         {
           "component": "text",
-          "name": "name"
+          "name": "bandname"
         },
         {
           "component": "text",
