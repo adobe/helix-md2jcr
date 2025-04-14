@@ -34,6 +34,7 @@ import ModelHelper from '../../domain/ModelHelper.js';
 /**
  * @typedef {import('../../index.d.ts').FieldDef} Field
  * @typedef {import('../../index.d.ts').DefinitionDef} Definition
+ * @typedef {import('../../index.d.ts').Filter} Filters
  */
 
 /**
@@ -356,15 +357,8 @@ function getBlockItems(mdast, modelHelper, definitions, allowedComponents) {
         };
 
         extractProperties(row, fieldGroup.model, 'blockItem', component, fieldGroup.fields, properties);
-
         items.push(`<item_${items.length} jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="${fieldGroup.model.id}" ${Object.entries(properties).map(([k, v]) => `${k}="${v}"`).join(' ')}></item_${items.length}>`);
       }
-    } else {
-      // const msg = `The component '${componentId}' is not allowed in the block
-      // '${modelHelper.blockName}'. Modify the ${modelHelper.blockName} filters
-      // file to include the '${componentId}' component in the list of
-      // components.`;
-      // console.error(msg);
     }
   });
 
