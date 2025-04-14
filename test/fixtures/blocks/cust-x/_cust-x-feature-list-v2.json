@@ -137,23 +137,23 @@
         {
           "component": "custom-asset-namespace:custom-asset",
           "valueType": "string",
-          "name": "listItem_icon",
+          "name": "icon",
           "label": "Icon",
           "configUrl": "/content/adobe.resource/tools/asset-selector/image.config.json"
         },
         {
           "component": "custom-asset-namespace:custom-asset-mimetype",
           "valueType": "string",
-          "name": "listItem_iconMimeType"
+          "name": "iconMimeType"
         },
         {
           "component": "text",
-          "name": "listItem_iconText",
+          "name": "iconText",
           "label": "Alt Text"
         },
         {
           "component": "richtext",
-          "name": "listItem_description",
+          "name": "description",
           "label": "Description"
         }
       ]
