@@ -47,7 +47,7 @@ function heading(context) {
 
   title = Handlebars.Utils.escapeExpression(context.children.map(parseInlineElements).join(''));
 
-  return `<title${uniqueName} sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="${title}" type="h${depth}"/>\n`;
+  return `<title${uniqueName} sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="${title}" titleType="h${depth}"/>\n`;
 }
 
 export default heading;
