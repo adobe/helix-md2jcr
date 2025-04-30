@@ -142,6 +142,10 @@ describe('md2jcr Tests', () => {
       await testBlock('richtext', `${folder}/richtext`);
     });
 
+    it('richtext-html', async () => {
+      await testBlock('richtext-html', `${folder}/richtext-html`);
+    });
+
     /**
      * Verify that richtext consumes content up to the next image.
      */

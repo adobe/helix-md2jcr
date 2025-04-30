@@ -137,7 +137,13 @@ function extractPropertiesForNode(field, currentNode, properties) {
     if (currentNode.type === 'wrapper') {
       // combine all the children into a single string, but wrap them in a paragraph
       value = currentNode.children.reduce((acc, node) => {
-        let str = toHtml(toHast(node));
+        const hast = toHast(node, {
+          allowDangerousHtml: true,
+        });
+
+        let str = toHtml(hast, {
+          allowDangerousHtml: true,
+        });
 
         // don't wrap nodes that are already paragraphs or code blocks
         if (node.type !== 'paragraph' && node.type !== 'code') {
