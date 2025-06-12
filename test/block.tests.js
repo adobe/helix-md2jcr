@@ -161,6 +161,10 @@ describe('md2jcr Tests', () => {
       await testBlock('section-metadata', `${folder}/section-metadata`);
     });
 
+    it('section-metadata-custom', async () => {
+      await testBlock('section-metadata-custom', `${folder}/section-metadata-custom`);
+    });
+
     it('missing-cell-data', async () => {
       await testBlock('missing-cell-data', `${folder}/missing-cell-data`);
     });

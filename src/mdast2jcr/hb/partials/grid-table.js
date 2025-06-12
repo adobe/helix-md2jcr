@@ -18,7 +18,8 @@ import { toHast } from 'mdast-util-to-hast';
 import { toHtml } from 'hast-util-to-html';
 import { getComponentById, getComponentByTitle, getModelId } from '../../domain/Definitions.js';
 import {
-  findModelById, getField, getModelFields,
+  findModelById,
+  getField, getModelFieldNames,
 } from '../../domain/Models.js';
 import { findAll } from '../../utils/mdast.js';
 import link from './supports/link.js';
@@ -360,7 +361,7 @@ function getBlockItems(mdast, modelHelper, definitions, allowedComponents) {
         const component = getComponentById(definitions, componentId);
         const properties = {
           ...component.defaultFields,
-          modelFields: `[${getModelFields(fieldGroup.model)}]`,
+          modelFields: `[${getModelFieldNames(fieldGroup.model).join(',')}]`,
         };
 
         extractProperties(row, fieldGroup.model, 'blockItem', component, fieldGroup.fields, properties);
@@ -428,7 +429,7 @@ function gridTablePartial(context) {
   };
 
   if (model) {
-    properties.modelFields = `[${getModelFields(model)}]`;
+    properties.modelFields = `[${getModelFieldNames(model).join(',')}]`;
   }
 
   let blockProperties = '';

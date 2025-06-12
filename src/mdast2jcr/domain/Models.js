@@ -42,20 +42,18 @@ function getField(model, fieldName) {
 }
 
 /**
- * Return a comma-separated list of fields in the model. If no fields are found,
- * return an empty string.
- * @param model
- * @return {string}
+ * Return a list of field names in the model, excluding 'classes'.
+ * @param {Model} model The model.
+ * @return {Array<string>} An array of field names.
  */
-function getModelFields(model) {
+function getModelFieldNames(model) {
   return model.fields
     .map((f) => f.name)
-    .filter((f) => f !== 'classes')
-    .join(',');
+    .filter((f) => f !== 'classes');
 }
 
 export {
   getField,
   findModelById,
-  getModelFields,
+  getModelFieldNames,
 };

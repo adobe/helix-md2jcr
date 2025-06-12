@@ -1,0 +1,74 @@
+{
+  "definitions": [
+    {
+      "title": "Custom Section",
+      "id": "custom-section",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "model": "custom-section"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "section",
+      "fields": [
+        {
+          "component": "text",
+          "name": "name",
+          "label": "Section Name",
+          "description": "The label shown for this section in the Content Tree"
+        },
+        {
+          "component": "multiselect",
+          "name": "style",
+          "label": "Style",
+          "options": [
+            {
+              "name": "Highlight",
+              "value": "highlight"
+            },
+            {
+              "name": "Dark",
+              "value": "dark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "custom-section",
+      "fields": [
+        {
+          "component": "text",
+          "name": "style",
+          "label": "Style"
+        },
+        {
+          "component": "text",
+          "name": "order",
+          "label": "Order"
+        },
+        {
+          "component": "text",
+          "name": "location",
+          "label": "Location"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "custom-section",
+      "components": [
+        "text"
+      ]
+    }
+  ]
+}

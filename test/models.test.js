@@ -15,7 +15,7 @@ import assert from 'assert';
 import {
   findModelById,
   getField,
-  getModelFields,
+  getModelFieldNames,
 } from '../src/mdast2jcr/domain/Models.js';
 
 describe('Models Utility Test', () => {
@@ -71,18 +71,18 @@ describe('Models Utility Test', () => {
     assert.strictEqual(result, undefined);
   });
 
-  it('should return a comma-separated list of field names', () => {
+  it('should return an array of field names excluding "classes"', () => {
     const model = {
       fields: [
         { name: 'title', type: 'string' },
-        { name: 'description', type: 'string' },
+        { name: 'classes', type: 'string' },
         { name: 'content', type: 'string' },
       ],
     };
-    const expectedFields = 'title,description,content';
+    const expectedFields = ['title', 'content'];
 
-    const result = getModelFields(model);
-    assert.strictEqual(result, expectedFields);
+    const result = getModelFieldNames(model, true);
+    assert.deepStrictEqual(result, expectedFields);
   });
 
   it('should exclude the "classes" field from the list', () => {
@@ -93,19 +93,19 @@ describe('Models Utility Test', () => {
         { name: 'content', type: 'string' },
       ],
     };
-    const expectedFields = 'title,content';
+    const expectedFields = ['title', 'content'];
 
-    const result = getModelFields(model);
-    assert.strictEqual(result, expectedFields);
+    const result = getModelFieldNames(model);
+    assert.deepEqual(result, expectedFields);
   });
 
   it('should return an empty string if there are no fields', () => {
     const model = {
       fields: [],
     };
-    const expectedFields = '';
+    const expectedFields = [];
 
-    const result = getModelFields(model);
-    assert.strictEqual(result, expectedFields);
+    const result = getModelFieldNames(model);
+    assert.deepEqual(result, expectedFields);
   });
 });

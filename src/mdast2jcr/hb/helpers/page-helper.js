@@ -11,7 +11,11 @@
  */
 import { find } from 'unist-util-find';
 import { toString } from 'mdast-util-to-string';
-import { findModelById, getField, getModelFields } from '../../domain/Models.js';
+import {
+  findModelById,
+  getField,
+  getModelFieldNames,
+} from '../../domain/Models.js';
 import { findAll } from '../../utils/mdast.js';
 import { encodeHTMLEntities, stripNewlines } from '../../utils.js';
 import link from '../partials/supports/link.js';
@@ -70,8 +74,8 @@ function buildPageMetadata(table, models) {
   // we need to add a property called modelFields for the Universal Editor
   // that has all the fields for the model
   if (model) {
-    const fields = getModelFields(model);
-    mappedMetadata.modelFields = `[${fields}]`;
+    const fields = getModelFieldNames(model);
+    mappedMetadata.modelFields = `[${fields.join(',')}]`;
   }
 
   return mappedMetadata;
