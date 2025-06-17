@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@adobe/eslint-config-helix": "2.0.9",
-    "@adobe/helix-mediahandler": "2.7.10",
+    "@adobe/helix-mediahandler": "2.7.11",
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@semantic-release/changelog": "6.0.3",
