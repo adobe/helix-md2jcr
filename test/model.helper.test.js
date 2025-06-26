@@ -12,8 +12,8 @@
 /* eslint-env mocha */
 import { expect } from 'chai';
 import assert from 'assert';
-import ModelHelper from '../../src/mdast2jcr/domain/ModelHelper.js';
-import { loadBlockResources } from '../test.utils.js';
+import ModelHelper from '../src/mdast2jcr/domain/ModelHelper.js';
+import { loadBlockResources } from './test.utils.js';
 
 describe('Model Helper Tests', () => {
   let models;

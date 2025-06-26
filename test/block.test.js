@@ -19,7 +19,7 @@ async function testBlock(spec, folder) {
   await test(`${folder}/${spec}`, { models, definition, filters });
 }
 
-describe('md2jcr Tests', () => {
+describe('block tests', () => {
   /**
    * The suite of core block unit tests.
    */
@@ -39,6 +39,13 @@ describe('md2jcr Tests', () => {
      */
     it('block properties', async () => {
       await testBlock('block-properties', `${folder}/block-properties`);
+    });
+
+    /**
+     * General Block with random content.
+     */
+    it('columns', async () => {
+      await testBlock('columns', `${folder}/columns`);
     });
 
     /**

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
+  <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
+    <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
+        <columns sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" rows="1" columns="3">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;One&lt;/p&gt;"/>
+            </col1>
+            <col2 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Two&lt;/p&gt;"/>
+            </col2>
+            <col3 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Three&lt;/p&gt;"/>
+            </col3>
+          </row1>
+        </columns>
+        <columns_1 sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" rows="2" columns="3">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;One&lt;/p&gt;"/>
+            </col1>
+            <col2 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Two&lt;/p&gt;"/>
+            </col2>
+            <col3 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Three&lt;/p&gt;"/>
+            </col3>
+          </row1>
+          <row2 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Row One&lt;/p&gt;"/>
+            </col1>
+            <col2 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Row Two Cell Two&lt;/p&gt;"/>
+            </col2>
+            <col3 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Row Three Cell Three&lt;/p&gt;"/>
+            </col3>
+          </row2>
+        </columns_1>
+        <columns_2 sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" classes="[dark]" rows="1" columns="3">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Example with class&lt;/p&gt;"/>
+            </col1>
+            <col2 jcr:primaryType="nt:unstructured"></col2>
+            <col3 jcr:primaryType="nt:unstructured"></col3>
+          </row1>
+        </columns_2>
+        <columns_3 sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" classes="[dark,wide]" rows="1" columns="3">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Example with class&lt;/p&gt;"/>
+            </col1>
+            <col2 jcr:primaryType="nt:unstructured"></col2>
+            <col3 jcr:primaryType="nt:unstructured"></col3>
+          </row1>
+        </columns_3>
+        <columns_4 sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" classes="[empty]" rows="1" columns="3">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured"></col1>
+            <col2 jcr:primaryType="nt:unstructured"></col2>
+            <col3 jcr:primaryType="nt:unstructured"></col3>
+          </row1>
+        </columns_4>
+        <columns_5 sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" classes="[headings]" rows="2" columns="3">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Heading One" titleType="h1"/>
+            </col1>
+            <col2 jcr:primaryType="nt:unstructured">
+              <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Heading Two" titleType="h2"/>
+            </col2>
+            <col3 jcr:primaryType="nt:unstructured">
+              <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Heading Three" titleType="h3"/>
+            </col3>
+          </row1>
+          <row2 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Heading Four" titleType="h4"/>
+            </col1>
+            <col2 jcr:primaryType="nt:unstructured">
+              <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Heading Five" titleType="h5"/>
+            </col2>
+            <col3 jcr:primaryType="nt:unstructured">
+              <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Heading Six" titleType="h6"/>
+            </col3>
+          </row2>
+        </columns_5>
+        <columns_6 sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" rows="1" columns="1">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Text &lt;em&gt;with&lt;/em&gt; emphasis and &lt;strong&gt;bold&lt;/strong&gt; text.&lt;/p&gt;"/>
+            </col1>
+          </row1>
+        </columns_6>
+        <columns_7 sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" rows="1" columns="1">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Text &lt;em&gt;with&lt;/em&gt; emphasis and &lt;strong&gt;bold&lt;/strong&gt; text.&lt;/p&gt;"/>
+              <image sling:resourceType="core/franklin/components/image/v1/image" jcr:primaryType="nt:unstructured" image="http://www.image.com/image.png" imageAlt=""/>
+            </col1>
+          </row1>
+        </columns_7>
+        <columns_8 sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" rows="1" columns="1">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Text &lt;img src&#x3D;&quot;http://localhost/image.png&quot; alt&#x3D;&quot;&quot;&gt; inline image&lt;/p&gt;"/>
+            </col1>
+          </row1>
+        </columns_8>
+        <columns_9 sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" rows="1" columns="1">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Single Node Example (code)&lt;/p&gt;&lt;pre&gt;&lt;code&gt;    javascript();
+                    &lt;/code&gt;&lt;/pre&gt;"/>
+            </col1>
+          </row1>
+        </columns_9>
+        <columns_10 sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" rows="1" columns="1">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;All text up to image is included:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;console.log(&quot;hello&quot;)
+                    &lt;/code&gt;&lt;/pre&gt;"/>
+              <button sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="www.google.com" linkText="Google"/>
+              <text_1 sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;![Image][image0]&lt;/p&gt;&lt;p&gt;After image there&#x27;s more text&lt;/p&gt;"/>
+            </col1>
+          </row1>
+        </columns_10>
+        <columns_11 sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" classes="[columns3]" rows="1" columns="2">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Columns block" titleType="h1"/>
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;ul&gt;
+                    &lt;li&gt;One&lt;/li&gt;
+                    &lt;li&gt;Two&lt;/li&gt;
+                    &lt;li&gt;Three&lt;/li&gt;
+                    &lt;/ul&gt;"/>
+              <button sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="http://localhost:3001/" linkText="Live" linkTitle="Live"/>
+              <image sling:resourceType="core/franklin/components/image/v1/image" jcr:primaryType="nt:unstructured" image="http://www.image.com/image.png" imageAlt="green double Helix"/>
+            </col1>
+            <col2 jcr:primaryType="nt:unstructured">
+              <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Column Two" titleType="h2"/>
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Or you can just view the preview&lt;/p&gt;&lt;p&gt;&lt;em&gt;&lt;a href&#x3D;&quot;http://localhost:3001/&quot; title&#x3D;&quot;Preview&quot;&gt;Preview&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;"/>
+            </col2>
+          </row1>
+        </columns_11>
+      </section>
+    </root>
+  </jcr:content>
+</jcr:root>

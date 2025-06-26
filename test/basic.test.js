@@ -13,7 +13,7 @@
 import assert from 'assert';
 import { test } from './test-base.js';
 
-describe('md2jcr Tests', () => {
+describe('basic Tests', () => {
   it('convert a simple md', async () => {
     await test('simple');
   });

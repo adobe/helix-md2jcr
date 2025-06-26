@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+import { visit } from 'unist-util-visit';
+
 /**
  * findAll goes through the children of a node searching for nodes that match a
  * test function.
@@ -42,6 +44,21 @@ function findAll(node, test, flatten = false) {
   }
 }
 
+/**
+ * Find all nodes that match the test condition
+ * @param {Node} tree - Node(s) to search
+ * @param {Function|string} test - Test function or node type
+ * @returns {Array} Array of matching nodes
+ */
+function findAllDeep(tree, test) {
+  const results = [];
+  visit(tree, test, (node) => {
+    results.push(node);
+  });
+  return results;
+}
+
 export {
   findAll,
+  findAllDeep,
 };
