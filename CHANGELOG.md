@@ -1,3 +1,10 @@
+## [1.1.25](https://github.com/adobe/helix-md2jcr/compare/v1.1.24...v1.1.25) (2025-06-27)
+
+
+### Bug Fixes
+
+* **108:** support columns block ([#111](https://github.com/adobe/helix-md2jcr/issues/111)) ([7792a12](https://github.com/adobe/helix-md2jcr/commit/7792a12f5178c16f13e15e92b0970f6c826e23ad))
+
 ## [1.1.24](https://github.com/adobe/helix-md2jcr/compare/v1.1.23...v1.1.24) (2025-06-18)
 
 

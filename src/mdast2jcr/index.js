@@ -13,11 +13,16 @@
 /* eslint-disable no-param-reassign */
 import Handlebars from 'handlebars';
 import xmlFormatter from 'xml-formatter';
-import { splitSection, unwrapImages as unwrapElements, wrapParagraphs } from './utils.js';
+import {
+  splitSection,
+  unwrapImages as unwrapElements,
+  wrapParagraphs,
+} from './utils.js';
 import sanitizeHtml from './mdast-sanitize-html.js';
 import headingPartial from './hb/partials/heading.js';
 import stringPartial from './hb/partials/strong.js';
 import emphasisPartial from './hb/partials/emphasis.js';
+import columnsPartial from './hb/partials/columns.js';
 import linkPartial from './hb/partials/link.js';
 import paragraphWrapperPartial from './hb/partials/paragraph.js';
 import nameHelper, { nameReset } from './hb/helpers/name-helper.js';
@@ -30,6 +35,7 @@ import pageHelper from './hb/helpers/page-helper.js';
 import pageTemplate from './templates/page-template.js';
 import unsupportedPartial from './hb/partials/unsupported.js';
 import sanitizeEds from './mdast-sanitize-eds.js';
+import { splitColumns } from './mdast-columns-block.js';
 
 /**
  * Converts a markdown AST to JCR XML.  This function is the main entry point
@@ -46,6 +52,7 @@ export default async function mdast2jcr(mdast, options = {}) {
   mdast = splitSection(mdast);
   mdast = unwrapElements(mdast);
   mdast = wrapParagraphs(mdast);
+  mdast = splitColumns(mdast);
 
   Handlebars.registerPartial('heading', headingPartial);
   Handlebars.registerPartial('image', imagePartial);
@@ -53,6 +60,7 @@ export default async function mdast2jcr(mdast, options = {}) {
   Handlebars.registerPartial('strong', stringPartial);
   Handlebars.registerPartial('emphasis', emphasisPartial);
   Handlebars.registerPartial('paragraphWrapper', paragraphWrapperPartial);
+  Handlebars.registerPartial('columns', columnsPartial);
   Handlebars.registerPartial('gridTable', gridTablePartial);
   Handlebars.registerPartial('unsupported', unsupportedPartial);
 

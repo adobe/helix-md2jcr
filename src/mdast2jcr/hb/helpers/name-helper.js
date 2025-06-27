@@ -32,20 +32,22 @@ const nameCounter = [];
  * or an empty string if the node is unique.
  */
 function nameHelper(name) {
+  // Support for per-context nameCounter
+  const context = this || {};
+  const counter = context.nameCounter || nameCounter;
+
   // reset the name counter if the node is a section or if the name counter is empty
-  // we could reset the name counter and empty all the counters, but it's cool
-  // to see the counts for debugging
-  if (name === 'section' || !nameCounter.length) {
-    nameCounter.push({});
+  if (name === 'section' || !counter.length) {
+    counter.push({});
   }
 
   // treat sections as a top level node and return the length of the name counter
   if (name === 'section') {
-    return nameCounter.length > 1 ? `_${nameCounter.length - 1}` : '';
+    return counter.length > 1 ? `_${counter.length - 1}` : '';
   }
 
   // get the current counter
-  const currentCounter = nameCounter[nameCounter.length - 1];
+  const currentCounter = counter[counter.length - 1];
 
   // increment the counter for the node name
   currentCounter[name] = (currentCounter[name] || 0) + 1;
