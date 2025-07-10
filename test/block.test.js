@@ -41,6 +41,10 @@ describe('block tests', () => {
       await testBlock('block-properties', `${folder}/block-properties`);
     });
 
+    it('cards', async () => {
+      await testBlock('cards', `${folder}/cards`);
+    });
+
     /**
      * General Block with random content.
      */

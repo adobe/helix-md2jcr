@@ -277,8 +277,13 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
     // gather all the cells from the row
     const cells = findAll(row, (node) => node.type === 'gtCell', false);
 
-    // if we are block and our first cell is a class field then skip it
-    if (mode === 'blockItem' && classesField) {
+    // if we are block-item
+    //   and we have a classess field
+    //   and we have more cells than model fields...
+    // We then want to throw away the first cell as it is the class field
+    // EC currently does not add the classes field therefore more cells than model fields
+    // See container-block.md for an example of more cells than model fields (second table)
+    if (mode === 'blockItem' && classesField && (cells.length > modelFields.length)) {
       cells.shift();
     }
 
