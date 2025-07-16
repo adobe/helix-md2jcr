@@ -24,7 +24,10 @@ class Component {
   constructor(name, id, template) {
     this._template = template;
     this._filterId = template?.filter;
-    this._modelId = template?.model;
+    // if the model is not part of the template, then use the component id
+    // the component id will be used more often in v2 of the component definitions
+    // as the template concept will be used less
+    this._modelId = template?.model || id;
     this._keyValue = template?.['key-value'];
     this._name = name;
     this._id = id;

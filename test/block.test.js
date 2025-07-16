@@ -53,6 +53,13 @@ describe('block tests', () => {
     });
 
     /**
+     * General Block with random content.
+     */
+    it('columns-boilerplate', async () => {
+      await testBlock('columns-boilerplate', `${folder}/columns-boilerplate`);
+    });
+
+    /**
      * Container block test to verify that container blocks are generated correctly.
      * Container blocks are blocks that contain other blocks, and therefore require
      * special handling, validation of classes, and the correct structure.
