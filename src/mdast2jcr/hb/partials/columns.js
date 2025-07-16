@@ -42,7 +42,7 @@ function columnsPartial(context) {
 
   if (match) {
     const blockName = match.groups.blockName.trim();
-    const modelId = getModelId(definition, blockName);
+    const modelId = getModelId(definition, blockName) || 'columns';
     const blockClasses = match.groups.classes ? match.groups.classes.split(',').map((c) => c.trim()) : [];
 
     const model = findModelById(models, modelId);
