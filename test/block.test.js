@@ -72,6 +72,14 @@ describe('block tests', () => {
      * The grouping test verifies that blocks with models that have grouped fields
      * are correctly generated.
      */
+    it('embed', async () => {
+      await testBlock('embed', `${folder}/embed`);
+    });
+
+    /**
+     * The grouping test verifies that blocks with models that have grouped fields
+     * are correctly generated.
+     */
     it('grouping', async () => {
       await testBlock('grouping', `${folder}/grouping`);
     });

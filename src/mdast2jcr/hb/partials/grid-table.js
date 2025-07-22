@@ -200,9 +200,18 @@ function extractKeyValueProperties(row, model, fieldResolver, fieldGroup, proper
 function processCell(cell, fieldGroup, fieldResolver, properties) {
   const cellChildren = cell.children;
   if (cellChildren.length !== 0) {
+    let nextFieldHint;
     while (cellChildren.length > 0) {
       const node = cellChildren.shift();
-      const field = fieldResolver.resolve(node, fieldGroup);
+
+      // if we see a property name hint, parse it and continue, unset it if not
+      if (node.type === 'html' && node.value?.startsWith('<!-- hint:') && node.value?.endsWith(' -->')) {
+        nextFieldHint = node.value.split('<!-- hint:')[1].split(' -->')[0].trim();
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      const field = fieldResolver.resolve(node, fieldGroup, nextFieldHint);
       let pWrapper;
       if (field.component === 'richtext') {
         pWrapper = {
@@ -228,6 +237,8 @@ function processCell(cell, fieldGroup, fieldResolver, properties) {
         pWrapper = node;
       }
       extractPropertiesForNode(field, pWrapper, properties);
+
+      nextFieldHint = null;
     }
   }
 }
