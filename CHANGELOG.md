@@ -1,3 +1,10 @@
+## [1.1.29](https://github.com/adobe/helix-md2jcr/compare/v1.1.28...v1.1.29) (2025-07-29)
+
+
+### Bug Fixes
+
+* report content failing to map to the model ([#128](https://github.com/adobe/helix-md2jcr/issues/128)) ([52f9989](https://github.com/adobe/helix-md2jcr/commit/52f99890b6c7145afae65d784af62c09b25c9495)), closes [#127](https://github.com/adobe/helix-md2jcr/issues/127)
+
 ## [1.1.28](https://github.com/adobe/helix-md2jcr/compare/v1.1.27...v1.1.28) (2025-07-16)
 
 
