@@ -1,3 +1,10 @@
+## [1.1.30](https://github.com/adobe/helix-md2jcr/compare/v1.1.29...v1.1.30) (2025-08-12)
+
+
+### Bug Fixes
+
+* ignore any inline images ([#135](https://github.com/adobe/helix-md2jcr/issues/135)) ([be36770](https://github.com/adobe/helix-md2jcr/commit/be3677000b55c3e19d0f05fff7223c9f227e6bfc)), closes [#134](https://github.com/adobe/helix-md2jcr/issues/134)
+
 ## [1.1.29](https://github.com/adobe/helix-md2jcr/compare/v1.1.28...v1.1.29) (2025-07-29)
 
 
