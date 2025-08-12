@@ -18,7 +18,7 @@ function image(context) {
   // discard any inline data images
   if (url.startsWith('data:')) {
     console.info(`[WARN] Discaring inline data image: ${url}`);
-    return '';
+    return '\n';
   }
 
   const uniqueName = Handlebars.helpers.nameHelper.call(context, 'image');

@@ -191,6 +191,14 @@ describe('block tests', () => {
     it('suffixes', async () => {
       await testBlock('suffixes', `${folder}/suffixes`);
     });
+
+    /**
+     * The data-uri-image block test verifies that image URLs starting with 'data:'
+     * are handled correctly by returning an empty string for the image URL.
+     */
+    it('data-uri-image', async () => {
+      await testBlock('data-uri-image', `${folder}/data-uri-image`);
+    });
   });
 
   /**
