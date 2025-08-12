@@ -13,8 +13,15 @@ import Handlebars from 'handlebars';
 import { encodeHtml } from '../../utils.js';
 
 function image(context) {
-  const uniqueName = Handlebars.helpers.nameHelper.call(context, 'image');
   const { alt, url } = context;
+
+  // discard any inline data images
+  if (url.startsWith('data:')) {
+    console.info(`[WARN] Discaring inline data image: ${url}`);
+    return '';
+  }
+
+  const uniqueName = Handlebars.helpers.nameHelper.call(context, 'image');
 
   const encoded = encodeHtml(url);
   return `<image${uniqueName} sling:resourceType="core/franklin/components/image/v1/image" 
