@@ -134,7 +134,10 @@ function findSectionMetadata(children, models) {
     const result = processMetadataRows(rows, model);
 
     return {
-      attributes: result.attributes,
+      attributes: {
+        ...result.attributes,
+        model: sectionModelId || 'section',
+      },
       modelFields: result.modelFields,
     };
   }
@@ -146,6 +149,9 @@ function findSectionMetadata(children, models) {
   }
 
   return {
+    attributes: {
+      model: sectionModel.id,
+    },
     modelFields: getModelFieldNames(sectionModel),
   };
 }
