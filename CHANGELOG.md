@@ -1,3 +1,10 @@
+## [1.1.31](https://github.com/adobe/helix-md2jcr/compare/v1.1.30...v1.1.31) (2025-08-17)
+
+
+### Bug Fixes
+
+* custom sections/normal sections should identify their model ([#137](https://github.com/adobe/helix-md2jcr/issues/137)) ([2d69b7a](https://github.com/adobe/helix-md2jcr/commit/2d69b7a84dfd4717cd1fe3757a0c47dff28ccb6a)), closes [#136](https://github.com/adobe/helix-md2jcr/issues/136)
+
 ## [1.1.30](https://github.com/adobe/helix-md2jcr/compare/v1.1.29...v1.1.30) (2025-08-12)
 
 
