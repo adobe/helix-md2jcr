@@ -197,21 +197,39 @@ function extractKeyValueProperties(row, model, fieldResolver, fieldGroup, proper
   }
 }
 
+function isFieldNameHint(node) {
+  return node.type === 'html' && node.value?.startsWith('<!-- field:') && node.value?.endsWith(' -->');
+}
+
 function processCell(cell, fieldGroup, fieldResolver, properties) {
   const cellChildren = cell.children;
+
   if (cellChildren.length !== 0) {
-    let nextFieldHint;
+    let nextFieldName;
     while (cellChildren.length > 0) {
+      // while the cell has children we need to process the fields in the fieldGroup
+      // if we run out of fields but there are still more nodes, then we need to throw an error
+      // because the model does not map correctly to the content
       const node = cellChildren.shift();
 
+      // have we run out of fields?
+      if (fieldGroup.fields.length === 0) {
+        let errorMsg = 'The content isn’t mapping to the model correctly, likely due to the import ';
+        errorMsg += 'script generating incompatible markdown. Review the model file and ensure the ';
+        errorMsg += 'import script meets all column and row requirements, every field must align ';
+        errorMsg += 'with a column, even if empty.';
+        throw new Error(errorMsg);
+      }
+
       // if we see a property name hint, parse it and continue, unset it if not
-      if (node.type === 'html' && node.value?.startsWith('<!-- hint:') && node.value?.endsWith(' -->')) {
-        nextFieldHint = node.value.split('<!-- hint:')[1].split(' -->')[0].trim();
+      if (isFieldNameHint(node)) {
+        nextFieldName = node.value.split('<!-- field:')[1].split(' -->')[0].trim();
         // eslint-disable-next-line no-continue
         continue;
       }
 
-      const field = fieldResolver.resolve(node, fieldGroup, nextFieldHint);
+      const field = fieldResolver.resolve(node, fieldGroup, nextFieldName);
+
       let pWrapper;
       if (field.component === 'richtext') {
         pWrapper = {
@@ -225,7 +243,9 @@ function processCell(cell, fieldGroup, fieldResolver, properties) {
           const n = cellChildren.shift();
           if (!n) break;
 
-          if (find(n, { type: 'image' })) {
+          // richtexts are greedy:
+          // they will consume all the children until they hit an image or a named field
+          if (find(n, { type: 'image' }) || isFieldNameHint(n)) {
             cellChildren.unshift(n);
             searching = false;
           }
@@ -238,7 +258,7 @@ function processCell(cell, fieldGroup, fieldResolver, properties) {
       }
       extractPropertiesForNode(field, pWrapper, properties);
 
-      nextFieldHint = null;
+      nextFieldName = null;
     }
   }
 }
@@ -305,7 +325,7 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
         if (mode === 'blockItem') {
           fieldGroup = fieldsCloned.shift();
         }
-        processCell(cell, fieldGroup, fieldResolver, properties, mode);
+        processCell(cell, fieldGroup, fieldResolver, properties);
       }
     }
   }
@@ -458,44 +478,52 @@ function gridTablePartial(context) {
     filters,
   );
 
+  // children of the parent block
+  let blockItems;
+
   // it is possible that a block (Accordion) does not have a model, but the
   // child component will, which will be handled in the Component Block Processing
   // section
-  if (model) {
-    fieldGroup = modelHelper.getModelFieldGroup(model.id);
-    extractProperties(mdast, model, mode, component, fieldGroup.fields, properties);
-  } else {
-    // because we have no model we expect the block to have a filter with a component that does
-    // so that means we can remove the header row from the mdast tree
-    remove(mdast, (n) => is(n, { type: 'gtHeader' }));
+  try {
+    if (model) {
+      fieldGroup = modelHelper.getModelFieldGroup(model.id);
+      extractProperties(mdast, model, mode, component, fieldGroup.fields, properties);
+    } else {
+      // because we have no model we expect the block to have a filter with a component that does
+      // so that means we can remove the header row from the mdast tree
+      remove(mdast, (n) => is(n, { type: 'gtHeader' }));
+    }
+
+    // sort all the properties so that they are in a consistent order
+    // helpful for debugging and xml readability
+    const sorted = Object.entries(properties).sort(sortJcrProperties);
+    blockProperties = sorted.map(([k, v]) => `${k}="${v}"`).join(' ');
+
+    // *****************************************************
+    // Component Block Processing
+    // *****************************************************
+    // 1. In this section attempt to locate the associated model for the block.
+    // 2. Trim the mdast nodes to only be relevant for the child block.
+    // 3. Then getBlockitems will process the mdast nodes and return the block items.
+    const allowedComponents = filters.find((f) => f.id === component.filterId)?.components || [];
+    // collect all rows
+    const blockRows = findAll(mdast, (node) => node.type === 'gtRow', true);
+    // the fieldGroup (parent model) determines the expected number of rows in the table
+    // so we can remove the rows that belong to the parent and leave only the
+    // relevant rows for the child
+    if (model) {
+      const removed = blockRows.splice(0, fieldGroup.fields.length + 1);
+      // remove the elements from the mdast tree that match the items in the removed array
+      removed.forEach((r) => {
+        remove(mdast, (n) => is(n, r));
+      });
+    }
+    blockItems = getBlockItems(mdast, modelHelper, definition, allowedComponents) || [];
+  } catch (e) {
+    const blockname = `${blockHeaderProperties.name} ${blockHeaderProperties.classes ? `(${blockHeaderProperties.classes})` : ''}`;
+    const msg = `${blockname} has errors!`;
+    throw new Error(`${msg}\n${e?.message || e}`);
   }
-
-  // sort all the properties so that they are in a consistent order
-  // helpful for debugging and xml readability
-  const sorted = Object.entries(properties).sort(sortJcrProperties);
-  blockProperties = sorted.map(([k, v]) => `${k}="${v}"`).join(' ');
-
-  // *****************************************************
-  // Component Block Processing
-  // *****************************************************
-  // 1. In this section attempt to locate the associated model for the block.
-  // 2. Trim the mdast nodes to only be relevant for the child block.
-  // 3. Then getBlockitems will process the mdast nodes and return the block items.
-  const allowedComponents = filters.find((f) => f.id === component.filterId)?.components || [];
-  // collect all rows
-  const blockRows = findAll(mdast, (node) => node.type === 'gtRow', true);
-  // the fieldGroup (parent model) determines the expected number of rows in the table
-  // so we can remove the rows that belong to the parent and leave only the
-  // relevant rows for the child
-  if (model) {
-    const removed = blockRows.splice(0, fieldGroup.fields.length + 1);
-    // remove the elements from the mdast tree that match the items in the removed array
-    removed.forEach((r) => {
-      remove(mdast, (n) => is(n, r));
-    });
-  }
-
-  const blockItems = getBlockItems(mdast, modelHelper, definition, allowedComponents) || [];
 
   return `<block${uniqueName} ${blockProperties}>${blockItems.length > 0 ? blockItems.join('\n') : ''}</block${uniqueName}>`;
 }

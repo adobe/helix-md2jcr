@@ -1,3 +1,24 @@
+## [1.1.31](https://github.com/adobe/helix-md2jcr/compare/v1.1.30...v1.1.31) (2025-08-17)
+
+
+### Bug Fixes
+
+* custom sections/normal sections should identify their model ([#137](https://github.com/adobe/helix-md2jcr/issues/137)) ([2d69b7a](https://github.com/adobe/helix-md2jcr/commit/2d69b7a84dfd4717cd1fe3757a0c47dff28ccb6a)), closes [#136](https://github.com/adobe/helix-md2jcr/issues/136)
+
+## [1.1.30](https://github.com/adobe/helix-md2jcr/compare/v1.1.29...v1.1.30) (2025-08-12)
+
+
+### Bug Fixes
+
+* ignore any inline images ([#135](https://github.com/adobe/helix-md2jcr/issues/135)) ([be36770](https://github.com/adobe/helix-md2jcr/commit/be3677000b55c3e19d0f05fff7223c9f227e6bfc)), closes [#134](https://github.com/adobe/helix-md2jcr/issues/134)
+
+## [1.1.29](https://github.com/adobe/helix-md2jcr/compare/v1.1.28...v1.1.29) (2025-07-29)
+
+
+### Bug Fixes
+
+* report content failing to map to the model ([#128](https://github.com/adobe/helix-md2jcr/issues/128)) ([52f9989](https://github.com/adobe/helix-md2jcr/commit/52f99890b6c7145afae65d784af62c09b25c9495)), closes [#127](https://github.com/adobe/helix-md2jcr/issues/127)
+
 ## [1.1.28](https://github.com/adobe/helix-md2jcr/compare/v1.1.27...v1.1.28) (2025-07-16)
 
 

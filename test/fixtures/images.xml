@@ -11,6 +11,7 @@
         <image_2 sling:resourceType="core/franklin/components/image/v1/image" jcr:primaryType="nt:unstructured" image="image.png" imageAlt="Decorative double Helix"/>
         <title_3 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Image with alt text" titleType="h1"/>
         <image_3 sling:resourceType="core/franklin/components/image/v1/image" jcr:primaryType="nt:unstructured" image="/media_1dc0a2d290d791a050feb1e159746f52db392775a.jpeg" imageAlt="Alt text &quot;goes&quot; here"/>
+        <title_4 sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Image with inline data" titleType="h1"/>
       </section>
     </root>
   </jcr:content>

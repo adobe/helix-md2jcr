@@ -16,8 +16,10 @@ const image = {
 
   getProperties: (node) => {
     const imageNode = find(node, { type: 'image' });
+
+    // if the image url starts with data: then return an empty string for image url
     return {
-      url: imageNode?.url || '',
+      url: imageNode?.url?.startsWith('data:') ? '' : imageNode?.url || '',
       alt: imageNode?.alt || '',
       label: imageNode?.label || '',
     };

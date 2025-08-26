@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
+import { expect } from 'chai';
 import { loadBlockResources } from './test.utils.js';
 import { test } from './test-base.js';
 
@@ -198,6 +199,14 @@ describe('block tests', () => {
     it('suffixes', async () => {
       await testBlock('suffixes', `${folder}/suffixes`);
     });
+
+    /**
+     * The data-uri-image block test verifies that image URLs starting with 'data:'
+     * are handled correctly by returning an empty string for the image URL.
+     */
+    it('data-uri-image', async () => {
+      await testBlock('data-uri-image', `${folder}/data-uri-image`);
+    });
   });
 
   /**
@@ -247,6 +256,26 @@ describe('block tests', () => {
 
     it('cards', async () => {
       await testBlock('cards/cards', folder);
+    });
+  });
+
+  describe('error handling', () => {
+    const folder = 'blocks/error-handling';
+
+    /**
+     * Identify errors in blocks that are not correctly mapping to the model.
+     * A classic case is that the cards model wants a image and text fields, but the
+     * import script only generates a text field. This should throw an error
+     * indicating that the markdown is invalid for the model.
+     */
+    it('missing-content', async () => {
+      // expect an error and test that the error contains the correct block name
+      try {
+        await testBlock('missing-content', `${folder}/missing-content`);
+      } catch (e) {
+        expect(e.message).to.contain('cardsNoImages');
+        expect(e.message).to.contain('The content isn’t mapping to the model correctly');
+      }
     });
   });
 });

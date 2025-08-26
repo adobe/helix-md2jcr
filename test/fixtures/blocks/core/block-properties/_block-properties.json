@@ -26,6 +26,11 @@
           "component": "text",
           "name": "text",
           "label": "Text"
+        },
+        {
+          "component": "text",
+          "name": "prop2",
+          "label": "Text 2"
         }
       ]
     }
