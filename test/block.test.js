@@ -97,7 +97,7 @@ describe('block tests', () => {
      * The grouping-with-names test verifies that blocks that have use field name comments
      * in groups are properly handled.
      */
-    it.only('grouping-with-names', async () => {
+    it('grouping-with-names', async () => {
       await testBlock('grouping-with-names', `${folder}/grouping-with-names`);
     });
 
