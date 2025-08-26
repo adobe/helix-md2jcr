@@ -73,6 +73,14 @@ describe('block tests', () => {
      * The grouping test verifies that blocks with models that have grouped fields
      * are correctly generated.
      */
+    it('embed', async () => {
+      await testBlock('embed', `${folder}/embed`);
+    });
+
+    /**
+     * The grouping test verifies that blocks with models that have grouped fields
+     * are correctly generated.
+     */
     it('grouping', async () => {
       await testBlock('grouping', `${folder}/grouping`);
     });
@@ -83,6 +91,14 @@ describe('block tests', () => {
      */
     it('grouping-with-defaults', async () => {
       await testBlock('grouping-with-defaults', `${folder}/grouping-with-defaults`);
+    });
+
+    /**
+     * The grouping-with-names test verifies that blocks that have use field name comments
+     * in groups are properly handled.
+     */
+    it('grouping-with-names', async () => {
+      await testBlock('grouping-with-names', `${folder}/grouping-with-names`);
     });
 
     /**

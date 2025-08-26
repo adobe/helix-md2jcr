@@ -197,14 +197,19 @@ function extractKeyValueProperties(row, model, fieldResolver, fieldGroup, proper
   }
 }
 
+function isFieldNameHint(node) {
+  return node.type === 'html' && node.value?.startsWith('<!-- field:') && node.value?.endsWith(' -->');
+}
+
 function processCell(cell, fieldGroup, fieldResolver, properties) {
   const cellChildren = cell.children;
 
   if (cellChildren.length !== 0) {
-    // while the cell has children we need to process the fields in the fieldGroup
-    // if we run out of fields but there are still more nodes, then we need to throw an error
-    // because the model does not map correctly to the content
+    let nextFieldName;
     while (cellChildren.length > 0) {
+      // while the cell has children we need to process the fields in the fieldGroup
+      // if we run out of fields but there are still more nodes, then we need to throw an error
+      // because the model does not map correctly to the content
       const node = cellChildren.shift();
 
       // have we run out of fields?
@@ -216,7 +221,14 @@ function processCell(cell, fieldGroup, fieldResolver, properties) {
         throw new Error(errorMsg);
       }
 
-      const field = fieldResolver.resolve(node, fieldGroup);
+      // if we see a property name hint, parse it and continue, unset it if not
+      if (isFieldNameHint(node)) {
+        nextFieldName = node.value.split('<!-- field:')[1].split(' -->')[0].trim();
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      const field = fieldResolver.resolve(node, fieldGroup, nextFieldName);
 
       let pWrapper;
       if (field.component === 'richtext') {
@@ -231,7 +243,9 @@ function processCell(cell, fieldGroup, fieldResolver, properties) {
           const n = cellChildren.shift();
           if (!n) break;
 
-          if (find(n, { type: 'image' })) {
+          // richtexts are greedy:
+          // they will consume all the children until they hit an image or a named field
+          if (find(n, { type: 'image' }) || isFieldNameHint(n)) {
             cellChildren.unshift(n);
             searching = false;
           }
@@ -243,6 +257,8 @@ function processCell(cell, fieldGroup, fieldResolver, properties) {
         pWrapper = node;
       }
       extractPropertiesForNode(field, pWrapper, properties);
+
+      nextFieldName = null;
     }
   }
 }

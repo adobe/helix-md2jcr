@@ -47,11 +47,21 @@ class FieldGroupFieldResolver {
    * @param {{isGrouped: boolean, name: string, fields: [],
    * collapsed: [{isGrouped: boolean, name: string, fields: []}]}} fieldGroup - the field group
    */
-  resolve(node, fieldGroup) {
+  resolve(node, fieldGroup, hint) {
     const { fields } = fieldGroup;
     if (fields === undefined) {
       // throw an Error indicating the issue
       throw new Error(`Field group ${fieldGroup.name} does not have any fields defined.`);
+    }
+
+    // if a hint is provided, then we need to find the field that matches the hint
+    if (hint) {
+      const fieldIndex = fields.findIndex((field) => field.name === hint);
+      if (fieldIndex !== -1) {
+        const field = fields[fieldIndex];
+        fields.splice(0, fieldIndex + 1);
+        return field;
+      }
     }
 
     let foundField = fields.find((field) => {
