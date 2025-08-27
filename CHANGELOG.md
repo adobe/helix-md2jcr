@@ -1,3 +1,10 @@
+## [1.1.32](https://github.com/adobe/helix-md2jcr/compare/v1.1.31...v1.1.32) (2025-08-27)
+
+
+### Bug Fixes
+
+* **143:** support for field name hints ([8dbe511](https://github.com/adobe/helix-md2jcr/commit/8dbe511651f2d3f6e1b4a322eeb1ea91a83048a9))
+
 ## [1.1.31](https://github.com/adobe/helix-md2jcr/compare/v1.1.30...v1.1.31) (2025-08-17)
 
 
