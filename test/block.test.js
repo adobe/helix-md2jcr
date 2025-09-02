@@ -70,6 +70,14 @@ describe('block tests', () => {
     });
 
     /**
+     * Container block test to verify that container blocks with multiple models are
+     * generated correctly. No classes should be added to the block item.
+     */
+    it('container-block-multi-model', async () => {
+      await testBlock('container-block-multi-model', `${folder}/container-block-multi-model`);
+    });
+
+    /**
      * The grouping test verifies that blocks with models that have grouped fields
      * are correctly generated.
      */
