@@ -1,3 +1,10 @@
+## [1.1.33](https://github.com/adobe/helix-md2jcr/compare/v1.1.32...v1.1.33) (2025-09-03)
+
+
+### Bug Fixes
+
+* container blocks fail to parse correctly when no class is provided ([#147](https://github.com/adobe/helix-md2jcr/issues/147)) ([846f281](https://github.com/adobe/helix-md2jcr/commit/846f281509f47ddeb228a6cda9d6252e42861b74))
+
 ## [1.1.32](https://github.com/adobe/helix-md2jcr/compare/v1.1.31...v1.1.32) (2025-08-27)
 
 
