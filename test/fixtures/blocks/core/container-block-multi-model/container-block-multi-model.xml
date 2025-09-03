@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
+  <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
+    <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" filter="articles" model="articles" modelFields="[]" name="Articles">
+          <item_0 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Customization Item" model="customization" titleType="h2" modelFields="[title,titleType,description,link]" title="Customization Title" description="&lt;p&gt;Description goes here&lt;/p&gt;" link="http://www.adobe.com"></item_0>
+          <item_1 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Teaser Item" model="teaser" titleType="h2" modelFields="[image,title,titleType,link]" image="https://mwww.adobe.com/1.png" title="CustomizationTitle" link="http://www.adobe.com"></item_1>
+          <item_2 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Survey Item" model="survey" titleType="h2" modelFields="[title,typeOfPost,link]" title="My Text" typeOfPost="post" link="http://www.adobe.com"></item_2>
+        </block>
+      </section>
+    </root>
+  </jcr:content>
+</jcr:root>

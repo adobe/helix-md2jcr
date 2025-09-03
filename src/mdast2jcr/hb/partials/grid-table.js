@@ -263,11 +263,30 @@ function processCell(cell, fieldGroup, fieldResolver, properties) {
   }
 }
 
-function extractProperties(mdast, model, mode, component, fields, properties) {
+/**
+ * Extract the properties for the block item.
+ * @param {*} mdast - The mdast tree.
+ * @param {*} model - The model.
+ * @param {*} mode - The mode, either 'blockItem' or 'keyValue' or 'simple'.
+ * @param {*} component - The component.
+ * @param {*} fields - The fields.
+ * @param {*} properties - The properties.
+ * @param {*} skipFirstCell - Use to tell the function to skip the first cell when
+ * processing the block item.  This is only applicable when mode is 'blockItem' and
+ * when there is a component id specified in the first cell of the row for the block item.
+ */
+function extractProperties(
+  mdast,
+  model,
+  mode,
+  component,
+  fields,
+  properties,
+  skipFirstCell,
+) {
   const fieldsCloned = structuredClone(fields);
 
   // the first cells is the header row, so we skip it
-  // const nodes = findAll(mdast, (node) => node.type === 'gtCell', true);
   const rows = findAll(mdast, (node) => node.type === 'gtRow', false);
   let classesField;
   if (mode === 'blockItem') {
@@ -314,7 +333,7 @@ function extractProperties(mdast, model, mode, component, fields, properties) {
     // We then want to throw away the first cell as it is the class field
     // EC currently does not add the classes field therefore more cells than model fields
     // See container-block.md for an example of more cells than model fields (second table)
-    if (mode === 'blockItem' && classesField && (cells.length > modelFields.length)) {
+    if (mode === 'blockItem' && (skipFirstCell) && (cells.length > modelFields.length)) {
       cells.shift();
     }
 
@@ -382,12 +401,14 @@ function getBlockItems(mdast, modelHelper, definitions, allowedComponents) {
 
     // the first cell may be defined as the component id (with optional classes)
     let componentId = cellText.split(',').shift().trim();
-
+    let skipFirstCell = false;
     // if we can't find the component id in the allowed components it means
     // the user has not specified what component to use therefore we fall back
     // to the first allowed component.
     if (allowedComponents.indexOf(componentId) === -1) {
       [componentId] = allowedComponents;
+    } else {
+      skipFirstCell = true;
     }
 
     // check to see if we can use this component
@@ -400,7 +421,7 @@ function getBlockItems(mdast, modelHelper, definitions, allowedComponents) {
           modelFields: `[${getModelFieldNames(fieldGroup.model).join(',')}]`,
         };
 
-        extractProperties(row, fieldGroup.model, 'blockItem', component, fieldGroup.fields, properties);
+        extractProperties(row, fieldGroup.model, 'blockItem', component, fieldGroup.fields, properties, skipFirstCell);
         items.push(`<item_${items.length} jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="${fieldGroup.model.id}" ${Object.entries(properties).map(([k, v]) => `${k}="${v}"`).join(' ')}></item_${items.length}>`);
       }
     }
