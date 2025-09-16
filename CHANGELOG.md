@@ -1,3 +1,10 @@
+## [1.1.34](https://github.com/adobe/helix-md2jcr/compare/v1.1.33...v1.1.34) (2025-09-16)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#152](https://github.com/adobe/helix-md2jcr/issues/152)) ([cd12f99](https://github.com/adobe/helix-md2jcr/commit/cd12f99ec08e953a02769a5737cd2ab8081f8cc7))
+
 ## [1.1.33](https://github.com/adobe/helix-md2jcr/compare/v1.1.32...v1.1.33) (2025-09-03)
 
 
