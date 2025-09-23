@@ -24,7 +24,7 @@
 +=================================================+
 | ![A group of people sitting on a stage][image0] |
 +-------------------------------------------------+
-| <!-- field:teaserText_title -->                 |
+| <!--field:teaserText_title-->                   |
 | ## Welcome to AEM                               |
 | The CTA will merge into the greedy richtext ... |
 | **[Adobe](www.adobe.com)**                      |
@@ -35,10 +35,10 @@
 +=================================================+
 | ![A group of people sitting on a stage][image0] |
 +-------------------------------------------------+
-| <!-- field:teaserText_title -->                 |
+| <!--field:teaserText_title -->                  |
 | ## Welcome to AEM                               |
 | The CTA will be set to it's own field ...       |
-| <!-- field:teaserText_cta -->                   |
+| <!-- field:teaserText_cta-->                    |
 | **[Adobe](www.adobe.com)**                      |
 +-------------------------------------------------+
 

@@ -197,8 +197,31 @@ function extractKeyValueProperties(row, model, fieldResolver, fieldGroup, proper
   }
 }
 
+/**
+ * Check if the node is a field name hint.
+ * @param {Node} node - the node to check
+ * @returns {boolean} - true if the node is a field name hint, false otherwise
+ */
 function isFieldNameHint(node) {
-  return node.type === 'html' && node.value?.startsWith('<!-- field:') && node.value?.endsWith(' -->');
+  // get the node value and remove all whitespace from the value to test if it is a field name hint
+  if (node.type === 'html') {
+    const value = node.value.replace(/\s/g, '');
+    return value?.startsWith('<!--field:') && value?.endsWith('-->');
+  }
+  return false;
+}
+
+/**
+ * Get the field name hint value from the node.
+ * @param {Node} node - the node to get the field name hint value from
+ * @returns {string} - the field name hint value or null if the node is not a field name hint
+ */
+function fieldHintValue(node) {
+  if (node.type === 'html') {
+    const value = node.value.replace(/\s/g, '');
+    return value.split('<!--field:')[1].split('-->')[0].trim();
+  }
+  return null;
 }
 
 function processCell(cell, fieldGroup, fieldResolver, properties) {
@@ -223,7 +246,7 @@ function processCell(cell, fieldGroup, fieldResolver, properties) {
 
       // if we see a property name hint, parse it and continue, unset it if not
       if (isFieldNameHint(node)) {
-        nextFieldName = node.value.split('<!-- field:')[1].split(' -->')[0].trim();
+        nextFieldName = fieldHintValue(node);
         // eslint-disable-next-line no-continue
         continue;
       }
