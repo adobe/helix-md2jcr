@@ -1,3 +1,10 @@
+## [1.1.35](https://github.com/adobe/helix-md2jcr/compare/v1.1.34...v1.1.35) (2025-09-23)
+
+
+### Bug Fixes
+
+* support html comments generated with createComment api ([#153](https://github.com/adobe/helix-md2jcr/issues/153)) ([dc8d06e](https://github.com/adobe/helix-md2jcr/commit/dc8d06e62643c738db639cc3276bd77f040d9ae7))
+
 ## [1.1.34](https://github.com/adobe/helix-md2jcr/compare/v1.1.33...v1.1.34) (2025-09-16)
 
 
