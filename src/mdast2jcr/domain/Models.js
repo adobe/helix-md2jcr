@@ -49,6 +49,7 @@ function getField(model, fieldName) {
 function getModelFieldNames(model) {
   return model
     ? model.fields
+      .filter((f) => f.component !== 'tab')
       .map((f) => f.name)
       .filter((f) => f !== 'classes')
     : [];
