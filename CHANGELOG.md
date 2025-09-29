@@ -1,3 +1,10 @@
+## [1.1.36](https://github.com/adobe/helix-md2jcr/compare/v1.1.35...v1.1.36) (2025-09-29)
+
+
+### Bug Fixes
+
+* model fields of component = tab should not be included in model fields ([#155](https://github.com/adobe/helix-md2jcr/issues/155)) ([ad3ecc4](https://github.com/adobe/helix-md2jcr/commit/ad3ecc4bb86acbc6cbf8a3ca842ba92572efc49b)), closes [#154](https://github.com/adobe/helix-md2jcr/issues/154)
+
 ## [1.1.35](https://github.com/adobe/helix-md2jcr/compare/v1.1.34...v1.1.35) (2025-09-23)
 
 
