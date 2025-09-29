@@ -217,6 +217,14 @@ describe('block tests', () => {
     });
 
     /**
+     * This test is to verify that model fields that have a component type of 'tab'
+     * are not included in the model fields, as this is a special case for UE UI.
+     */
+    it('tabs', async () => {
+      await testBlock('tabs', `${folder}/tabs`);
+    });
+
+    /**
      * The data-uri-image block test verifies that image URLs starting with 'data:'
      * are handled correctly by returning an empty string for the image URL.
      */

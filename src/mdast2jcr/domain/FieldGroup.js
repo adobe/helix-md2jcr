@@ -34,6 +34,7 @@ class FieldGroup {
     const suffixes = ['Alt', 'MimeType', 'Type', 'Text', 'Title'];
 
     this.model.fields
+      .filter((field) => field.component !== 'tab')
       .filter((field) => field.name !== 'classes')
       .forEach((field) => {
         if (field.name.includes('_')) {
