@@ -549,7 +549,8 @@ function gridTablePartial(context) {
     // 1. In this section attempt to locate the associated model for the block.
     // 2. Trim the mdast nodes to only be relevant for the child block.
     // 3. Then getBlockitems will process the mdast nodes and return the block items.
-    const allowedComponents = filters.find((f) => f.id === component.filterId)?.components || [];
+    const allowedComponents = modelHelper.getAllowedComponents(component);
+
     // collect all rows
     const blockRows = findAll(mdast, (node) => node.type === 'gtRow', true);
     // the fieldGroup (parent model) determines the expected number of rows in the table
