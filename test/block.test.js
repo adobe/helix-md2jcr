@@ -233,7 +233,7 @@ describe('block tests', () => {
     });
 
     it('tables', async () => {
-      await testBlock('tables', folder);
+      await testBlock('tables', `${folder}/tables`);
     });
   });
 
