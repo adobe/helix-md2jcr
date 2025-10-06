@@ -60,7 +60,26 @@ md2jcr test/fixtures/simple.md -v
 md2jcr test/fixtures/simple.md -v -d
 ```
 
+**Use custom Universal Editor files from a directory:**
+```bash
+md2jcr content.md -ue path/to/ue-files-directory
+```
+
 The converter will generate a `.xml` file alongside the markdown file containing the JCR structure. This can be used to check for potential content changes due to conversion.
+
+#### Command-Line Options
+
+- `-v`, `--verbose` - Print the XML output to the console
+- `-d`, `--decode` - Decode HTML entities in the XML output (use with `-v`)
+- `-ue`, `--ue-files <directory>` - Specify a directory containing Universal Editor configuration files
+
+Example directory structure:
+```
+ue-files/
+  ├── component-models.json
+  ├── component-definition.json
+  └── component-filters.json
+```
 
 ### Programmatic Usage
 

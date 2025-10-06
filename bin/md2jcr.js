@@ -43,10 +43,16 @@ async function readJsonFile(filePath) {
  * @param mdFile {string} The path to the markdown file.
  * @param verbose - if true the XML will be printed to the console.
  * @param decodeXML - if true a file with the decoded XML will be created.
+ * @param ueFilesDir - optional path to directory containing UE files (models, definitions, filters)
  * @returns {Promise<void>} A promise that resolves when the conversion is
  * complete, or rejects if the file is not a markdown file.
  */
-async function convert(mdFile, verbose = false, decodeXML = false) {
+async function convert(
+  mdFile,
+  verbose = false,
+  decodeXML = false,
+  ueFilesDir = null,
+) {
   if (!mdFile.endsWith('.md')) {
     return Promise.reject(new Error('File must be a markdown file'));
   }
@@ -59,32 +65,68 @@ async function convert(mdFile, verbose = false, decodeXML = false) {
   let definitionJson;
   let filtersJson;
 
-  const blockDefinitionsPath = path.resolve(dir, `_${base}.json`);
+  // Use provided UE files directory if specified
+  if (ueFilesDir) {
+    const ueDir = path.resolve(process.cwd(), ueFilesDir);
 
-  // check to see if the blockFiles exists
-  try {
-    await stat(blockDefinitionsPath);
-    const blockDefinitionFile = await readJsonFile(path.resolve(dir, `_${base}.json`));
-    modelJson = blockDefinitionFile.models;
-    definitionJson = {
-      groups: [
-        {
-          title: 'Blocks',
-          id: 'blocks',
-          components: [
-            ...blockDefinitionFile.definitions,
-          ],
-        },
-      ],
-    };
-    filtersJson = blockDefinitionFile.filters;
-  } catch (err) {
-    const modelFile = path.resolve(dir, `${base}-models.json`);
-    const definitionFile = path.resolve(dir, `${base}-definitions.json`);
-    const filtersFile = path.resolve(dir, `${base}-filters.json`);
-    modelJson = await readJsonFile(modelFile);
-    definitionJson = await readJsonFile(definitionFile);
-    filtersJson = await readJsonFile(filtersFile);
+    // Try to load models.json
+    const modelsPath = path.resolve(ueDir, 'component-models.json');
+    const loadedModels = await readJsonFile(modelsPath);
+    modelJson = Array.isArray(loadedModels) ? loadedModels : loadedModels.models;
+
+    // Try to load definitions.json
+    const definitionsPath = path.resolve(ueDir, 'component-definition.json');
+    const loadedDefinitions = await readJsonFile(definitionsPath);
+    if (loadedDefinitions.groups) {
+      definitionJson = loadedDefinitions;
+    } else if (loadedDefinitions.definitions) {
+      // Wrap definitions in the expected structure
+      definitionJson = {
+        groups: [
+          {
+            title: 'Blocks',
+            id: 'blocks',
+            components: loadedDefinitions.definitions,
+          },
+        ],
+      };
+    } else {
+      definitionJson = loadedDefinitions;
+    }
+
+    // Try to load filters.json
+    const filtersPath = path.resolve(ueDir, 'component-filters.json');
+    const loadedFilters = await readJsonFile(filtersPath);
+    filtersJson = Array.isArray(loadedFilters) ? loadedFilters : loadedFilters.filters;
+  } else {
+    // Fall back to automatic discovery
+    const blockDefinitionsPath = path.resolve(dir, `_${base}.json`);
+
+    // check to see if the blockFiles exists
+    try {
+      await stat(blockDefinitionsPath);
+      const blockDefinitionFile = await readJsonFile(path.resolve(dir, `_${base}.json`));
+      modelJson = blockDefinitionFile.models;
+      definitionJson = {
+        groups: [
+          {
+            title: 'Blocks',
+            id: 'blocks',
+            components: [
+              ...blockDefinitionFile.definitions,
+            ],
+          },
+        ],
+      };
+      filtersJson = blockDefinitionFile.filters;
+    } catch (err) {
+      const modelFile = path.resolve(dir, `${base}-models.json`);
+      const definitionFile = path.resolve(dir, `${base}-definitions.json`);
+      const filtersFile = path.resolve(dir, `${base}-filters.json`);
+      modelJson = await readJsonFile(modelFile);
+      definitionJson = await readJsonFile(definitionFile);
+      filtersJson = await readJsonFile(filtersFile);
+    }
   }
 
   const md = await readFile(mdFile, 'utf-8');
@@ -110,13 +152,46 @@ async function convert(mdFile, verbose = false, decodeXML = false) {
 }
 
 /**
+ * Parse command-line arguments
+ * @returns {object} Parsed arguments
+ */
+function parseArgs() {
+  const args = {
+    path: null,
+    verbose: false,
+    decode: false,
+    ueFilesDir: null,
+  };
+
+  for (let i = 2; i < process.argv.length; i += 1) {
+    const arg = process.argv[i];
+
+    if (arg === '-v' || arg === '--verbose') {
+      args.verbose = true;
+    } else if (arg === '-d' || arg === '--decode') {
+      args.decode = true;
+    } else if (arg === '-ue' || arg === '--ue-files') {
+      args.ueFilesDir = process.argv[i + 1];
+      i += 1;
+    } else if (!arg.startsWith('-')) {
+      args.path = arg;
+    }
+  }
+
+  return args;
+}
+
+/**
  * Entry point to convert a markdown file to JCR XML.
  * @param inPath {string} The path to the markdown file or directory containing
  * markdown files.
+ * @param verbose {boolean} If true, print output to console
+ * @param htmlDecode {boolean} If true, decode HTML entities in output
+ * @param ueFilesDir {string|null} Optional path to directory containing UE files
  * @returns {Promise<void>} A promise that resolves when the conversion is
  * complete.
  */
-async function run(inPath) {
+export async function run(inPath, verbose, htmlDecode, ueFilesDir) {
   const dirOrFilePath = path.resolve(process.cwd(), inPath);
 
   const files = [];
@@ -130,8 +205,15 @@ async function run(inPath) {
   }
 
   for (const file of files) {
-    await convert(file, process.argv.includes('-v'), process.argv.includes('-d'));
+    await convert(file, verbose, htmlDecode, ueFilesDir);
   }
 }
 
-run(process.argv[2] || process.cwd()).catch(console.error);
+const args = parseArgs();
+
+run(
+  args.path || process.cwd(),
+  args.verbose,
+  args.decode,
+  args.ueFilesDir,
+).catch(console.error);
