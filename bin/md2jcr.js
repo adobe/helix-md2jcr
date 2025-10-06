@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 /*
- * Copyright 2021 Adobe. All rights reserved.
+ * Copyright 2024 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -16,7 +18,7 @@ import {
 } from 'fs/promises';
 import path from 'path';
 import { decode } from 'entities';
-import { md2jcr } from '../index.js';
+import { md2jcr } from '../src/index.js';
 
 /**
  * Read a JSON file. If the file does not exist, return an empty object.

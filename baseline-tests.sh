@@ -36,7 +36,7 @@ done
 MD_DIR="test/fixtures"
 
 # Node script to execute
-NODE_SCRIPT="src/cli/convert2jcr.js"
+NODE_SCRIPT="bin/md2jcr.js"
 
 # Check if the directory exists
 if [ ! -d "$MD_DIR" ]; then

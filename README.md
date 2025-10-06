@@ -16,31 +16,69 @@ npm install
 ```
 
 ## Usage
+
+### Installation
+
 You can install the package via npm:
 
 ```bash
 npm install @adobe/helix-md2jcr
 ```
 
-## Converting Markdown to JCR Nodes
-Running the following command will generate an XML file with the JCR structure alongside of the input file.
+Or use it directly with `npx` without installing:
 
-For example generating xml for the simple.md file, run:
 ```bash
-node ./src/cli/convert2jcr.js test/fixtures/simple.md 
-```
-If you wish to see the output in the console, you can run the following command with the verbose flag -v
-```bash
-node ./src/cli/convert2jcr.js test/fixtures/simple.md -v
+npx @adobe/helix-md2jcr path/to/content.md
 ```
 
-If you wish to see the decoded output in the console you can run the following command with the verbose and decode flags -v and -d:
+### Converting Markdown to JCR Nodes
+
+The package includes a CLI tool `md2jcr` that converts markdown files to JCR XML format.
+
+**Basic usage:**
 ```bash
-node ./src/cli/convert2jcr.js test/fixtures/simple.md -v -d
+npx @adobe/helix-md2jcr path/to/content.md
 ```
 
-The converter will produce a `.xml` which is the generated document converted
-from markdown. This can be used to check for potential content changes due to conversion.
+**Convert a single file:**
+```bash
+md2jcr test/fixtures/simple.md
+```
+
+**Convert all markdown files in a directory:**
+```bash
+md2jcr test/fixtures/
+```
+
+**View output in console with verbose flag `-v`:**
+```bash
+md2jcr test/fixtures/simple.md -v
+```
+
+**View decoded XML output with `-v` and `-d` flags:**
+```bash
+md2jcr test/fixtures/simple.md -v -d
+```
+
+The converter will generate a `.xml` file alongside the markdown file containing the JCR structure. This can be used to check for potential content changes due to conversion.
+
+### Programmatic Usage
+
+You can also use the library programmatically in your Node.js code:
+
+```javascript
+import { md2jcr } from '@adobe/helix-md2jcr';
+
+const markdown = '# Hello World\n\nThis is a test.';
+const options = {
+  models: [...],
+  definition: {...},
+  filters: [...]
+};
+
+const xml = await md2jcr(markdown, options);
+console.log(xml);
+```
 
 ## Baseline XML Files
 Running the ./baseline-tests.sh script will detect any md file under test/fixtures and execute the convert2jcr node script.  
