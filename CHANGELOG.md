@@ -1,3 +1,10 @@
+## [1.1.38](https://github.com/adobe/helix-md2jcr/compare/v1.1.37...v1.1.38) (2025-10-06)
+
+
+### Bug Fixes
+
+* table support ([#157](https://github.com/adobe/helix-md2jcr/issues/157)) ([1815a04](https://github.com/adobe/helix-md2jcr/commit/1815a043a0ed2ae8fbb8c07b007f6354e0ab9edb))
+
 ## [1.1.37](https://github.com/adobe/helix-md2jcr/compare/v1.1.36...v1.1.37) (2025-09-29)
 
 
