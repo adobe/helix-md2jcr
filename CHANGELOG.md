@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/adobe/helix-md2jcr/compare/v1.1.38...v1.2.0) (2025-10-06)
+
+
+### Features
+
+* add global CLI command for md2jcr ([4705024](https://github.com/adobe/helix-md2jcr/commit/47050246625b58ea93d23ac8c7fc303edc81998f))
+
 ## [1.1.38](https://github.com/adobe/helix-md2jcr/compare/v1.1.37...v1.1.38) (2025-10-06)
 
 
