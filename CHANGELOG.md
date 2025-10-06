@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/adobe/helix-md2jcr/compare/v1.2.0...v1.2.1) (2025-10-06)
+
+
+### Bug Fixes
+
+* cli specify the folder to look for the json files in ([b7664fe](https://github.com/adobe/helix-md2jcr/commit/b7664fe1b5a8781218e8585649cb1d0bc099cdbc))
+
 # [1.2.0](https://github.com/adobe/helix-md2jcr/compare/v1.1.38...v1.2.0) (2025-10-06)
 
 
