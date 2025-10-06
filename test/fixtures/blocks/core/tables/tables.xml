@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
+  <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
+    <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="one" filter="table" model="table" modelFields="[filter]" name="Table">
+          <item_0 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Row" model="table-row" column1text="&lt;p&gt;one&lt;/p&gt;" modelFields="[column1text]"></item_0>
+          <item_1 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Row" model="table-row" column1text="&lt;p&gt;one&lt;/p&gt;" modelFields="[column1text]"></item_1>
+        </block>
+        <block_1 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="two" filter="table-2-columns" model="table" modelFields="[filter]" name="Table">
+          <item_0 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Row" model="table-col-2" column1text="&lt;p&gt;one&lt;/p&gt;" column2text="&lt;p&gt;two&lt;/p&gt;" modelFields="[column1text,column2text]"></item_0>
+          <item_1 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Row" model="table-col-2" column1text="&lt;p&gt;one&lt;/p&gt;" column2text="&lt;p&gt;two&lt;/p&gt;" modelFields="[column1text,column2text]"></item_1>
+        </block_1>
+        <block_2 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="three" filter="table-3-columns" model="table" modelFields="[filter]" name="Table">
+          <item_0 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Row" model="table-col-3" column1text="&lt;p&gt;one&lt;/p&gt;" column2text="&lt;p&gt;two&lt;/p&gt;" column3text="&lt;p&gt;three&lt;/p&gt;" modelFields="[column1text,column2text,column3text]"></item_0>
+          <item_1 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Row" model="table-col-3" column1text="&lt;p&gt;one&lt;/p&gt;" column2text="&lt;p&gt;two&lt;/p&gt;" column3text="&lt;p&gt;three&lt;/p&gt;" modelFields="[column1text,column2text,column3text]"></item_1>
+        </block_2>
+        <block_3 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" classes="four" filter="table-4-columns" model="table" modelFields="[filter]" name="Table">
+          <item_0 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Row" model="table-col-4" column1text="&lt;p&gt;one&lt;/p&gt;" column2text="&lt;p&gt;two&lt;/p&gt;" column3text="&lt;p&gt;three&lt;/p&gt;" column4text="&lt;p&gt;four&lt;/p&gt;" modelFields="[column1text,column2text,column3text,column4text]"></item_0>
+          <item_1 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Row" model="table-col-4" column1text="&lt;p&gt;one&lt;/p&gt;" column2text="&lt;p&gt;two&lt;/p&gt;" column3text="&lt;p&gt;three&lt;/p&gt;" column4text="&lt;p&gt;four&lt;/p&gt;" modelFields="[column1text,column2text,column3text,column4text]"></item_1>
+        </block_3>
+      </section>
+    </root>
+  </jcr:content>
+</jcr:root>

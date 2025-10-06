@@ -231,6 +231,10 @@ describe('block tests', () => {
     it('data-uri-image', async () => {
       await testBlock('data-uri-image', `${folder}/data-uri-image`);
     });
+
+    it('tables', async () => {
+      await testBlock('tables', `${folder}/tables`);
+    });
   });
 
   /**

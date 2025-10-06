@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import assert from 'assert';
 import ModelHelper from '../src/mdast2jcr/domain/ModelHelper.js';
+import { getComponentByTitle } from '../src/mdast2jcr/domain/Definitions.js';
 import { loadBlockResources } from './test.utils.js';
 
 describe('Model Helper Tests', () => {
@@ -58,5 +59,26 @@ describe('Model Helper Tests', () => {
     expect(heroField.name).to.equal('hero_img');
     expect(heroField.collapsed[0].name).to.equal('hero_imgAlt');
     expect(heroField.collapsed[1].name).to.equal('hero_imgMimeType');
+  });
+
+  // write a unit test for getAllowedComponents
+  it('Verify table component and child models are assembled correctly', async () => {
+    ({ models, definition, filters } = await loadBlockResources('tables', 'fixtures/blocks/core/tables'));
+    const modelHelper = new ModelHelper('Table', models, definition, filters);
+    expect(modelHelper.groups.length).to.equal(5);
+    // expect the Table group to have 1 field
+    expect(modelHelper.groups[0].fieldGroup.fields.length).to.equal(1);
+    // expect the table-col-2 group to have 1 field
+    expect(modelHelper.groups[1].fieldGroup.fields.length).to.equal(1);
+    // expect the table-col-3 group to have 2 fields
+    expect(modelHelper.groups[2].fieldGroup.fields.length).to.equal(2);
+    // expect the table-col-4 group to have 3 fields
+    expect(modelHelper.groups[3].fieldGroup.fields.length).to.equal(3);
+    // expect the fifth group to have 4 fields
+    expect(modelHelper.groups[4].fieldGroup.fields.length).to.equal(4);
+
+    const tableComponent = getComponentByTitle(definition, 'Table');
+    // expect the allowed components to be the table-row, table-col-2, table-col-3, and table-col-4
+    expect(modelHelper.getAllowedComponents(tableComponent).length).to.equal(4);
   });
 });

@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-import { getComponentById, getComponentByTitle } from './Definitions.js';
+import { getComponentById, getComponentByTitle, getAllComponents } from './Definitions.js';
 import FieldGroup from './FieldGroup.js';
 
 /**
@@ -99,6 +99,18 @@ class ModelHelper {
         this.groups.push({ modelId: filtersModel.id, fieldGroup: new FieldGroup(filtersModel) });
       });
     }
+
+    // // special case for the table component where the component is dynamically selected
+    // // therefore we are going to add all the models that start with 'table-col-'
+    // // so that we can find the associated model for each column.
+    if (component.name.toLowerCase() === 'table') {
+      // add all the models that start with 'table-col-'
+      this.models.forEach((m) => {
+        if (m.id.startsWith('table-col-')) {
+          this.groups.push({ modelId: m.id, fieldGroup: new FieldGroup(m) });
+        }
+      });
+    }
   }
 
   /**
@@ -111,6 +123,27 @@ class ModelHelper {
 
     // no need to pass the fieldGroup just return the fields in the group
     return (result) ? result.fieldGroup : null;
+  }
+
+  /**
+   * Return the allowed components for the component.
+   * @param {Component} component The component.
+   * @return {Array<string>} The allowed components.
+   */
+  getAllowedComponents(component) {
+    const base = this.filters.find((f) => f.id === component.filterId)?.components || [];
+
+    // special case for the table component where the component is dynamically selected
+    // therefore we are going to add all the models that start with 'table-col-'
+    // so that we can find the associated model for each column.
+    if (component.name.toLowerCase() === 'table') {
+      const components = getAllComponents(this.definition);
+      components
+        .filter((c) => c.id.startsWith('table-col-'))
+        .forEach((c) => base.push(c.id));
+    }
+
+    return base;
   }
 }
 
