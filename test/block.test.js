@@ -287,6 +287,23 @@ describe('block tests', () => {
     });
   });
 
+  /**
+   * The suite of non grid table markdown block unit tests.
+   */
+  describe('plain-md', () => {
+    /**
+     * This test verifies that non grid table markdown blocks are correctly
+     * converted to JCR XML.
+     */
+    const folder = 'blocks/plain-md';
+    it('cards', async () => {
+      await testBlock('cards', `${folder}/cards`);
+    });
+  });
+
+  /**
+   * The suite of error handling block unit tests.
+   */
   describe('error handling', () => {
     const folder = 'blocks/error-handling';
 
