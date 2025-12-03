@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/adobe/helix-md2jcr/compare/v1.2.6...v1.2.7) (2025-12-03)
+
+
+### Bug Fixes
+
+* update semantic-release to v25 and node to 24.x for OIDC ([#164](https://github.com/adobe/helix-md2jcr/issues/164)) ([bd9945c](https://github.com/adobe/helix-md2jcr/commit/bd9945c297c8504768ea0445a23456ef0be823ed))
+
 ## [1.2.6](https://github.com/adobe/helix-md2jcr/compare/v1.2.5...v1.2.6) (2025-12-02)
 
 
