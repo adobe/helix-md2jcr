@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
+  <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
+    <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" filter="cards" model="cards" modelFields="[]" name="Cards">
+          <item_0 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Card" model="card" modelFields="[image,text]" image="https://main--stini--bhellema.aem.page/media_11750a2f0c941d2afebe990fc756a1c78cb0d817c.jpg#width=512&amp;height=512" text="&lt;p&gt;&lt;strong&gt;Discounted!&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;2024 Stock needs to move!&lt;/p&gt;"></item_0>
+          <item_1 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Card" model="card" modelFields="[image,text]" image="https://main--stini--bhellema.aem.page/media_155f5bb528b2327053971d5eef5276d7dca867f8f.jpg#width=512&amp;height=512" text="&lt;p&gt;&lt;strong&gt;Wolf Mix Master&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;2024 Wolf Mix Master is ready to move out!&lt;/p&gt;"></item_1>
+          <item_2 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Card" model="card" modelFields="[image,text]" image="https://main--stini--bhellema.aem.page/media_1f3f98711f157e84bd39ed3ef552987b4da75ddbd.jpg#width=512&amp;height=512" text="&lt;p&gt;&lt;strong&gt;Mooooove Me!&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;The rockin’ cow plush is ready to go to pasture.  Order now and let him loose!&lt;/p&gt;"></item_2>
+        </block>
+      </section>
+    </root>
+  </jcr:content>
+</jcr:root>
