@@ -33,7 +33,7 @@
   "dependencies": {
     "@adobe/fetch": "4.2.3",
     "@adobe/helix-markdown-support": "7.1.17",
-    "@adobe/helix-shared-process-queue": "3.1.3",
+    "@adobe/helix-shared-process-queue": "3.1.4",
     "@adobe/remark-gridtables": "3.0.16",
     "entities": "^6.0.0",
     "github-slugger": "2.0.0",
