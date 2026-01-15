@@ -48,6 +48,24 @@ ARGS=""
 [ "$VERBOSE" = "true" ] && ARGS="$ARGS -v"
 [ "$DECODE" = "true" ] && ARGS="$ARGS -d"
 
+# Function to check if spec-specific files exist, otherwise use component-*.json fallback
+get_ue_args() {
+  local md_file="$1"
+  local dir=$(dirname "$md_file")
+  local base=$(basename "$md_file" .md)
+  
+  # Check if spec-specific files exist
+  if [ -f "$dir/${base}-models.json" ] || [ -f "$dir/_${base}.json" ]; then
+    # Spec-specific files exist, no need for -ue flag
+    echo ""
+  elif [ -f "$dir/component-models.json" ]; then
+    # Fall back to component-*.json files
+    echo "-ue $dir"
+  else
+    echo ""
+  fi
+}
+
 # If a specific file is provided, process only that file
 if [ -n "$SPECIFIC_FILE" ]; then
   if [ ! -f "$SPECIFIC_FILE" ]; then
@@ -58,7 +76,10 @@ if [ -n "$SPECIFIC_FILE" ]; then
   echo "Processing $SPECIFIC_FILE..."
   [ "$VERBOSE" = "true" ] && echo
   
-  node "$NODE_SCRIPT" "$SPECIFIC_FILE" $ARGS 2>/dev/null
+  # Get any additional UE args for fallback
+  UE_ARGS=$(get_ue_args "$SPECIFIC_FILE")
+  
+  node "$NODE_SCRIPT" "$SPECIFIC_FILE" $ARGS $UE_ARGS
   
   if [ $? -ne 0 ]; then
     echo "Error processing $SPECIFIC_FILE with $NODE_SCRIPT."
@@ -89,7 +110,10 @@ for MD_FILE in $MD_FILES; do
   # if VERBOSE is true then echo a new line
   [ "$VERBOSE" = "true" ] && echo
 
-  node "$NODE_SCRIPT" "$MD_FILE" $ARGS 2>/dev/null
+  # Get any additional UE args for fallback
+  UE_ARGS=$(get_ue_args "$MD_FILE")
+
+  node "$NODE_SCRIPT" "$MD_FILE" $ARGS $UE_ARGS 2>/dev/null
 
   # Check if the Node.js script executed successfully
   if [ $? -ne 0 ]; then

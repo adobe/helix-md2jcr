@@ -44,9 +44,20 @@ export async function loadBlockResources(spec, folder) {
     };
     filtersJson = json.filters;
   } catch (err) {
-    const modelFile = await readFile(resolve(__testdir, folder, `${spec}-models.json`), 'utf-8');
-    const definitionFile = await readFile(resolve(__testdir, folder, `${spec}-definitions.json`), 'utf-8');
-    const filtersFile = await readFile(resolve(__testdir, folder, `${spec}-filters.json`), 'utf-8');
+    // Helper to try spec-specific file first, then fall back to component-* file
+    async function loadWithFallback(specFile, fallbackFile) {
+      const specPath = resolve(__testdir, folder, specFile);
+      try {
+        await stat(specPath);
+        return readFile(specPath, 'utf-8');
+      } catch {
+        return readFile(resolve(__testdir, folder, fallbackFile), 'utf-8');
+      }
+    }
+
+    const modelFile = await loadWithFallback(`${spec}-models.json`, 'component-models.json');
+    const definitionFile = await loadWithFallback(`${spec}-definition.json`, 'component-definition.json');
+    const filtersFile = await loadWithFallback(`${spec}-filters.json`, 'component-filters.json');
 
     modelJson = JSON.parse(modelFile);
     definitionJson = JSON.parse(definitionFile);
