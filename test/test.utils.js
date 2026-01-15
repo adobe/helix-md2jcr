@@ -55,8 +55,28 @@ export async function loadBlockResources(spec, folder) {
       }
     }
 
+    // Helper for definition file which can be singular or plural
+    async function loadDefinitionFile() {
+      // Try spec-definitions.json (plural) first
+      const pluralPath = resolve(__testdir, folder, `${spec}-definitions.json`);
+      try {
+        await stat(pluralPath);
+        return readFile(pluralPath, 'utf-8');
+      } catch {
+        // Try spec-definition.json (singular)
+        const singularPath = resolve(__testdir, folder, `${spec}-definition.json`);
+        try {
+          await stat(singularPath);
+          return readFile(singularPath, 'utf-8');
+        } catch {
+          // Fall back to component-definition.json
+          return readFile(resolve(__testdir, folder, 'component-definition.json'), 'utf-8');
+        }
+      }
+    }
+
     const modelFile = await loadWithFallback(`${spec}-models.json`, 'component-models.json');
-    const definitionFile = await loadWithFallback(`${spec}-definition.json`, 'component-definition.json');
+    const definitionFile = await loadDefinitionFile();
     const filtersFile = await loadWithFallback(`${spec}-filters.json`, 'component-filters.json');
 
     modelJson = JSON.parse(modelFile);
