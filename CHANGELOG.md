@@ -1,3 +1,10 @@
+## [1.2.13](https://github.com/adobe/helix-md2jcr/compare/v1.2.12...v1.2.13) (2026-02-02)
+
+
+### Bug Fixes
+
+* metadata content needs to be encoded ([#186](https://github.com/adobe/helix-md2jcr/issues/186)) ([bea5476](https://github.com/adobe/helix-md2jcr/commit/bea5476460c6d3daf21e79299f41af1c08389ac7))
+
 ## [1.2.12](https://github.com/adobe/helix-md2jcr/compare/v1.2.11...v1.2.12) (2026-01-25)
 
 
