@@ -17,7 +17,7 @@
 import Component from './Component.js';
 
 /**
- * Get the components from the definitions object, (component-definitions.json).
+ * Get the components from the definitions object, (component-definition.json).
  * @param {DefinitionDef} definitions The Definitions object.
  * @returns {Component[]} An array of Component objects.
  */

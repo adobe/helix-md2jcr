@@ -164,6 +164,14 @@ describe('block tests', () => {
     });
 
     /**
+     * The metadata-quotes block test verifies that metadata fields are correctly
+     * handled when the text contains quotes.
+     */
+    it('metadata-quotes', async () => {
+      await testBlock('metadata-quotes', `${folder}/metadata-quotes`);
+    });
+
+    /**
      * The multi-cell block test verifies that model grouping is correctly handled.
      * Where each model field that is grouped is in its own cell.
      */

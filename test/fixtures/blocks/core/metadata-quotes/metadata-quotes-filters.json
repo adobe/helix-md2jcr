@@ -1,0 +1,14 @@
+[
+  {
+    "id": "main",
+    "components": [
+      "section"
+    ]
+  },
+  {
+    "id": "section",
+    "components": [
+      "page"
+    ]
+  }
+]

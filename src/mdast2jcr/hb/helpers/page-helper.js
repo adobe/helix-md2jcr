@@ -64,6 +64,8 @@ function buildPageMetadata(table, models) {
         if (isMultiField(field)) {
           value = value.split(',').map((v) => encodeHTMLEntities(v.trim()));
           value = value.length > 0 ? `[${value.join(',')}]` : '';
+        } else {
+          value = encodeHTMLEntities(value);
         }
         metadata[field.name] = value;
       }
