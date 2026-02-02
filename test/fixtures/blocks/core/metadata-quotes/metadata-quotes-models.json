@@ -1,0 +1,32 @@
+[
+  {
+    "id": "basic",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title"
+      }
+    ]
+  },
+  {
+    "id": "page-metadata",
+    "fields": [
+      {
+        "component": "text",
+        "name": "jcr:title"
+      },
+      {
+        "component": "text",
+        "name": "jcr:description"
+      },
+      {
+        "component": "reference",
+        "name": "image"
+      },
+      {
+        "component": "text",
+        "name": "og:url"
+      }
+    ]
+  }
+]

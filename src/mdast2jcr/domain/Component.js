@@ -12,7 +12,7 @@
 
 /**
  * The Component class represents a single component located in the
- * component-definitions.json file.
+ * component-definition.json file.
  */
 class Component {
   /**
