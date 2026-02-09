@@ -1,3 +1,10 @@
+## [1.2.14](https://github.com/adobe/helix-md2jcr/compare/v1.2.13...v1.2.14) (2026-02-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency unist-util-visit to v5.1.0 ([#189](https://github.com/adobe/helix-md2jcr/issues/189)) ([d87f0a4](https://github.com/adobe/helix-md2jcr/commit/d87f0a42e7d52b78e1ca2c2865ce3146aa53517a))
+
 ## [1.2.13](https://github.com/adobe/helix-md2jcr/compare/v1.2.12...v1.2.13) (2026-02-02)
 
 
