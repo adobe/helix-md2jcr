@@ -57,8 +57,8 @@
     "xml-formatter": "^3.6.3"
   },
   "devDependencies": {
-    "@adobe/eslint-config-helix": "3.0.18",
-    "@adobe/helix-mediahandler": "2.10.1",
+    "@adobe/eslint-config-helix": "3.0.19",
+    "@adobe/helix-mediahandler": "2.11.0",
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
     "@semantic-release/changelog": "6.0.3",
