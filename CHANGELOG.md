@@ -1,3 +1,10 @@
+## [1.2.17](https://github.com/adobe/helix-md2jcr/compare/v1.2.16...v1.2.17) (2026-03-24)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#201](https://github.com/adobe/helix-md2jcr/issues/201)) ([90b4a83](https://github.com/adobe/helix-md2jcr/commit/90b4a834db19ff25474aff7ff1d6855843264429))
+
 ## [1.2.16](https://github.com/adobe/helix-md2jcr/compare/v1.2.15...v1.2.16) (2026-02-22)
 
 
