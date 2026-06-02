@@ -60,6 +60,10 @@ describe('block tests', () => {
       await testBlock('columns-boilerplate', `${folder}/columns-boilerplate`);
     });
 
+    it('columns-savings', async () => {
+      await testBlock('columns-savings', `${folder}/columns-savings`);
+    });
+
     /**
      * Container block test to verify that container blocks are generated correctly.
      * Container blocks are blocks that contain other blocks, and therefore require
