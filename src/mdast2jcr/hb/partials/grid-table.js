@@ -264,7 +264,9 @@ function processCell(cell, fieldGroup, fieldResolver, properties) {
 
         while (searching) {
           const n = cellChildren.shift();
-          if (!n) break;
+          if (!n) {
+            break;
+          }
 
           // richtexts are greedy:
           // they will consume all the children until they hit an image or a named field

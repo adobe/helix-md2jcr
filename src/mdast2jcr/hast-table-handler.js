@@ -68,7 +68,9 @@ function toRows(children) {
 
       nodes.push(node);
     } else {
-      if (!queue) queue = [];
+      if (!queue) {
+        queue = [];
+      }
       queue.push(node);
     }
   });
