@@ -70,11 +70,49 @@ describe('block tests', () => {
     });
 
     /**
+     * Container block where parent and child both have a single field. A single-cell
+     * body row is ambiguous — it is treated as parent data and a warning is emitted
+     * advising the author to add an explicit child component id.
+     */
+    it('container-block-ambiguous', async () => {
+      const { models, definition, filters } = await loadBlockResources(
+        'container-block-ambiguous',
+        `fixtures/${folder}/container-block-ambiguous`,
+      );
+
+      // eslint-disable-next-line no-console
+      const originalWarn = console.warn;
+      const warnings = [];
+      // eslint-disable-next-line no-console
+      console.warn = (message) => warnings.push(message);
+      try {
+        await test(`${folder}/container-block-ambiguous/container-block-ambiguous`, { models, definition, filters });
+      } finally {
+        // eslint-disable-next-line no-console
+        console.warn = originalWarn;
+      }
+
+      expect(warnings).to.have.length(1);
+      expect(warnings[0]).to.contain('Ambiguous container block row in "Container"');
+      expect(warnings[0]).to.contain('add the child component id');
+    });
+
+    /**
      * Container block test to verify that container blocks with multiple models are
      * generated correctly. No classes should be added to the block item.
      */
     it('container-block-multi-model', async () => {
       await testBlock('container-block-multi-model', `${folder}/container-block-multi-model`);
+    });
+
+    /**
+     * Container block test to verify that when parent property rows are omitted,
+     * child items are still correctly generated. Per the spec, parent rows are
+     * single-column and child rows are multi-column, so the first multi-column
+     * body row signals that parent rows were skipped entirely.
+     */
+    it('container-block-no-parent-rows', async () => {
+      await testBlock('container-block-no-parent-rows', `${folder}/container-block-no-parent-rows`);
     });
 
     /**

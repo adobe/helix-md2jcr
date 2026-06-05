@@ -9,6 +9,22 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+/**
+ * Recursively checks whether a field's options tree contains an entry matching
+ * the given value by either its `value` or `name` property.
+ * @param {Array<object>} options - The options array from a model field.
+ * @param {string} value - The value to search for.
+ * @return {boolean}
+ */
+export function optionsIncludeValue(options, value) {
+  return options.some((option) => {
+    if (option.value === value || option.name === value) {
+      return true;
+    }
+    return option.children ? optionsIncludeValue(option.children, value) : false;
+  });
+}
+
 class FieldGroup {
   /**
    * Constructor.
@@ -80,6 +96,18 @@ class FieldGroup {
           }
         }
       });
+  }
+
+  /**
+   * Returns true if the first field in this group has an options list that includes
+   * the given value. Used to distinguish a valid parent-property value from a
+   * child component id when a single-cell row is encountered.
+   * @param {string} value - The cell text to test against the field's options.
+   * @return {boolean}
+   */
+  fieldHasMatchingOption(value) {
+    const firstField = this.fields[0]?.fields[0];
+    return firstField?.options ? optionsIncludeValue(firstField.options, value) : false;
   }
 }
 
