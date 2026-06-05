@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import { loadBlockResources } from './test.utils.js';
 import { test } from './test-base.js';
+import md2jcr from '../src/md2jcr/index.js';
 
 async function testBlock(spec, folder) {
   // split the spec by a / to find the name and the folder
@@ -365,8 +366,38 @@ describe('block tests', () => {
         await testBlock('missing-content', `${folder}/missing-content`);
       } catch (e) {
         expect(e.message).to.contain('cardsNoImages');
-        expect(e.message).to.contain('The content isn’t mapping to the model correctly');
+        expect(e.message).to.contain('mapping to the model correctly');
       }
+    });
+
+    it('throws when models is not an array', async () => {
+      const md = '+-------+\n| Block |\n+=======+\n| value |\n+-------+';
+      let err;
+      try {
+        await md2jcr(md, { models: null, definition: { groups: [] }, filters: [] });
+      } catch (e) {
+        err = e;
+      }
+      expect(err).to.be.an('Error');
+      expect(err.message).to.contain('*-models.json');
+    });
+
+    it('throws when block component is not found in definitions', async () => {
+      const md = '+---------------+\n| UnknownBlock  |\n+===============+\n| value         |\n+---------------+';
+      const options = {
+        models: [{ id: 'other', fields: [] }],
+        definition: { groups: [{ title: 'Blocks', id: 'blocks', components: [{ title: 'Other', id: 'other', plugins: { xwalk: { page: { resourceType: 'rt', template: {} } } } }] }] },
+        filters: [],
+      };
+      let err;
+      try {
+        await md2jcr(md, options);
+      } catch (e) {
+        err = e;
+      }
+      expect(err).to.be.an('Error');
+      expect(err.message).to.contain('UnknownBlock');
+      expect(err.message).to.contain('does not exist');
     });
   });
 });

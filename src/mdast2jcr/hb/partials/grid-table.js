@@ -433,10 +433,6 @@ function getComponentId(cell) {
  * @return {boolean}
  */
 function isAmbiguousSingleCellChildRow(firstCells, allowedComponents, modelHelper, fieldGroup) {
-  if (firstCells.length !== 1) {
-    return false;
-  }
-
   const cellValue = stripNewlines(toString(firstCells[0]));
   const componentId = getComponentId(firstCells[0]);
   if (allowedComponents.includes(componentId)) {

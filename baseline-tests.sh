@@ -90,8 +90,10 @@ if [ -n "$SPECIFIC_FILE" ]; then
   exit 0
 fi
 
-# Find all .md files recursively in the directory
-MD_FILES=$(find "$MD_DIR" -type f -name "*.md")
+# Find all .md files recursively in the directory.
+# The bin fixture is excluded: its .xml is a throwaway artifact generated and
+# cleaned up by bin.test.js, so it has no committed baseline to diff against.
+MD_FILES=$(find "$MD_DIR" -type f -name "*.md" -not -path "*/fixtures/bin/*")
 
 # Check if no .md files are found
 if [ -z "$MD_FILES" ]; then
