@@ -71,9 +71,16 @@ describe('block tests', () => {
     });
 
     /**
-     * Container block where parent and child both have a single field. A single-cell
-     * body row is ambiguous — it is treated as parent data and a warning is emitted
-     * advising the author to add an explicit child component id.
+     * Ambiguous single-cell row.
+     *
+     * Setup: the parent (container) and child both have exactly one field, and the
+     * filter allows a single child component. The body row is one cell of arbitrary
+     * text ("Maybe child title").
+     *
+     * Because the cell is neither an allowed component id nor a matching option
+     * value, md2jcr cannot tell whether it is the parent's title or a child item.
+     * It defaults to treating the row as parent data (title="Maybe child title")
+     * and emits a warning advising the author to add an explicit child component id.
      */
     it('container-block-ambiguous', async () => {
       const { models, definition, filters } = await loadBlockResources(
@@ -368,6 +375,27 @@ describe('block tests', () => {
         expect(e.message).to.contain('cardsNoImages');
         expect(e.message).to.contain('mapping to the model correctly');
       }
+    });
+
+    /**
+     * A single-cell body row that contains only a child component id (with no
+     * property cells) is a malformed child item row. A valid child row is
+     * multi-column — the component id followed by its property cells — so md2jcr
+     * throws rather than silently consuming the lone component id as parent data.
+     */
+    it('container-block-child-missing-properties', async () => {
+      let err;
+      try {
+        await testBlock(
+          'container-block-child-missing-properties',
+          `${folder}/container-block-child-missing-properties`,
+        );
+      } catch (e) {
+        err = e;
+      }
+      expect(err).to.be.an('Error');
+      expect(err.message).to.contain('Container block row in "Container"');
+      expect(err.message).to.contain('has no property cells');
     });
 
     it('throws when models is not an array', async () => {

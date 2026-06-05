@@ -98,6 +98,31 @@ To make a one-property child item unambiguous, include the child component id:
 The first cell selects the child component. The second cell is mapped to the
 child model's single property.
 
+## Child Component Id Without Properties
+
+A valid child item row is multi-column: the child component id followed by its
+property cells. A single-cell row that contains only a child component id is
+therefore a malformed child row — it names a component but provides none of its
+properties. md2jcr treats this as an error and fails the conversion rather than
+silently consuming the lone cell as parent block data:
+
+```text
+Container block row in "Container": first body row has one cell ("child") which matches the child component "child" but has no property cells. Add the child item's properties as additional cells, or remove the component id if this is parent block data.
+```
+
+To fix it, add the child's property cells:
+
+```markdown
++-------------------------+
+| Container               |
++============+============+
+| child      | Title      |
++------------+------------+
+```
+
+Or, if the lone value really is parent data, remove the component id so it no
+longer collides with a child component name.
+
 ## Best Practices
 
 - Include parent property rows only when the parent model should receive values.

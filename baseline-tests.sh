@@ -91,9 +91,14 @@ if [ -n "$SPECIFIC_FILE" ]; then
 fi
 
 # Find all .md files recursively in the directory.
-# The bin fixture is excluded: its .xml is a throwaway artifact generated and
-# cleaned up by bin.test.js, so it has no committed baseline to diff against.
-MD_FILES=$(find "$MD_DIR" -type f -name "*.md" -not -path "*/fixtures/bin/*")
+# Exclusions:
+#   - fixtures/bin: its .xml is a throwaway artifact generated and cleaned up by
+#     bin.test.js, so it has no committed baseline to diff against.
+#   - error-handling: these fixtures intentionally fail conversion, so running
+#     them through md2jcr is expected to error.
+MD_FILES=$(find "$MD_DIR" -type f -name "*.md" \
+  -not -path "*/fixtures/bin/*" \
+  -not -path "*/fixtures/blocks/error-handling/*")
 
 # Check if no .md files are found
 if [ -z "$MD_FILES" ]; then
