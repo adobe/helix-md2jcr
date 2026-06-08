@@ -13,6 +13,7 @@
 import { expect } from 'chai';
 import { loadBlockResources } from './test.utils.js';
 import { test } from './test-base.js';
+import md2jcr from '../src/md2jcr/index.js';
 
 async function testBlock(spec, folder) {
   // split the spec by a / to find the name and the folder
@@ -61,20 +62,86 @@ describe('block tests', () => {
     });
 
     /**
-     * Container block test to verify that container blocks are generated correctly.
-     * Container blocks are blocks that contain other blocks, and therefore require
-     * special handling, validation of classes, and the correct structure.
+     * Container blocks create a parent block node and one or more child block item
+     * nodes. They require special handling for parent vs. child rows, class
+     * validation, and structure. All container-block fixtures live together under
+     * blocks/core/container-block.
      */
-    it('container-block', async () => {
-      await testBlock('container-block', `${folder}/container-block`);
-    });
+    describe('container-block', () => {
+      const containerFolder = `${folder}/container-block`;
 
-    /**
-     * Container block test to verify that container blocks with multiple models are
-     * generated correctly. No classes should be added to the block item.
-     */
-    it('container-block-multi-model', async () => {
-      await testBlock('container-block-multi-model', `${folder}/container-block-multi-model`);
+      /**
+       * Baseline container block: parent property rows plus child item rows,
+       * including class handling on the parent and child items.
+       */
+      it('container-block-core', async () => {
+        await testBlock('container-block-core', `${containerFolder}/container-block-core`);
+      });
+
+      /**
+       * Container block with multiple child models. No classes should be added to
+       * the block item.
+       */
+      it('container-block-multi-model', async () => {
+        await testBlock('container-block-multi-model', `${containerFolder}/container-block-multi-model`);
+      });
+
+      /**
+       * When parent property rows are omitted, child items are still generated. Per
+       * the spec, parent rows are single-column and child rows are multi-column, so
+       * a multi-column first body row signals that parent rows were skipped.
+       */
+      it('container-block-no-parent-rows', async () => {
+        await testBlock('container-block-no-parent-rows', `${containerFolder}/container-block-no-parent-rows`);
+      });
+
+      /**
+       * Parent has no model, with a single-field child. With no parent model there
+       * are no parent property rows, so each single-cell body row becomes a child
+       * item — the opposite of a block with a parent model, where a single cell is
+       * parent data.
+       */
+      it('container-block-no-parent-model', async () => {
+        await testBlock('container-block-no-parent-model', `${containerFolder}/container-block-no-parent-model`);
+      });
+
+      /**
+       * Parent model and an allowed child, but only a parent property row and no
+       * child rows. An empty container is valid (e.g. a Cards block with block-level
+       * properties and no cards yet), so the single-cell row is parent data and no
+       * child items are produced — without any warning.
+       */
+      it('container-block-parent-only', async () => {
+        await testBlock('container-block-parent-only', `${containerFolder}/container-block-parent-only`);
+      });
+
+      /**
+       * Parent (multiple fields) has only field-hint comments and no values,
+       * followed by multi-column child rows. The hint-only rows are consumed as
+       * parent rows but set no properties, and the child rows become items.
+       */
+      it('container-block-parent-hints', async () => {
+        await testBlock('container-block-parent-hints', `${containerFolder}/container-block-parent-hints`);
+      });
+
+      /**
+       * Single-field parent property left blank with an empty row (the EDS
+       * convention for an unset parent property), followed by a single-column child
+       * value. The empty row is consumed as the parent property (left empty), and
+       * the next single-column row becomes a child item.
+       */
+      it('container-block-empty-parent-single-child', async () => {
+        await testBlock('container-block-empty-parent-single-child', `${containerFolder}/container-block-empty-parent-single-child`);
+      });
+
+      /**
+       * Parent fields share a prefix (one field group), where a single parent row
+       * uses a field hint to target a later field. The hint skips the earlier field
+       * in the group (left unset) and assigns the value to the hinted field.
+       */
+      it('container-block-parent-hint-skip', async () => {
+        await testBlock('container-block-parent-hint-skip', `${containerFolder}/container-block-parent-hint-skip`);
+      });
     });
 
     /**
@@ -327,8 +394,59 @@ describe('block tests', () => {
         await testBlock('missing-content', `${folder}/missing-content`);
       } catch (e) {
         expect(e.message).to.contain('cardsNoImages');
-        expect(e.message).to.contain('The content isn’t mapping to the model correctly');
+        expect(e.message).to.contain('mapping to the model correctly');
       }
+    });
+
+    /**
+     * A single-cell body row that contains only a child component id (with no
+     * property cells) is a malformed child item row. A valid child row is
+     * multi-column — the component id followed by its property cells — so md2jcr
+     * throws rather than silently consuming the lone component id as parent data.
+     */
+    it('container-block-child-missing-properties', async () => {
+      let err;
+      try {
+        await testBlock(
+          'container-block-child-missing-properties',
+          `${folder}/container-block-child-missing-properties`,
+        );
+      } catch (e) {
+        err = e;
+      }
+      expect(err).to.be.an('Error');
+      expect(err.message).to.contain('Container block row in "Container"');
+      expect(err.message).to.contain('has no property cells');
+    });
+
+    it('throws when models is not an array', async () => {
+      const md = '+-------+\n| Block |\n+=======+\n| value |\n+-------+';
+      let err;
+      try {
+        await md2jcr(md, { models: null, definition: { groups: [] }, filters: [] });
+      } catch (e) {
+        err = e;
+      }
+      expect(err).to.be.an('Error');
+      expect(err.message).to.contain('*-models.json');
+    });
+
+    it('throws when block component is not found in definitions', async () => {
+      const md = '+---------------+\n| UnknownBlock  |\n+===============+\n| value         |\n+---------------+';
+      const options = {
+        models: [{ id: 'other', fields: [] }],
+        definition: { groups: [{ title: 'Blocks', id: 'blocks', components: [{ title: 'Other', id: 'other', plugins: { xwalk: { page: { resourceType: 'rt', template: {} } } } }] }] },
+        filters: [],
+      };
+      let err;
+      try {
+        await md2jcr(md, options);
+      } catch (e) {
+        err = e;
+      }
+      expect(err).to.be.an('Error');
+      expect(err.message).to.contain('UnknownBlock');
+      expect(err.message).to.contain('does not exist');
     });
   });
 });

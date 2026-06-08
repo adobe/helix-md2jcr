@@ -90,8 +90,17 @@ if [ -n "$SPECIFIC_FILE" ]; then
   exit 0
 fi
 
-# Find all .md files recursively in the directory
-MD_FILES=$(find "$MD_DIR" -type f -name "*.md")
+# Find all .md files recursively in the directory.
+# Exclusions:
+#   - fixtures/bin: its .xml is a throwaway artifact generated and cleaned up by
+#     bin.test.js, so it has no committed baseline to diff against.
+#   - error-handling: these fixtures intentionally fail conversion, so running
+#     them through md2jcr is expected to error.
+#   - README.md: documentation, not a fixture.
+MD_FILES=$(find "$MD_DIR" -type f -name "*.md" \
+  -not -name "README.md" \
+  -not -path "*/fixtures/bin/*" \
+  -not -path "*/fixtures/blocks/error-handling/*")
 
 # Check if no .md files are found
 if [ -z "$MD_FILES" ]; then

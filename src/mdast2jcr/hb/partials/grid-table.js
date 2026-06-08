@@ -38,6 +38,8 @@ import ModelHelper from '../../domain/ModelHelper.js';
  * @typedef {import('../../index.d.ts').Filter} Filters
  */
 
+// -- Block Header -------------------------------------------------------------
+
 /**
  * Locate the name of the Block and any classes that are associated with it.
  * Return null if the block name can not be found in the models.
@@ -79,6 +81,44 @@ function getBlockDetails(mdast, definition) {
   }
   return null;
 }
+
+/**
+ * Extract the properties that are belong to the block header.  Properties like
+ * name, model id, and classes.
+ * @param {Array<Model>} models - the models object
+ * @param {Definition} definition - the definitions object
+ * @param {object} mdast - the mdast tree
+ * @return {{
+ *   name: string,
+ *   model: string,
+ *   classes?: string
+ * }}
+ */
+function extractBlockHeaderProperties(models, definition, mdast) {
+  const blockDetails = getBlockDetails(mdast, definition);
+  const props = {};
+
+  props.name = blockDetails.name;
+  if (blockDetails.modelId) {
+    props.model = blockDetails.modelId;
+  }
+
+  const model = findModelById(models, blockDetails.modelId);
+
+  // section metadata may not have a model
+  if (model) {
+    const classesField = getField(model, 'classes');
+
+    if (blockDetails.classes.length > 0 && classesField) {
+      props.classes = (classesField.multi === true)
+        ? `[${blockDetails.classes.join(', ')}]` : blockDetails.classes.join(', ');
+    }
+  }
+
+  return props;
+}
+
+// -- Field Extraction Pipeline ------------------------------------------------
 
 /**
  * Process the field and collapse the field into the properties object.
@@ -187,16 +227,6 @@ function extractPropertiesForNode(field, currentNode, properties) {
   }
 }
 
-function extractKeyValueProperties(row, model, fieldResolver, fieldGroup, properties) {
-  const [, ...nodes] = findAll(row, (node) => node.type === 'gtCell', true);
-
-  for (let i = 0; i < nodes.length; i += 1) {
-    const node = nodes[i];
-    const field = fieldResolver.resolve(node, fieldGroup);
-    extractPropertiesForNode(field, node, properties);
-  }
-}
-
 /**
  * Check if the node is a field name hint.
  * @param {Node} node - the node to check
@@ -288,6 +318,16 @@ function processCell(cell, fieldGroup, fieldResolver, properties) {
   }
 }
 
+function extractKeyValueProperties(row, model, fieldResolver, fieldGroup, properties) {
+  const [, ...nodes] = findAll(row, (node) => node.type === 'gtCell', true);
+
+  for (let i = 0; i < nodes.length; i += 1) {
+    const node = nodes[i];
+    const field = fieldResolver.resolve(node, fieldGroup);
+    extractPropertiesForNode(field, node, properties);
+  }
+}
+
 /**
  * Extract the properties for the block item.
  * @param {*} mdast - The mdast tree.
@@ -375,40 +415,29 @@ function extractProperties(
   }
 }
 
+// -- Container Block / Child Items --------------------------------------------
+
+function getComponentId(cell) {
+  return stripNewlines(toString(cell)).split(',').shift().trim();
+}
+
 /**
- * Extract the properties that are belong to the block header.  Properties like
- * name, model id, and classes.
- * @param {Array<Model>} models - the models object
- * @param {Definition} definition - the definitions object
- * @param {object} mdast - the mdast tree
- * @return {{
- *   name: string,
- *   model: string,
- *   classes?: string
- * }}
+ * Builds the error thrown when a single-cell body row contains only a child
+ * component id with no property cells. A valid child item row is multi-column
+ * (the component id followed by its property cells), so a lone component id is a
+ * malformed child row and conversion cannot continue.
+ * @param {{name: string}} blockHeaderProperties - The parsed block header.
+ * @param {string} componentId - The child component id found in the cell.
+ * @return {Error}
  */
-function extractBlockHeaderProperties(models, definition, mdast) {
-  const blockDetails = getBlockDetails(mdast, definition);
-  const props = {};
-
-  props.name = blockDetails.name;
-  if (blockDetails.modelId) {
-    props.model = blockDetails.modelId;
-  }
-
-  const model = findModelById(models, blockDetails.modelId);
-
-  // section metadata may not have a model
-  if (model) {
-    const classesField = getField(model, 'classes');
-
-    if (blockDetails.classes.length > 0 && classesField) {
-      props.classes = (classesField.multi === true)
-        ? `[${blockDetails.classes.join(', ')}]` : blockDetails.classes.join(', ');
-    }
-  }
-
-  return props;
+function childItemMissingPropertiesError(blockHeaderProperties, componentId) {
+  const message = [
+    `Container block row in "${blockHeaderProperties.name}": first body row has one cell ("${componentId}")`,
+    `which matches the child component "${componentId}" but has no property cells.`,
+    'Add the child item\'s properties as additional cells, or remove the component id'
+    + ' if this is parent block data.',
+  ].join(' ');
+  return new Error(message);
 }
 
 function getBlockItems(mdast, modelHelper, definitions, allowedComponents) {
@@ -454,6 +483,8 @@ function getBlockItems(mdast, modelHelper, definitions, allowedComponents) {
 
   return items;
 }
+
+// -- Entry Point --------------------------------------------------------------
 
 /**
  * The gridTablePartial function is a Handlebars partial that generates a block element.
@@ -531,12 +562,38 @@ function gridTablePartial(context) {
   // child component will, which will be handled in the Component Block Processing
   // section
   try {
+    const allowedComponents = modelHelper.getAllowedComponents(component);
+
+    // Pre-compute fieldGroup so it can be used for both detection and processing.
     if (model) {
       fieldGroup = modelHelper.getModelFieldGroup(model.id);
+    }
+
+    // Per the container-block spec, parent property rows are always single-column
+    // and child item rows are always multi-column. If the first body row has more
+    // than one cell, the author omitted parent rows entirely.
+    let hasParentRows = true;
+    if (fieldGroup && allowedComponents.length > 0) {
+      const allRows = findAll(mdast, (node) => node.type === 'gtRow', false);
+      const firstBodyRow = allRows[1]; // allRows[0] is the header gtRow
+      if (firstBodyRow) {
+        const firstCells = findAll(firstBodyRow, (n) => n.type === 'gtCell', false);
+        hasParentRows = firstCells.length === 1 && fieldGroup.fields.length > 0;
+        if (hasParentRows) {
+          const componentId = getComponentId(firstCells[0]);
+          if (allowedComponents.includes(componentId)) {
+            // a lone component id with no property cells is a malformed child row
+            throw childItemMissingPropertiesError(blockHeaderProperties, componentId);
+          }
+        }
+      }
+    }
+
+    if (model && hasParentRows) {
       extractProperties(mdast, model, mode, component, fieldGroup.fields, properties);
     } else {
-      // because we have no model we expect the block to have a filter with a component that does
-      // so that means we can remove the header row from the mdast tree
+      // no model, or model present but parent rows omitted - remove the header
+      // so getBlockItems only sees child item rows
       remove(mdast, (n) => is(n, { type: 'gtHeader' }));
     }
 
@@ -551,14 +608,13 @@ function gridTablePartial(context) {
     // 1. In this section attempt to locate the associated model for the block.
     // 2. Trim the mdast nodes to only be relevant for the child block.
     // 3. Then getBlockitems will process the mdast nodes and return the block items.
-    const allowedComponents = modelHelper.getAllowedComponents(component);
 
     // collect all rows
     const blockRows = findAll(mdast, (node) => node.type === 'gtRow', true);
     // the fieldGroup (parent model) determines the expected number of rows in the table
     // so we can remove the rows that belong to the parent and leave only the
     // relevant rows for the child
-    if (model) {
+    if (model && hasParentRows) {
       const removed = blockRows.splice(0, fieldGroup.fields.length + 1);
       // remove the elements from the mdast tree that match the items in the removed array
       removed.forEach((r) => {

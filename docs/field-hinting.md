@@ -4,17 +4,36 @@ This document provides guidance on modeling content in the Helix MD2JCR system, 
 
 ## Field Hinting
 
-Field hinting is a powerful feature in the Helix MD2JCR system that allows you to explicitly specify which field in a component model should receive specific content from your markdown. This is particularly useful when the automatic field resolution doesn't match your intended content structure or when you need precise control over field mapping.
+Field hinting lets you skip ahead to a specific field **within a field group**
+when the automatic field resolution would otherwise assign content to an earlier
+field in that group. It is a tool for navigating *grouped* (collapsed) fields —
+the related fields a model collapses together, such as `teaserText_title`,
+`teaserText_subtitle`, and `teaserText_description`.
 
 ### Purpose of Field Hinting
 
-Field hinting serves several important purposes:
+The feature exists to skip over grouped fields you don't want to fill:
 
-1. **Precise Field Mapping**: When content doesn't naturally flow into the expected fields based on the model's field order, field hints allow you to explicitly direct content to specific fields.
+1. **Skip ahead within a field group**: When a group contains several related
+   fields and you only want to populate a later one, a hint jumps directly to it
+   and leaves the skipped fields unset.
 
-2. **Content Structure Control**: In complex components with multiple fields of the same type (e.g., multiple text fields), field hints ensure content goes to the correct field.
+2. **Precise mapping among similar grouped fields**: When a group has multiple
+   fields of the same type (e.g. several text fields), a hint ensures the content
+   lands on the intended one instead of the next one in sequence.
 
-3. **Sequential Field Mapping**: Field hints allow you to skip ahead to a specific field in the model's field sequence, but content must still be processed in the order it appears in the markdown.
+### Scope and Direction
+
+Two constraints follow from how this works, and they define what the feature is
+*not* for:
+
+- **Within a single field group only.** A hint splices the current group's
+  remaining fields. It cannot reach across separate, ungrouped top-level fields
+  (fields that do not share a group prefix) — those are resolved positionally,
+  not by hint.
+- **Forward only.** You can skip *ahead* to a later field in the group. A hint
+  that names a field already consumed is ignored, and the content flows into the
+  next available field. There is no way to hint backward.
 
 ### How Field Hinting Works
 

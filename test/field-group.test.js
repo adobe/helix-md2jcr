@@ -141,6 +141,24 @@ describe('Field Group Tests', () => {
     assert.equal(fieldGrouping.fields.length, 0);
   });
 
+  it('throws when a suffix field has no matching base field in the group', () => {
+    // 'teaser_title' creates a group named 'teaser' whose only field is 'teaser_title'.
+    // 'teaserText' resolves to the same group name ('teaser') but no field in that group
+    // is a prefix of 'teaserText', so the collapsed field cannot be found.
+    const model = {
+      id: 'sample',
+      fields: [
+        { name: 'teaser_title' },
+        { name: 'teaserText' },
+      ],
+    };
+
+    assert.throws(
+      () => new FieldGroup(model),
+      /Unable to find the collapsed field for field: teaserText/,
+    );
+  });
+
   it('one field with collapsing', () => {
     const model = {
       id: 'sample',
