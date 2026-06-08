@@ -19,7 +19,7 @@ import { toHtml } from 'hast-util-to-html';
 import { getComponentById, getComponentByTitle, getModelId } from '../../domain/Definitions.js';
 import {
   findModelById,
-  getField, getModelFieldNames,
+  getModelFieldNames, isClassesField,
 } from '../../domain/Models.js';
 import { findAll } from '../../utils/mdast.js';
 import link from './supports/link.js';
@@ -37,6 +37,91 @@ import ModelHelper from '../../domain/ModelHelper.js';
  * @typedef {import('../../index.d.ts').DefinitionDef} Definition
  * @typedef {import('../../index.d.ts').Filter} Filters
  */
+
+// -- Block Options (classes) --------------------------------------------------
+
+/**
+ * Recursively collect every option `value` from a field's options tree
+ * (options may be nested under `children`).
+ * @param {Array<object>} options - The field's options array.
+ * @return {Array<string>} The flat list of option values.
+ */
+function collectOptionValues(options) {
+  return (options || []).flatMap((option) => {
+    if (option.children) {
+      return collectOptionValues(option.children);
+    }
+    return option.value !== undefined ? [option.value] : [];
+  });
+}
+
+/**
+ * Distribute block-option tokens (the classes from a block header, or the
+ * leading cell of a child item) across the model's `classes` group fields, per
+ * the AEM "element grouping for block options" rules:
+ *
+ * - a boolean field receives "true" when its name suffix (after `classes_`)
+ *   appears as a token (e.g. token "fullwidth" -> classes_fullwidth="true");
+ * - a text/select field with options claims the tokens that match its option
+ *   values (e.g. token "light" -> classes_background="light");
+ * - any remaining tokens fall back to the base `classes` field, which also
+ *   covers the common single-field case (a free-form `classes` field).
+ *
+ * Multi fields are written as `[a, b]`; single fields as a comma-separated list.
+ * @param {Model} model - The block or item model.
+ * @param {Array<string>} tokens - The option tokens.
+ * @return {Object<string, string>} A map of class field name to property value.
+ */
+function distributeBlockOptions(model, tokens) {
+  const groupFields = (model?.fields || []).filter((f) => isClassesField(f.name));
+  if (groupFields.length === 0 || tokens.length === 0) {
+    return {};
+  }
+
+  const remaining = [...tokens];
+  const assigned = new Map();
+
+  // boolean fields: the suffix after `classes_` becomes the option when present
+  groupFields
+    .filter((field) => field.component === 'boolean')
+    .forEach((field) => {
+      const suffix = field.name.replace(/^classes_/, '');
+      const idx = remaining.indexOf(suffix);
+      if (idx !== -1) {
+        assigned.set(field.name, true);
+        remaining.splice(idx, 1);
+      }
+    });
+
+  // text/select fields with options: claim the tokens that match their values
+  groupFields
+    .filter((field) => field.component !== 'boolean' && field.options)
+    .forEach((field) => {
+      const values = collectOptionValues(field.options);
+      const matched = remaining.filter((t) => values.includes(t));
+      if (matched.length > 0) {
+        assigned.set(field.name, matched);
+        matched.forEach((m) => remaining.splice(remaining.indexOf(m), 1));
+      }
+    });
+
+  // leftover tokens fall back to the base `classes` field (and the single-field case)
+  const base = groupFields.find((f) => f.name === 'classes' && f.component !== 'boolean');
+  if (remaining.length > 0 && base) {
+    assigned.set('classes', [...(assigned.get('classes') || []), ...remaining]);
+  }
+
+  const result = {};
+  assigned.forEach((value, name) => {
+    if (value === true) {
+      result[name] = 'true';
+    } else {
+      const field = groupFields.find((f) => f.name === name);
+      result[name] = field.multi === true ? `[${value.join(', ')}]` : value.join(', ');
+    }
+  });
+  return result;
+}
 
 // -- Block Header -------------------------------------------------------------
 
@@ -105,14 +190,10 @@ function extractBlockHeaderProperties(models, definition, mdast) {
 
   const model = findModelById(models, blockDetails.modelId);
 
-  // section metadata may not have a model
+  // section metadata may not have a model. Distribute the header's block options
+  // across the model's classes group fields (element grouping for block options).
   if (model) {
-    const classesField = getField(model, 'classes');
-
-    if (blockDetails.classes.length > 0 && classesField) {
-      props.classes = (classesField.multi === true)
-        ? `[${blockDetails.classes.join(', ')}]` : blockDetails.classes.join(', ');
-    }
+    Object.assign(props, distributeBlockOptions(model, blockDetails.classes));
   }
 
   return props;
@@ -353,14 +434,10 @@ function extractProperties(
 
   // the first cells is the header row, so we skip it
   const rows = findAll(mdast, (node) => node.type === 'gtRow', false);
-  let classesField;
   if (mode === 'blockItem') {
-    classesField = getField(model, 'classes');
-    // if our model defines a classes field then dig out the classes from the first cell
-    if (classesField) {
-      // if we are a block item we need to look at the first cell to see if it has any class
-      // properties by inspecting the text value for any commas
-      // if there is a comma that then becomes the classes property for the block item
+    // if our model defines any classes group field then dig the block options out
+    // of the first cell (the component id followed by optional class names)
+    if ((model.fields || []).some((f) => isClassesField(f.name))) {
       const firstCell = rows[0].children[0];
       const textValue = toString(firstCell);
       const classes = textValue.split(',').map((c) => c.trim());
@@ -368,11 +445,8 @@ function extractProperties(
       // discard the component name leaving only the block option names (class names)
       classes.shift();
 
-      // if we are left with any classes to add to the block item, then add them
-      if (classes.length > 0) {
-        properties.classes = classesField?.multi === true
-          ? `[${classes.join(', ')}]` : classes.join(', ');
-      }
+      // distribute the options across the model's classes group fields
+      Object.assign(properties, distributeBlockOptions(model, classes));
     }
   } else {
     // get rid of the header row, no need for that

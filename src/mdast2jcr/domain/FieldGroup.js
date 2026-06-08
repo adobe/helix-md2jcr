@@ -9,6 +9,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import { isClassesField } from './Models.js';
+
 class FieldGroup {
   /**
    * Constructor.
@@ -35,7 +37,7 @@ class FieldGroup {
 
     this.model.fields
       .filter((field) => field.component !== 'tab')
-      .filter((field) => field.name !== 'classes')
+      .filter((field) => !isClassesField(field.name))
       .forEach((field) => {
         if (field.name.includes('_')) {
           const groupName = field.name.split('_')[0];

@@ -1,0 +1,66 @@
+{
+  "definitions": [
+    {
+      "title": "Teaser",
+      "id": "teaser",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "model": "teaser"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "teaser",
+      "fields": [
+        {
+          "component": "text",
+          "name": "title",
+          "label": "Title"
+        },
+        {
+          "component": "select",
+          "name": "classes",
+          "label": "Variant",
+          "options": [
+            {
+              "name": "Variant A",
+              "value": "variant-a"
+            },
+            {
+              "name": "Variant B",
+              "value": "variant-b"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "classes_background",
+          "label": "Background",
+          "options": [
+            {
+              "name": "Light",
+              "value": "light"
+            },
+            {
+              "name": "Dark",
+              "value": "dark"
+            }
+          ]
+        },
+        {
+          "component": "boolean",
+          "name": "classes_fullwidth",
+          "label": "Full width"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}
