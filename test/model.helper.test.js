@@ -22,7 +22,7 @@ describe('Model Helper Tests', () => {
   let filters;
 
   before(async () => {
-    ({ models, definition, filters } = await loadBlockResources('container-block', 'fixtures/blocks/core/container-block'));
+    ({ models, definition, filters } = await loadBlockResources('container-block-core', 'fixtures/blocks/core/container-block/container-block-core'));
   });
 
   it('Verify container block and child models are assembled correctly', () => {

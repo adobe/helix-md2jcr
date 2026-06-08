@@ -69,64 +69,80 @@ the first component listed in the parent filter. This allows simple child rows:
 That row maps to the first allowed child component as long as the cells match
 that child model's field groups.
 
-## Ambiguous Single-Cell Rows
+## One Column vs. Many Columns
 
-A single-cell row immediately after the header is ambiguous when the parent
-block has a model and the default child component can also be represented by one
-cell. The row could be either:
+The simple rule that decides everything:
 
-- the first parent property row
-- a child item row that omitted the child component id
-
-md2jcr keeps the existing parent-row behavior in this case. It treats the row as
-parent block data and logs a warning:
-
-```text
-Ambiguous container block row in "Container": first body row has one cell ("Maybe child title") and was treated as parent block data. If this is a child item for "child", add the child component id as the first cell.
-```
-
-To make a one-property child item unambiguous, include the child component id:
+- **one column = parent info** (a parent property row)
+- **two or more columns = a child item**
 
 ```markdown
-+-------------------------+
-| Container               |
-+============+============+
-| child      | Title      |
-+------------+------------+
++----------------------------+
+| Cards                      |   <- the block name
++==============+=============+
+| My heading   |             |   <- ONE column  = parent info
++--------------+-------------+
+| card title 1 | card body 1 |   <- TWO columns = a child card
++--------------+-------------+
+| card title 2 | card body 2 |   <- TWO columns = a child card
++--------------+-------------+
 ```
 
-The first cell selects the child component. The second cell is mapped to the
-child model's single property.
+A one-column row is always parent info. md2jcr does not try to guess whether you
+"meant" it to be a child — if you want a child item, give it more than one
+column.
+
+### A container can have parent info and no children
+
+This is allowed. A Cards block can carry block-level properties without any card
+items yet:
+
+```markdown
++----------------+
+| Cards          |
++================+
+| My heading     |   <- parent info, and zero cards. This is fine.
++----------------+
+```
 
 ## Child Component Id Without Properties
 
-A valid child item row is multi-column: the child component id followed by its
-property cells. A single-cell row that contains only a child component id is
-therefore a malformed child row — it names a component but provides none of its
-properties. md2jcr treats this as an error and fails the conversion rather than
-silently consuming the lone cell as parent block data:
+There is one one-column row that is **not** allowed: a single cell that contains
+only a child component id and nothing else.
+
+```markdown
++----------------+
+| Cards          |
++================+
+| card           |   <- one column, and the word is a child component id
++----------------+
+```
+
+A child item always needs more than one column (its component id followed by its
+property cells), so a lone component id is a half-finished child row — the author
+named the child but gave it no content. md2jcr stops with an error rather than
+quietly storing the component name as a parent property:
 
 ```text
-Container block row in "Container": first body row has one cell ("child") which matches the child component "child" but has no property cells. Add the child item's properties as additional cells, or remove the component id if this is parent block data.
+Container block row in "Container": first body row has one cell ("card") which matches the child component "card" but has no property cells. Add the child item's properties as additional cells, or remove the component id if this is parent block data.
 ```
 
 To fix it, add the child's property cells:
 
 ```markdown
-+-------------------------+
-| Container               |
-+============+============+
-| child      | Title      |
-+------------+------------+
++----------------+-------------+
+| Cards          |             |
++================+=============+
+| card           | card body   |
++----------------+-------------+
 ```
 
-Or, if the lone value really is parent data, remove the component id so it no
-longer collides with a child component name.
+Or, if the lone value really is parent info, change it so it no longer matches a
+child component name.
 
 ## Best Practices
 
-- Include parent property rows only when the parent model should receive values.
+- Use one column for parent info and two or more columns for child items.
 - Start child rows with the child component id whenever more than one child
   component is allowed.
-- Always start one-property child item rows with the child component id.
-- Check conversion warnings before using generated XML in an import.
+- Never write a child component id on its own line without its property cells.

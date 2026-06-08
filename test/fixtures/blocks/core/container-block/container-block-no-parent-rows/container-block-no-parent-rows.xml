@@ -4,12 +4,12 @@
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
       <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
         <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" filter="vehicles" model="vehicles" modelFields="[title]" name="Vehicles">
-          <item_0 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Plane" model="plane" modelFields="[field1,field2,field3]" field1="Field 1" field2="Field 2" field3="Field 3"></item_0>
-          <item_1 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Train" model="train" modelFields="[field1,field2,field3]" field1="Field 1" field2="Field 2" field3="Field 3"></item_1>
+          <item_0 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Plane" model="plane" modelFields="[field1,field2,field3]" field1="Plane 1" field2="Plane 2" field3="Plane 3"></item_0>
+          <item_1 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Train" model="train" modelFields="[field1,field2,field3]" field1="Train 1" field2="Train 2" field3="Train 3"></item_1>
         </block>
         <block_1 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" filter="vehicles" model="vehicles" modelFields="[title]" name="Vehicles">
           <item_0 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Plane" model="plane" modelFields="[field1,field2,field3]" field1="Field 1" field2="Field 2" field3="Field 3"></item_0>
-          <item_1 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Plane" model="plane" modelFields="[field1,field2,field3]" field1="Field 1" field2="Field 2" field3="Field 3"></item_1>
+          <item_1 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Plane" model="plane" modelFields="[field1,field2,field3]" field1="Field2.1" field2="Field2.2" field3="Field 2.3"></item_1>
         </block_1>
       </section>
     </root>

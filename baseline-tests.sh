@@ -96,7 +96,9 @@ fi
 #     bin.test.js, so it has no committed baseline to diff against.
 #   - error-handling: these fixtures intentionally fail conversion, so running
 #     them through md2jcr is expected to error.
+#   - README.md: documentation, not a fixture.
 MD_FILES=$(find "$MD_DIR" -type f -name "*.md" \
+  -not -name "README.md" \
   -not -path "*/fixtures/bin/*" \
   -not -path "*/fixtures/blocks/error-handling/*")
 

@@ -422,62 +422,6 @@ function getComponentId(cell) {
 }
 
 /**
- * Returns true when a single-cell body row is ambiguous: the parent field has no
- * options that match the cell value and the default child model also has exactly
- * one field — so the row could be either a parent property or a child item row.
- * Callers must first rule out the case where the cell is an explicit child
- * component id (see warnChildItemMissingProperties).
- *
- * Example — given a "Container" with a single-field parent model and one allowed
- * child ("child") that also has a single field:
- *
- *   +-------------------+
- *   | Container         |
- *   +===================+
- *   | Maybe child title |   <- one cell, plain text
- *   +-------------------+
- *
- * The lone cell "Maybe child title" could be the parent's title, or a child item
- * whose component id was omitted. Both models accept a single cell, so the intent
- * is ambiguous and this returns true. (If the cell instead held a matching option
- * value, or the child model needed more than one field, it would return false.)
- *
- * @param {Array} firstCells - The cells of the first body row.
- * @param {Array<string>} allowedComponents - The allowed child component ids.
- * @param {ModelHelper} modelHelper - The model helper for the current block.
- * @param {FieldGroup} fieldGroup - The parent block's field group.
- * @return {boolean}
- */
-function isAmbiguousSingleCellChildRow(firstCells, allowedComponents, modelHelper, fieldGroup) {
-  const cellValue = stripNewlines(toString(firstCells[0]));
-
-  if (fieldGroup.fieldHasMatchingOption(cellValue)) {
-    return false;
-  }
-
-  const defaultChildFieldGroup = modelHelper.getModelFieldGroup(allowedComponents[0]);
-  return defaultChildFieldGroup?.fields.length === 1;
-}
-
-/**
- * Emits a console warning when a single-cell container block row is treated as
- * parent block data but could also be a child item row.
- * @param {{name: string}} blockHeaderProperties - The parsed block header.
- * @param {object} firstCell - The mdast cell node of the ambiguous row.
- * @param {Array<string>} allowedComponents - The allowed child component ids.
- */
-function warnAmbiguousContainerRow(blockHeaderProperties, firstCell, allowedComponents) {
-  const rowText = stripNewlines(toString(firstCell));
-  const defaultComponentId = allowedComponents[0];
-  const message = [
-    `Ambiguous container block row in "${blockHeaderProperties.name}": first body row has one cell ("${rowText}")`,
-    'and was treated as parent block data.',
-    `If this is a child item for "${defaultComponentId}", add the child component id as the first cell.`,
-  ].join(' ');
-  console.warn(message);
-}
-
-/**
  * Builds the error thrown when a single-cell body row contains only a child
  * component id with no property cells. A valid child item row is multi-column
  * (the component id followed by its property cells), so a lone component id is a
@@ -640,10 +584,6 @@ function gridTablePartial(context) {
           if (allowedComponents.includes(componentId)) {
             // a lone component id with no property cells is a malformed child row
             throw childItemMissingPropertiesError(blockHeaderProperties, componentId);
-          } else if (
-            isAmbiguousSingleCellChildRow(firstCells, allowedComponents, modelHelper, fieldGroup)
-          ) {
-            warnAmbiguousContainerRow(blockHeaderProperties, firstCells[0], allowedComponents);
           }
         }
       }
