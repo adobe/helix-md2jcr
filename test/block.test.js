@@ -313,6 +313,42 @@ describe('block tests', () => {
   });
 
   /**
+   * Block options via element grouping. A model exposes block options through a
+   * `classes` group (the base `classes` field plus any `classes_*` field). Each
+   * option in the block header is routed back to its field — select / multiselect
+   * fields by their declared option values, boolean fields by their name suffix
+   * (e.g. "fullwidth" -> classes_fullwidth="true") — and unmatched tokens fall back
+   * to the base `classes` field. The classes group fields are block options, not
+   * content, so they are excluded from modelFields.
+   */
+  describe('block options', () => {
+    const folder = 'blocks/core/block-options';
+
+    // Single selects + a boolean that is on; all fields present, one value each.
+    it('block-options-grouping', async () => {
+      await testBlock('block-options-grouping', `${folder}/block-options-grouping`);
+    });
+
+    // A multiselect claims all of its matching option values; a boolean that is
+    // off contributes nothing.
+    it('block-options-grouping-multi', async () => {
+      await testBlock('block-options-grouping-multi', `${folder}/block-options-grouping-multi`);
+    });
+
+    // Tokens matching no grouped field's options fall back to the free-form base
+    // `classes` field, alongside a grouped boolean.
+    it('block-options-grouping-fallback', async () => {
+      await testBlock('block-options-grouping-fallback', `${folder}/block-options-grouping-fallback`);
+    });
+
+    // Several independent booleans: each is "true" only when its name suffix
+    // appears; the rest are unset.
+    it('block-options-grouping-booleans', async () => {
+      await testBlock('block-options-grouping-booleans', `${folder}/block-options-grouping-booleans`);
+    });
+  });
+
+  /**
    * Customer X block unit tests.
    */
   describe('cust-x', () => {

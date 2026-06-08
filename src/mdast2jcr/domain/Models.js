@@ -42,7 +42,19 @@ function getField(model, fieldName) {
 }
 
 /**
- * Return a list of field names in the model, excluding 'classes'.
+ * Returns true if the field name belongs to the `classes` block-options group —
+ * either the base `classes` field or a grouped `classes_*` option field
+ * (element grouping for block options).
+ * @param {string} name The field name.
+ * @return {boolean}
+ */
+function isClassesField(name) {
+  return name === 'classes' || name.startsWith('classes_');
+}
+
+/**
+ * Return a list of field names in the model, excluding the `classes` group
+ * (those fields are block options, not content).
  * @param {Model} model The model.
  * @return {Array<string>} An array of field names.
  */
@@ -51,7 +63,7 @@ function getModelFieldNames(model) {
     ? model.fields
       .filter((f) => f.component !== 'tab')
       .map((f) => f.name)
-      .filter((f) => f !== 'classes')
+      .filter((f) => !isClassesField(f))
     : [];
 }
 
@@ -59,4 +71,5 @@ export {
   getField,
   findModelById,
   getModelFieldNames,
+  isClassesField,
 };

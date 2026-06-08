@@ -106,6 +106,9 @@ console.log(xml);
   rows, and error cases). See also the
   [container-block test fixtures](test/fixtures/blocks/core/container-block/README.md)
   for a worked scenario-by-scenario breakdown.
+- [Block Options (Classes)](docs/block-options.md) — block option classes and
+  element grouping (`classes`, `classes_*`): how header options are routed to
+  fields by their options or boolean name-suffix.
 - [Field Hinting](docs/field-hinting.md) — using `<!-- field: name -->` to skip
   ahead within a field group.
 
