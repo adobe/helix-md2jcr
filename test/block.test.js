@@ -153,27 +153,23 @@ describe('block tests', () => {
     });
 
     /**
-     * The grouping test verifies that blocks with models that have grouped fields
-     * are correctly generated.
+     * Field grouping: blocks whose models have grouped fields.
      */
-    it('grouping', async () => {
-      await testBlock('grouping', `${folder}/grouping`);
-    });
+    describe('grouping', () => {
+      // blocks with models that have grouped fields are correctly generated.
+      it('grouping', async () => {
+        await testBlock('grouping', `${folder}/grouping`);
+      });
 
-    /**
-     * The grouping-with-defaults test verifies that blocks that have component definition
-     * template properties are respected and are used when generating the block.
-     */
-    it('grouping-with-defaults', async () => {
-      await testBlock('grouping-with-defaults', `${folder}/grouping-with-defaults`);
-    });
+      // component definition template properties are respected and used.
+      it('grouping-with-defaults', async () => {
+        await testBlock('grouping-with-defaults', `${folder}/grouping-with-defaults`);
+      });
 
-    /**
-     * The grouping-with-names test verifies that blocks that have use field name comments
-     * in groups are properly handled.
-     */
-    it('grouping-with-names', async () => {
-      await testBlock('grouping-with-names', `${folder}/grouping-with-names`);
+      // field name comments in groups are properly handled.
+      it('grouping-with-names', async () => {
+        await testBlock('grouping-with-names', `${folder}/grouping-with-names`);
+      });
     });
 
     /**
@@ -199,43 +195,33 @@ describe('block tests', () => {
     });
 
     /**
-     * The metadata block test verifies that metadata fields are correctly
-     * added to the page properties.
+     * Metadata blocks: page-metadata fields and their AEM mappings.
      */
-    it('metadata', async () => {
-      await testBlock('metadata', `${folder}/metadata`);
-    });
+    describe('metadata', () => {
+      // metadata fields are correctly added to the page properties.
+      it('metadata', async () => {
+        await testBlock('metadata', `${folder}/metadata`);
+      });
 
-    /**
-     * The metadata-expanded block test verifies that metadata fields are correctly
-     * added to the page properties, and include more complex handling of images.
-     */
-    it('metadata-expanded', async () => {
-      await testBlock('metadata-expanded', `${folder}/metadata-expanded`);
-    });
+      // more complex handling of images in metadata.
+      it('metadata-expanded', async () => {
+        await testBlock('metadata-expanded', `${folder}/metadata-expanded`);
+      });
 
-    /**
-     * The metadata-aem-mapping block test verifies that metadata fields are correctly
-     * mapped to their aem properties.
-     */
-    it('metadata-aem-mapping', async () => {
-      await testBlock('metadata-aem-mapping', `${folder}/metadata-aem-mapping`);
-    });
+      // metadata fields are correctly mapped to their aem properties.
+      it('metadata-aem-mapping', async () => {
+        await testBlock('metadata-aem-mapping', `${folder}/metadata-aem-mapping`);
+      });
 
-    /**
-     * The metadata-aem-mapping-case block test verifies that metadata fields are correctly
-     * mapped to their aem properties if the case of the metadata field is uppercase.
-     */
-    it('metadata-aem-mapping', async () => {
-      await testBlock('metadata-aem-mapping-case', `${folder}/metadata-aem-mapping-case`);
-    });
+      // aem mapping when the case of the metadata field is uppercase.
+      it('metadata-aem-mapping-case', async () => {
+        await testBlock('metadata-aem-mapping-case', `${folder}/metadata-aem-mapping-case`);
+      });
 
-    /**
-     * The metadata-quotes block test verifies that metadata fields are correctly
-     * handled when the text contains quotes.
-     */
-    it('metadata-quotes', async () => {
-      await testBlock('metadata-quotes', `${folder}/metadata-quotes`);
+      // metadata fields are correctly handled when the text contains quotes.
+      it('metadata-quotes', async () => {
+        await testBlock('metadata-quotes', `${folder}/metadata-quotes`);
+      });
     });
 
     /**
@@ -254,33 +240,35 @@ describe('block tests', () => {
     });
 
     /**
-     * A number of different blocks with different paragraph structures to test.
+     * Richtext blocks with different paragraph structures.
      */
-    it('richtext', async () => {
-      await testBlock('richtext', `${folder}/richtext`);
-    });
+    describe('richtext', () => {
+      // a number of different blocks with different paragraph structures.
+      it('richtext', async () => {
+        await testBlock('richtext', `${folder}/richtext`);
+      });
 
-    it('richtext-html', async () => {
-      await testBlock('richtext-html', `${folder}/richtext-html`);
+      it('richtext-html', async () => {
+        await testBlock('richtext-html', `${folder}/richtext-html`);
+      });
+
+      // richtext consumes content up to the next image.
+      it('richtext-greedy', async () => {
+        await testBlock('richtext-greedy', `${folder}/richtext-greedy`);
+      });
     });
 
     /**
-     * Verify that richtext consumes content up to the next image.
+     * Section metadata: metadata is assigned to each section element.
      */
-    it('richtext-greedy', async () => {
-      await testBlock('richtext-greedy', `${folder}/richtext-greedy`);
-    });
+    describe('section-metadata', () => {
+      it('section-metadata', async () => {
+        await testBlock('section-metadata', `${folder}/section-metadata`);
+      });
 
-    /**
-     * Verify that sections are correctly generated by assigning the metadata to
-     * each section element.
-     */
-    it('section-metadata', async () => {
-      await testBlock('section-metadata', `${folder}/section-metadata`);
-    });
-
-    it('section-metadata-custom', async () => {
-      await testBlock('section-metadata-custom', `${folder}/section-metadata-custom`);
+      it('section-metadata-custom', async () => {
+        await testBlock('section-metadata-custom', `${folder}/section-metadata-custom`);
+      });
     });
 
     it('missing-cell-data', async () => {
