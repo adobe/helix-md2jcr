@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/adobe/helix-md2jcr/compare/v1.2.21...v1.3.0) (2026-06-08)
+
+
+### Features
+
+* **block-options:** support element grouping for block options ([#215](https://github.com/adobe/helix-md2jcr/issues/215)) ([7388c2d](https://github.com/adobe/helix-md2jcr/commit/7388c2dcf95252393c47fc8097235f4612916342)), closes [#214](https://github.com/adobe/helix-md2jcr/issues/214)
+
 ## [1.2.21](https://github.com/adobe/helix-md2jcr/compare/v1.2.20...v1.2.21) (2026-06-08)
 
 
