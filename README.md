@@ -99,6 +99,16 @@ const xml = await md2jcr(markdown, options);
 console.log(xml);
 ```
 
+## Documentation
+
+- [Container Blocks](docs/container-blocks.md) — how container blocks map parent
+  properties and child items (the one-column / many-column rules, omitting parent
+  rows, and error cases). See also the
+  [container-block test fixtures](test/fixtures/blocks/core/container-block/README.md)
+  for a worked scenario-by-scenario breakdown.
+- [Field Hinting](docs/field-hinting.md) — using `<!-- field: name -->` to skip
+  ahead within a field group.
+
 ## Baseline XML Files
 Running the ./baseline-tests.sh script will detect any md file under test/fixtures and execute the convert2jcr node script.  
 The script will generate new xml files beside the md files it locates. This is helpful when making changes to the converter

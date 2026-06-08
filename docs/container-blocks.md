@@ -146,3 +146,9 @@ child component name.
 - Start child rows with the child component id whenever more than one child
   component is allowed.
 - Never write a child component id on its own line without its property cells.
+
+## Examples
+
+For a worked, scenario-by-scenario breakdown of these rules — including omitted
+parent rows, empty parent properties, field hints, and the error case — see the
+[container-block test fixtures](../test/fixtures/blocks/core/container-block/README.md).
