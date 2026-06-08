@@ -1,3 +1,10 @@
+## [1.2.21](https://github.com/adobe/helix-md2jcr/compare/v1.2.20...v1.2.21) (2026-06-08)
+
+
+### Bug Fixes
+
+* **container-blocks:** correctly detect omitted parent rows ([#212](https://github.com/adobe/helix-md2jcr/issues/212)) ([cf89ba4](https://github.com/adobe/helix-md2jcr/commit/cf89ba4f040b990db2bb40a9d1b374087d63668e))
+
 ## [1.2.20](https://github.com/adobe/helix-md2jcr/compare/v1.2.19...v1.2.20) (2026-06-03)
 
 
