@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/adobe/helix-md2jcr/compare/v1.3.0...v1.4.0) (2026-06-09)
+
+
+### Features
+
+* **section-metadata:** element grouping for section style + classes in modelFields ([#216](https://github.com/adobe/helix-md2jcr/issues/216)) ([861bf48](https://github.com/adobe/helix-md2jcr/commit/861bf481d623e74045a81de2a80bbc0af6a31db1)), closes [#215](https://github.com/adobe/helix-md2jcr/issues/215)
+
 # [1.3.0](https://github.com/adobe/helix-md2jcr/compare/v1.2.21...v1.3.0) (2026-06-08)
 
 
