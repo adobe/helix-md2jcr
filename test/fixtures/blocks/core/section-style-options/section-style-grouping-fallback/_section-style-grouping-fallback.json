@@ -1,0 +1,14 @@
+{
+  "definitions": [],
+  "models": [
+    {
+      "id": "section",
+      "fields": [
+        { "component": "text", "name": "name" },
+        { "component": "text", "name": "style", "multi": true },
+        { "component": "boolean", "name": "style_sticky" }
+      ]
+    }
+  ],
+  "filters": []
+}

@@ -76,8 +76,9 @@ Promo (highlight, featured, sticky)   // classes is free-form, classes_sticky is
   -> classes="[highlight, featured]"  classes_sticky="true"
 ```
 
-The classes group fields are block options, not content, so they are excluded
-from `modelFields` and never consume content rows.
+The classes group fields are block options, not content, so they never consume
+content rows. They are still listed in `modelFields` so the Universal Editor can
+render their option controls.
 
 ## Requirements
 

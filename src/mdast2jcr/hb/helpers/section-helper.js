@@ -18,6 +18,7 @@ import {
   getField,
   getModelFieldNames,
 } from '../../domain/Models.js';
+import { distributeGroupOptions } from '../../domain/GroupOptions.js';
 
 /**
  * Normalizes strings by converting to lowercase and replacing spaces with hyphens
@@ -61,6 +62,12 @@ function processMetadataRows(rows, model) {
   // always push the model fields so UE can use them, even if no attributes are found
   const modelFields = getModelFieldNames(model);
 
+  // a section uses element grouping when it declares a `style_*` field; in that
+  // case the single well-known `style` cell collapses the whole style group and
+  // must be distributed back across style / style_* fields. A model with only a
+  // base `style` field keeps the simple per-row mapping below.
+  const hasStyleGroup = (model?.fields || []).some((f) => f.name.startsWith('style_'));
+
   for (const row of rows) {
     const cells = findAll(row, (n) => n.type === 'gtCell', true);
     if (cells.length < 2) {
@@ -73,6 +80,22 @@ function processMetadataRows(rows, model) {
 
     // Skip empty keys/values and the special blockModelId field
     if (!key || !value || key === 'blockModelId') {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+
+    // element grouping for section styles: route the flat `style` cell across
+    // the model's style group fields (boolean by name suffix, select/multiselect
+    // by declared options, leftovers to the base `style` field)
+    if (hasStyleGroup && key === 'style') {
+      Object.assign(
+        attributes,
+        distributeGroupOptions(
+          model,
+          value.split(',').map((s) => s.trim()).filter(Boolean),
+          'style',
+        ),
+      );
       // eslint-disable-next-line no-continue
       continue;
     }

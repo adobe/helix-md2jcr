@@ -42,6 +42,18 @@ function getField(model, fieldName) {
 }
 
 /**
+ * Returns true if the field name belongs to an element-grouping group — either
+ * the base field named exactly `group`, or a grouped option field `group_<name>`
+ * (element grouping for block options / section styles).
+ * @param {string} name The field name.
+ * @param {string} group The group name (e.g. `classes` or `style`).
+ * @return {boolean}
+ */
+function isGroupField(name, group) {
+  return name === group || name.startsWith(`${group}_`);
+}
+
+/**
  * Returns true if the field name belongs to the `classes` block-options group —
  * either the base `classes` field or a grouped `classes_*` option field
  * (element grouping for block options).
@@ -49,12 +61,14 @@ function getField(model, fieldName) {
  * @return {boolean}
  */
 function isClassesField(name) {
-  return name === 'classes' || name.startsWith('classes_');
+  return isGroupField(name, 'classes');
 }
 
 /**
- * Return a list of field names in the model, excluding the `classes` group
- * (those fields are block options, not content).
+ * Return a list of field names in the model. Block-option / section-style group
+ * fields (`classes`, `classes_*`, `style`, `style_*`) are included so the
+ * Universal Editor can render their controls; only `tab` fields (a UE layout
+ * construct, not a content field) are excluded.
  * @param {Model} model The model.
  * @return {Array<string>} An array of field names.
  */
@@ -63,7 +77,6 @@ function getModelFieldNames(model) {
     ? model.fields
       .filter((f) => f.component !== 'tab')
       .map((f) => f.name)
-      .filter((f) => !isClassesField(f))
     : [];
 }
 
@@ -72,4 +85,5 @@ export {
   findModelById,
   getModelFieldNames,
   isClassesField,
+  isGroupField,
 };
