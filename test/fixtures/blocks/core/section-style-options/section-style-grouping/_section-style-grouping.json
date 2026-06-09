@@ -1,0 +1,15 @@
+{
+  "definitions": [],
+  "models": [
+    {
+      "id": "section",
+      "fields": [
+        { "component": "text", "name": "name", "label": "Section Name" },
+        { "component": "select", "name": "style", "label": "Variant", "options": [ { "name": "Variant A", "value": "variant-a" }, { "name": "Variant B", "value": "variant-b" } ] },
+        { "component": "select", "name": "style_background", "label": "Background", "options": [ { "name": "Light", "value": "light" }, { "name": "Dark", "value": "dark" } ] },
+        { "component": "boolean", "name": "style_fullwidth", "label": "Full width" }
+      ]
+    }
+  ],
+  "filters": []
+}

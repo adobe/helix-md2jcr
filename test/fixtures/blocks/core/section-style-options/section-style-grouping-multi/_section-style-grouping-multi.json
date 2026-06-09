@@ -1,0 +1,15 @@
+{
+  "definitions": [],
+  "models": [
+    {
+      "id": "section",
+      "fields": [
+        { "component": "text", "name": "name" },
+        { "component": "select", "name": "style", "options": [ { "value": "variant-a" }, { "value": "variant-b" } ] },
+        { "component": "multiselect", "name": "style_background", "multi": true, "options": [ { "value": "light" }, { "value": "dark" }, { "value": "muted" } ] },
+        { "component": "boolean", "name": "style_fullwidth" }
+      ]
+    }
+  ],
+  "filters": []
+}

@@ -307,7 +307,8 @@ describe('block tests', () => {
    * fields by their declared option values, boolean fields by their name suffix
    * (e.g. "fullwidth" -> classes_fullwidth="true") — and unmatched tokens fall back
    * to the base `classes` field. The classes group fields are block options, not
-   * content, so they are excluded from modelFields.
+   * content, so they never consume content rows, but they are listed in
+   * modelFields so the Universal Editor can render their controls.
    */
   describe('block options', () => {
     const folder = 'blocks/core/block-options';
@@ -333,6 +334,39 @@ describe('block tests', () => {
     // appears; the rest are unset.
     it('block-options-grouping-booleans', async () => {
       await testBlock('block-options-grouping-booleans', `${folder}/block-options-grouping-booleans`);
+    });
+  });
+
+  /**
+   * Section style options via element grouping. A section model exposes its CSS
+   * classes through a `style` group (the base `style` field plus any `style_*`
+   * field). The single well-known Section Metadata `style` cell collapses the
+   * whole group; md2jcr routes each token back to its field — select/multiselect
+   * by declared options, boolean by name suffix — with leftovers falling back to
+   * the base `style` field. Like a block's `classes` group, the `style` group is
+   * listed in modelFields (the UE renders those fields).
+   */
+  describe('section style options', () => {
+    const folder = 'blocks/core/section-style-options';
+
+    // Single selects + a boolean that is on.
+    it('section-style-grouping', async () => {
+      await testBlock('section-style-grouping', `${folder}/section-style-grouping`);
+    });
+
+    // A multiselect claims several values; a boolean that is off contributes nothing.
+    it('section-style-grouping-multi', async () => {
+      await testBlock('section-style-grouping-multi', `${folder}/section-style-grouping-multi`);
+    });
+
+    // Free-form base `style` catches leftover tokens alongside a grouped boolean.
+    it('section-style-grouping-fallback', async () => {
+      await testBlock('section-style-grouping-fallback', `${folder}/section-style-grouping-fallback`);
+    });
+
+    // Several independent booleans: each is "true" only when its suffix appears.
+    it('section-style-grouping-booleans', async () => {
+      await testBlock('section-style-grouping-booleans', `${folder}/section-style-grouping-booleans`);
     });
   });
 

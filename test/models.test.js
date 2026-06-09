@@ -16,6 +16,7 @@ import {
   findModelById,
   getField,
   getModelFieldNames,
+  isGroupField,
 } from '../src/mdast2jcr/domain/Models.js';
 
 describe('Models Utility Test', () => {
@@ -83,25 +84,26 @@ describe('Models Utility Test', () => {
   });
 
   describe('getModelFieldNames', () => {
-    it('should return an array of field names excluding "classes"', () => {
+    it('should include the "classes" group fields (block options / section styles)', () => {
       const model = {
         fields: [
           { name: 'title', type: 'string' },
           { name: 'classes', type: 'string' },
+          { name: 'classes_background', component: 'select' },
           { name: 'content', type: 'string' },
         ],
       };
-      const expectedFields = ['title', 'content'];
+      const expectedFields = ['title', 'classes', 'classes_background', 'content'];
 
-      const result = getModelFieldNames(model, true);
+      const result = getModelFieldNames(model);
       assert.deepStrictEqual(result, expectedFields);
     });
 
-    it('should exclude the "classes" field from the list', () => {
+    it('should exclude only "tab" fields (a UE layout construct, not content)', () => {
       const model = {
         fields: [
           { name: 'title', type: 'string' },
-          { name: 'classes', type: 'string' },
+          { name: 'layout', component: 'tab' },
           { name: 'content', type: 'string' },
         ],
       };
@@ -126,6 +128,21 @@ describe('Models Utility Test', () => {
 
       const result = getModelFieldNames(null);
       assert.deepEqual(result, expectedFields);
+    });
+  });
+
+  describe('isGroupField', () => {
+    it('matches the base group name and its underscored options', () => {
+      assert.strictEqual(isGroupField('classes', 'classes'), true);
+      assert.strictEqual(isGroupField('classes_background', 'classes'), true);
+      assert.strictEqual(isGroupField('style', 'style'), true);
+      assert.strictEqual(isGroupField('style_fullwidth', 'style'), true);
+    });
+
+    it('does not match other fields or a different group', () => {
+      assert.strictEqual(isGroupField('title', 'classes'), false);
+      assert.strictEqual(isGroupField('style', 'classes'), false);
+      assert.strictEqual(isGroupField('stylebox', 'style'), false);
     });
   });
 });

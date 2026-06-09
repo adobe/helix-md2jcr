@@ -109,6 +109,9 @@ console.log(xml);
 - [Block Options (Classes)](docs/block-options.md) — block option classes and
   element grouping (`classes`, `classes_*`): how header options are routed to
   fields by their options or boolean name-suffix.
+- [Section Styles](docs/section-styles.md) — element grouping for a section's
+  `style` group (`style`, `style_*`): how the single Section Metadata `style`
+  cell is routed back to fields, mirroring block options.
 - [Field Hinting](docs/field-hinting.md) — using `<!-- field: name -->` to skip
   ahead within a field group.
 

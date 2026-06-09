@@ -1,0 +1,15 @@
+{
+  "definitions": [],
+  "models": [
+    {
+      "id": "section",
+      "fields": [
+        { "component": "text", "name": "name" },
+        { "component": "boolean", "name": "style_dark" },
+        { "component": "boolean", "name": "style_fullwidth" },
+        { "component": "boolean", "name": "style_narrow" }
+      ]
+    }
+  ],
+  "filters": []
+}
