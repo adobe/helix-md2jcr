@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/adobe/helix-md2jcr/compare/v1.4.0...v1.4.1) (2026-06-09)
+
+
+### Bug Fixes
+
+* republish after npm provenance failures ([c078b3f](https://github.com/adobe/helix-md2jcr/commit/c078b3f68de461213347339cc6afd3de1c3cfcd7))
+
 # [1.4.0](https://github.com/adobe/helix-md2jcr/compare/v1.3.0...v1.4.0) (2026-06-09)
 
 
