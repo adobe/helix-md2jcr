@@ -16,6 +16,7 @@ import { toString } from 'mdast-util-to-string';
 import Handlebars from 'handlebars';
 import { toHast } from 'mdast-util-to-hast';
 import { toHtml } from 'hast-util-to-html';
+import { customHastHandlers } from './supports/hast-handlers.js';
 import { getComponentById, getComponentByTitle, getModelId } from '../../domain/Definitions.js';
 import {
   findModelById,
@@ -177,6 +178,7 @@ function extractPropertiesForNode(field, currentNode, properties) {
       value = currentNode.children.reduce((acc, node) => {
         const hast = toHast(node, {
           allowDangerousHtml: true,
+          handlers: customHastHandlers,
         });
 
         let str = toHtml(hast, {
@@ -190,7 +192,7 @@ function extractPropertiesForNode(field, currentNode, properties) {
         return acc + encodeHtml(str);
       }, '');
     } else {
-      value = encodeHtml(toHtml(toHast(currentNode)));
+      value = encodeHtml(toHtml(toHast(currentNode, { handlers: customHastHandlers })));
     }
 
     // if the node is a code block then don't strip out the newlines

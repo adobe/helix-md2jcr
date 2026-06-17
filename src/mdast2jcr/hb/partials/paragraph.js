@@ -13,10 +13,11 @@ import Handlebars from 'handlebars';
 
 import { toHast } from 'mdast-util-to-hast';
 import { toHtml } from 'hast-util-to-html';
+import { customHastHandlers } from './supports/hast-handlers.js';
 
 function paragraph(context) {
   const html = context.children.map((child) => {
-    const hast = toHast(child);
+    const hast = toHast(child, { handlers: customHastHandlers });
     return toHtml(hast);
   }).join('');
 

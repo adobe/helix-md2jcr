@@ -252,6 +252,14 @@ describe('block tests', () => {
         await testBlock('richtext-html', `${folder}/richtext-html`);
       });
 
+      it('richtext-superscript', async () => {
+        await testBlock('richtext-superscript', `${folder}/richtext-superscript`);
+      });
+
+      it('richtext-inline-html', async () => {
+        await testBlock('richtext-inline-html', `${folder}/richtext-inline-html`);
+      });
+
       // richtext consumes content up to the next image.
       it('richtext-greedy', async () => {
         await testBlock('richtext-greedy', `${folder}/richtext-greedy`);
