@@ -114,6 +114,8 @@ console.log(xml);
   cell is routed back to fields, mirroring block options.
 - [Field Hinting](docs/field-hinting.md) — using `<!-- field: name -->` to skip
   ahead within a field group.
+- [Phrasing Content](docs/phrasing.md) — supported inline HTML tags (`sup`, `sub`,
+  `u`, `del`, `strong`, `em`) and how they survive the markdown → JCR pipeline.
 
 ## Baseline XML Files
 Running the ./baseline-tests.sh script will detect any md file under test/fixtures and execute the convert2jcr node script.  
