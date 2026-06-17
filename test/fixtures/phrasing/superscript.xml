@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
+  <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
+    <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
+        <title sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="Superscript Examples" titleType="h1"/>
+        <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Einstein&#x27;s famous equation: E &#x3D; mc&lt;sup&gt;2&lt;/sup&gt;&lt;/p&gt;&lt;p&gt;The area of a circle is πr&lt;sup&gt;2&lt;/sup&gt;, and the volume of a sphere is &lt;sup&gt;4&lt;/sup&gt;/&lt;sub&gt;3&lt;/sub&gt;πr&lt;sup&gt;3&lt;/sup&gt;.&lt;/p&gt;&lt;p&gt;This is a footnote reference.&lt;sup&gt;1&lt;/sup&gt;&lt;/p&gt;&lt;p&gt;Ordinals: 1&lt;sup&gt;st&lt;/sup&gt;, 2&lt;sup&gt;nd&lt;/sup&gt;, 3&lt;sup&gt;rd&lt;/sup&gt;, 4&lt;sup&gt;th&lt;/sup&gt;&lt;/p&gt;"/>
+      </section>
+    </root>
+  </jcr:content>
+</jcr:root>

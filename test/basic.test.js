@@ -42,6 +42,32 @@ describe('basic Tests', () => {
     await test('default-content-only');
   });
 
+  describe('phrasing', () => {
+    it('converts superscript', async () => {
+      await test('phrasing/superscript');
+    });
+
+    it('converts subscript', async () => {
+      await test('phrasing/subscript');
+    });
+
+    it('converts underline', async () => {
+      await test('phrasing/underline');
+    });
+
+    it('converts strikethrough', async () => {
+      await test('phrasing/strikethrough');
+    });
+
+    it('converts bold as raw HTML', async () => {
+      await test('phrasing/bold');
+    });
+
+    it('converts italic as raw HTML', async () => {
+      await test('phrasing/italic');
+    });
+  });
+
   it('tables are not supported', async () => {
     await assert.rejects(
       test('table'),
