@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/adobe/helix-md2jcr/compare/v1.4.1...v1.5.0) (2026-06-17)
+
+
+### Features
+
+* **phrasing:** preserve inline HTML tags in text elements ([#217](https://github.com/adobe/helix-md2jcr/issues/217)) ([5f7d274](https://github.com/adobe/helix-md2jcr/commit/5f7d2745005ae0947866fb66989cdb9626cb3e60))
+
 ## [1.4.1](https://github.com/adobe/helix-md2jcr/compare/v1.4.0...v1.4.1) (2026-06-09)
 
 
