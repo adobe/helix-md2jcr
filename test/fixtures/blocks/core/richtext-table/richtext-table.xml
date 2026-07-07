@@ -4,6 +4,7 @@
     <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
       <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
         <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" model="richtext-table" modelFields="[text]" name="Richtext Table" text="&lt;p&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Role&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Ada&lt;/td&gt;&lt;td&gt;Engineer&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Grace&lt;/td&gt;&lt;td&gt;Admiral&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/p&gt;"></block>
+        <block_1 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" model="richtext-table" modelFields="[text]" name="Richtext Table" text="&lt;p&gt;before text&lt;/p&gt;&lt;p&gt;&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Role&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;Ada&lt;/td&gt;&lt;td&gt;Engineer&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Grace&lt;/td&gt;&lt;td&gt;Admiral&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;after&lt;/em&gt; text&lt;/p&gt;"></block_1>
       </section>
     </root>
   </jcr:content>
