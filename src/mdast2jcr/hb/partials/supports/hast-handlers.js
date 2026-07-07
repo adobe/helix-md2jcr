@@ -9,6 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import { mdast2hastGridTablesHandler } from '@adobe/mdast-util-gridtables';
 
 /**
  * Creates a hast handler that maps a custom mdast node type to an inline HTML element.
@@ -32,9 +33,16 @@ function formatHandler(tagName) {
  * Custom hast handlers for mdast node types that mdast-util-to-hast does not recognize
  * by default. Pass these as the `handlers` option wherever toHast() is called so that
  * inline formatting round-trips correctly through the mdast → hast → HTML pipeline.
+ *
+ * `gridTable` nodes show up here when a cell's content is itself a full markdown
+ * document containing a nested grid table (@adobe/remark-gridtables allows this).
+ * Without this handler mdast-util-to-hast falls back to its unknown-node handler,
+ * which just wraps every gtHeader/gtBody/gtRow/gtCell in a <div>, discarding the
+ * table semantics (and any colSpan/rowSpan/align data on the cells).
  */
 export const customHastHandlers = {
   superscript: formatHandler('sup'),
   subscript: formatHandler('sub'),
   underline: formatHandler('u'),
+  gridTable: mdast2hastGridTablesHandler(),
 };

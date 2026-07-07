@@ -260,6 +260,13 @@ describe('block tests', () => {
         await testBlock('richtext-inline-html', `${folder}/richtext-inline-html`);
       });
 
+      // a richtext field's cell content can itself be a full markdown document,
+      // including a nested grid table; its gtHeader/gtBody/gtRow/gtCell nodes must
+      // round-trip to a real <table>, not the unknown-node <div> fallback.
+      it('richtext-table', async () => {
+        await testBlock('richtext-table', `${folder}/richtext-table`);
+      });
+
       // richtext consumes content up to the next image.
       it('richtext-greedy', async () => {
         await testBlock('richtext-greedy', `${folder}/richtext-greedy`);
