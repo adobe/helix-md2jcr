@@ -1,3 +1,10 @@
+## [1.5.9](https://github.com/adobe/helix-md2jcr/compare/v1.5.8...v1.5.9) (2026-09-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency image-size to v2.0.3 [security] ([#234](https://github.com/adobe/helix-md2jcr/issues/234)) ([a01f57d](https://github.com/adobe/helix-md2jcr/commit/a01f57d9b4980dcdd9db04cc354a82be8c9ecf87))
+
 ## [1.5.8](https://github.com/adobe/helix-md2jcr/compare/v1.5.7...v1.5.8) (2026-09-01)
 
 
