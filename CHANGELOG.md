@@ -1,3 +1,10 @@
+## [1.5.18](https://github.com/adobe/helix-md2jcr/compare/v1.5.17...v1.5.18) (2026-10-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mime to v4.1.1 ([#248](https://github.com/adobe/helix-md2jcr/issues/248)) ([22ba1eb](https://github.com/adobe/helix-md2jcr/commit/22ba1eb9efe2c0f06723cf05423407093d4d813d))
+
 ## [1.5.17](https://github.com/adobe/helix-md2jcr/compare/v1.5.16...v1.5.17) (2026-10-20)
 
 
