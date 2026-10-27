@@ -45,7 +45,7 @@
     "image-size": "2.0.4",
     "mdast-util-to-hast": "^13.2.0",
     "mdast-util-to-string": "^4.0.0",
-    "mime": "4.1.0",
+    "mime": "4.1.1",
     "rehype-parse": "9.0.1",
     "remark-gfm": "4.0.1",
     "remark-parse": "11.0.0",
