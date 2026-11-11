@@ -1,3 +1,10 @@
+## [1.5.20](https://github.com/adobe/helix-md2jcr/compare/v1.5.19...v1.5.20) (2026-11-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/mdast-util-gridtables to v4.0.22 ([#250](https://github.com/adobe/helix-md2jcr/issues/250)) ([8103893](https://github.com/adobe/helix-md2jcr/commit/8103893e6ba5d84feb1690c0b86c312b4ad22167))
+
 ## [1.5.19](https://github.com/adobe/helix-md2jcr/compare/v1.5.18...v1.5.19) (2026-10-27)
 
 
