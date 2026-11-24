@@ -1,3 +1,10 @@
+## [1.5.27](https://github.com/adobe/helix-md2jcr/compare/v1.5.26...v1.5.27) (2026-11-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-markdown-support to v7.1.31 ([#257](https://github.com/adobe/helix-md2jcr/issues/257)) ([5c42203](https://github.com/adobe/helix-md2jcr/commit/5c4220351d1090b4236f72e6830f1ab65eb33be1))
+
 ## [1.5.26](https://github.com/adobe/helix-md2jcr/compare/v1.5.25...v1.5.26) (2026-11-24)
 
 
