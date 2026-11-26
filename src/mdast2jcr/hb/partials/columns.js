@@ -53,8 +53,13 @@ function columnsPartial(context) {
       classes = (classesField.multi === true) ? `[${blockClasses.join(',')}]` : blockClasses.join(',');
     }
 
+    // emit the full block name (e.g. "Columns Foobar") so custom column blocks
+    // can be identified; the base "Columns" block gets no name attribute. The
+    // blockName excludes any (classes) portion, so no class info leaks in here.
+    const name = blockName.toLowerCase() === 'columns' ? '' : blockName;
+
     headerProps = {
-      // name: match.groups.blockName.trim(),
+      name,
       // modelFields: `[${getModelFieldNames(model).join(',')}]`,
       classes,
       rows: rows.length,

@@ -61,6 +61,10 @@ describe('block tests', () => {
       await testBlock('columns-boilerplate', `${folder}/columns-boilerplate`);
     });
 
+    it('columns-savings', async () => {
+      await testBlock('columns-savings', `${folder}/columns-savings`);
+    });
+
     /**
      * Container blocks create a parent block node and one or more child block item
      * nodes. They require special handling for parent vs. child rows, class
