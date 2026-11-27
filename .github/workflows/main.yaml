@@ -9,6 +9,9 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write # needed for npm trusted publishers with OIDC
     steps:
       - uses: actions/checkout@v5
       - name: Use Node.js 20.x
