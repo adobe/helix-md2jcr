@@ -1,3 +1,11 @@
+## [1.5.27](https://github.com/adobe/helix-md2jcr/compare/v1.5.26...v1.5.27) (2026-11-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-markdown-support to v7.1.31 ([#257](https://github.com/adobe/helix-md2jcr/issues/257)) ([5c42203](https://github.com/adobe/helix-md2jcr/commit/5c4220351d1090b4236f72e6830f1ab65eb33be1))
+* escape XML attribute values centrally across partials and helpers ([#259](https://github.com/adobe/helix-md2jcr/issues/259)) ([513b804](https://github.com/adobe/helix-md2jcr/commit/513b804be6eb72c82eeaf0f6dd553a33916c4fa3))
+
 ## [1.5.27](https://github.com/adobe/helix-md2jcr/compare/v1.5.26...v1.5.27) (2026-11-24)
 
 
