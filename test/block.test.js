@@ -317,6 +317,16 @@ describe('block tests', () => {
     it('xml-escaping', async () => {
       await testBlock('xml-escaping', `${folder}/xml-escaping`);
     });
+
+    /**
+     * Dynamic Media link-images ([DM_URL](DM_URL "alt")) in blocks (reference and
+     * custom-asset-namespace:custom-asset fields, omitted/empty alt, mixed
+     * imageAlt/imageTitle models, grouped fields, container items, greedy richtext
+     * with field hints) as well as standalone default content and Columns cells.
+     */
+    it('dynamic-media-link-images', async () => {
+      await testBlock('dynamic-media-link-images', `${folder}/dynamic-media-link-images`);
+    });
   });
 
   /**

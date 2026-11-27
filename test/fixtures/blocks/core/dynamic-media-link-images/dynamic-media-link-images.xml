@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
+  <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent">
+    <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured">
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" image="https://delivery-p12345-e67890.adobeaemcloud.com/adobe/assets/urn:aaid:aem:9ead338d-4ac8-483a-a1cd-a3c7dfe9f437/as/hero.avif" imageTitle="Mountain vista" model="hero-reference" modelFields="[image,imageTitle,text]" name="Hero Reference" text="&lt;p&gt;&lt;h1&gt;Welcome to Dynamic Media&lt;/h1&gt;&lt;/p&gt;"></block>
+        <block_1 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" image="https://s7d1.scene7.com/is/image/org/hero?$preset=hero&amp;wid=1200&amp;qlt=80" imageTitle="Hero &amp; &quot;banner&quot; &lt;2026&gt;" model="hero-custom-asset" modelFields="[image,imageTitle,text]" name="Hero Custom Asset" text="&lt;p&gt;Scene7 hero copy.&lt;/p&gt;"></block_1>
+        <block_2 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" image="https://s7d1.scene7.com/is/image/org/no-alt?wid=800" model="hero-custom-asset" modelFields="[image,imageTitle,text]" name="Hero Custom Asset" text="&lt;p&gt;Omitted alt text.&lt;/p&gt;"></block_2>
+        <block_3 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" image="https://s7d1.scene7.com/is/image/org/empty-alt?wid=800" model="hero-custom-asset" modelFields="[image,imageTitle,text]" name="Hero Custom Asset" text="&lt;p&gt;Empty alt text.&lt;/p&gt;"></block_3>
+        <block_4 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" image="https://s7d1.scene7.com/is/image/org/dm-photo?wid=600" imageTitle="DM photo alt" model="mixed-media" modelFields="[image,imageAlt,imageTitle]" name="Mixed Media"></block_4>
+        <block_5 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" image="/content/dam/site/local.jpg" imageAlt="DAM photo alt" model="mixed-media" modelFields="[image,imageAlt,imageTitle]" name="Mixed Media"></block_5>
+        <block_6 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" card_image="https://s7d1.scene7.com/is/image/org/teaser?wid=600&amp;fmt=webp" card_imageTitle="Grouped card alt" card_text="&lt;p&gt;Teaser intro copy.&lt;/p&gt;" model="teaser" modelFields="[card_text,card_image,card_imageTitle]" name="Teaser"></block_6>
+        <block_7 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" filter="dm-cards" name="DM Cards">
+          <item_0 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="DM Card" model="dm-card" modelFields="[image,imageTitle,text]" image="https://delivery-p12345-e67890.adobeaemcloud.com/adobe/assets/urn:aaid:aem:11111111-2222-3333-4444-555555555555/as/card-1.avif" imageTitle="First card alt" text="&lt;p&gt;First card description.&lt;/p&gt;"></item_0>
+          <item_1 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="DM Card" model="dm-card" modelFields="[image,imageTitle,text]" image="https://s7d1.scene7.com/is/image/org/card-2?wid=400&amp;fmt=jpg" text="&lt;p&gt;Second card description.&lt;/p&gt;"></item_1>
+        </block_7>
+        <button sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://delivery-p12345-e67890.adobeaemcloud.com/adobe/assets/urn:aaid:aem:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/as/standalone.avif" linkText="https://delivery-p12345-e67890.adobeaemcloud.com/adobe/assets/urn:aaid:aem:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/as/standalone.avif" linkTitle="Standalone DM alt"/>
+        <button_1 sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://s7d1.scene7.com/is/image/org/standalone-no-alt?wid=800&amp;fmt=webp" linkText="https://s7d1.scene7.com/is/image/org/standalone-no-alt?wid=800&amp;fmt=webp"/>
+        <columns sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" rows="1" columns="2">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <button sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://s7d1.scene7.com/is/image/org/col?wid=600&amp;fmt=webp" linkText="https://s7d1.scene7.com/is/image/org/col?wid=600&amp;fmt=webp" linkTitle="Column DM alt"/>
+            </col1>
+            <col2 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Column text&lt;/p&gt;"/>
+            </col2>
+          </row1>
+        </columns>
+      </section>
+    </root>
+  </jcr:content>
+</jcr:root>
