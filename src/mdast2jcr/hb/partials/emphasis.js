@@ -11,24 +11,25 @@
  */
 
 import Handlebars from 'handlebars';
+import { toString } from 'mdast-util-to-string';
+import { serializeXmlAttributes } from '../../utils.js';
 
 function emphasis(context) {
   const uniqueName = Handlebars.helpers.nameHelper.call(context, 'button');
   const { children: [child] } = context;
-  const { title, url, children: [{ value }] } = child;
+  const { title, url } = child;
   const attributes = {
     'sling:resourceType': 'core/franklin/components/button/v1/button',
     'jcr:primaryType': 'nt:unstructured',
     link: url,
-    linkText: value,
+    linkText: toString(child),
     linkType: 'secondary',
   };
   if (title != null) {
     attributes.linkTitle = title;
   }
 
-  const attributesStr = Object.entries(attributes).map(([k, v]) => `${k}="${v}"`).join(' ');
-  return `<button${uniqueName} ${attributesStr}  />`;
+  return `<button${uniqueName} ${serializeXmlAttributes(attributes)}  />`;
 }
 
 export default emphasis;

@@ -20,6 +20,7 @@ import {
   findModelById,
   getField,
 } from '../../domain/Models.js';
+import { serializeXmlAttributes } from '../../utils.js';
 
 // eslint-disable-next-line no-unused-vars
 function columnsPartial(context) {
@@ -99,7 +100,7 @@ function columnsPartial(context) {
     return `<row${rowIndex + 1} jcr:primaryType="nt:unstructured">${columnEls.join('\n')}</row${rowIndex + 1}>`;
   });
 
-  const attributesStr = Object.entries(attributes).map(([k, v]) => `${k}="${v}"`).join(' ');
+  const attributesStr = serializeXmlAttributes(attributes);
   return `<columns${uniqueName} ${attributesStr}>${rowEls.join('\n')}</columns${uniqueName}>`;
 }
 

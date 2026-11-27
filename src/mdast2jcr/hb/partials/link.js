@@ -11,23 +11,24 @@
  */
 
 import Handlebars from 'handlebars';
+import { toString } from 'mdast-util-to-string';
+import { serializeXmlAttributes } from '../../utils.js';
 
 // eslint-disable-next-line no-unused-vars
 function link(context) {
   const uniqueName = Handlebars.helpers.nameHelper.call(context, 'button');
-  const { url, title, children: [child] } = context;
+  const { url, title } = context;
   const attributes = {
     'sling:resourceType': 'core/franklin/components/button/v1/button',
     'jcr:primaryType': 'nt:unstructured',
     link: url,
-    linkText: child?.value || '',
+    linkText: toString(context),
   };
   if (title != null) {
     attributes.linkTitle = title;
   }
 
-  const attributesStr = Object.entries(attributes).map(([k, v]) => `${k}="${v}"`).join(' ');
-  return `<button${uniqueName} ${attributesStr}  />`;
+  return `<button${uniqueName} ${serializeXmlAttributes(attributes)}  />`;
 }
 
 export default link;

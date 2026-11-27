@@ -8,6 +8,11 @@
         <button sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://www.adobe.com" linkText="Link"/>
         <button_1 sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://www.adobe.com" linkText="Button 1" linkType="secondary"/>
         <button_2 sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://www.adobe.com" linkText="Button 2" linkType="primary"/>
+        <button_3 sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://example.com/image.jpg" linkText="&lt; Click to view larger image &gt;"/>
+        <button_4 sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://example.com/form?site=cnv&amp;id=123" linkText="Apply now" linkTitle="Apply &lt;now&gt; &amp; &quot;save&quot;"/>
+        <button_5 sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://example.com/sec?a=1&amp;b=2" linkText="&lt; Secondary &gt; &amp; more" linkType="secondary" linkTitle="A &amp; &lt; B &gt;"/>
+        <button_6 sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://example.com/pri?c=3&amp;d=4" linkText="Primary &lt; Click &gt; &amp; go" linkType="primary" linkTitle="C &amp; &quot;D&quot;"/>
+        <button_7 sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://example.com/code?e=5&amp;f=6" linkText="Click &lt;tag&gt; &amp; go" linkType="primary"/>
       </section>
     </root>
   </jcr:content>

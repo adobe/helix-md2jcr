@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 import Handlebars from 'handlebars';
+import { preEncodedAttribute, serializeXmlAttributes } from '../../utils.js';
 
 function heading(context) {
 // You can access the context here and return a string based on it
@@ -27,12 +28,14 @@ function heading(context) {
       return `<strong>${node.children.map(parseInlineElements).join('')}</strong>`;
     }
     if (node.type === 'link') {
+      // eslint-disable-next-line local/no-unescaped-xml-attr -- escaped as a whole below
       return `<a href="${node.url}">${node.children.map(parseInlineElements).join('')}</a>`;
     }
     if (node.type === 'inlineCode') {
       return `<code>${node.value}</code>`;
     }
     if (node.type === 'image') {
+      // eslint-disable-next-line local/no-unescaped-xml-attr -- escaped as a whole below
       return `<img src="${node.url}" alt="${node.alt}"/>`;
     }
     if (node.type === 'html') {
@@ -41,13 +44,19 @@ function heading(context) {
     return '';
   };
 
-  let title = '';
   // Traverse the children of the heading to build the title, there can be
   // multiple children that contribute to the title like text, link, strong, etc.
+  const title = Handlebars.Utils.escapeExpression(
+    context.children.map(parseInlineElements).join(''),
+  );
+  const attributes = {
+    'sling:resourceType': 'core/franklin/components/title/v1/title',
+    'jcr:primaryType': 'nt:unstructured',
+    title: preEncodedAttribute(title),
+    titleType: `h${depth}`,
+  };
 
-  title = Handlebars.Utils.escapeExpression(context.children.map(parseInlineElements).join(''));
-
-  return `<title${uniqueName} sling:resourceType="core/franklin/components/title/v1/title" jcr:primaryType="nt:unstructured" title="${title}" titleType="h${depth}"/>\n`;
+  return `<title${uniqueName} ${serializeXmlAttributes(attributes)}/>\n`;
 }
 
 export default heading;

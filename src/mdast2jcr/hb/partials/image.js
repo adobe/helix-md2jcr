@@ -23,9 +23,8 @@ function image(context) {
 
   const uniqueName = Handlebars.helpers.nameHelper.call(context, 'image');
 
-  const encoded = encodeHtml(url);
   return `<image${uniqueName} sling:resourceType="core/franklin/components/image/v1/image" 
-    jcr:primaryType="nt:unstructured" image="${encoded}" imageAlt="${encodeHtml(alt)}"/>\n`;
+    jcr:primaryType="nt:unstructured" image="${encodeHtml(url)}" imageAlt="${encodeHtml(alt)}"/>\n`;
 }
 
 export default image;

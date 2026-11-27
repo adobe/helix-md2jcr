@@ -19,6 +19,7 @@ import {
   getModelFieldNames,
 } from '../../domain/Models.js';
 import { distributeGroupOptions } from '../../domain/GroupOptions.js';
+import { serializeXmlAttributes } from '../../utils.js';
 
 /**
  * Normalizes strings by converting to lowercase and replacing spaces with hyphens
@@ -200,9 +201,7 @@ function sectionHelper(index, children, options) {
     attributes.modelFields = `[${modelFields.join(',')}]`;
   }
 
-  const attributesStr = Object.entries(attributes)
-    .map(([k, v]) => `${k}="${v}"`)
-    .join(' ');
+  const attributesStr = serializeXmlAttributes(attributes);
 
   return `<section${uniqueName} ${attributesStr}>${options.fn(this)}</section${uniqueName}>`;
 }

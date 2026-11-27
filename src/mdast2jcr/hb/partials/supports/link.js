@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 import { find } from 'unist-util-find';
+import { toString } from 'mdast-util-to-string';
 
 /** @typedef {import('mdast').Node} Node */
 
@@ -34,10 +35,9 @@ const link = {
 
   getProperties: (child) => {
     const node = find(child, { type: 'link' });
-    const text = find(node, { type: 'text' });
     return {
       href: node.url,
-      text: text?.value || '',
+      text: toString(node),
       title: node.title || '',
     };
   },
