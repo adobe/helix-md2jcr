@@ -182,10 +182,52 @@ export function unwrapImages(mdast) {
   return mdast;
 }
 
-export function encodeHTMLEntities(str) {
-  return str ? str.replace(/&(?!amp;|lt;|gt;|quot;|apos;|#\d+;)/g, '&amp;')
+class PreEncodedAttribute {
+  constructor(value) {
+    this.value = value;
+  }
+}
+
+/**
+ * Mark an attribute value as already XML-escaped so serializeXmlAttributes
+ * does not double-escape it (used for richtext encoded via encodeHtml).
+ * @param {string} value - Pre-escaped XML attribute value.
+ * @return {PreEncodedAttribute}
+ */
+export function preEncodedAttribute(value) {
+  return new PreEncodedAttribute(value);
+}
+
+/**
+ * Escape a raw value for safe inclusion inside a double-quoted XML attribute.
+ * @param {*} value - The raw attribute value.
+ * @return {string} The XML-escaped attribute value.
+ */
+export function escapeXmlAttribute(value) {
+  if (value instanceof PreEncodedAttribute) {
+    return value.value;
+  }
+  if (value === null || value === undefined) {
+    return '';
+  }
+  return String(value)
+    .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
-    .replace(/"/g, '&quot;') : '';
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/**
+ * Serialize a map or entry list of attributes into an XML attribute string,
+ * escaping every value for double-quoted XML attributes.
+ * @param {Object<string, *>|Array<[string, *]>} attributes - Attributes object or entries.
+ * @return {string} Space-separated `key="escapedValue"` string.
+ */
+export function serializeXmlAttributes(attributes) {
+  const entries = Array.isArray(attributes) ? attributes : Object.entries(attributes);
+  return entries
+    .map(([k, v]) => `${k}="${escapeXmlAttribute(v)}"`)
+    .join(' ');
 }
 
 export function encodeHtml(str) {

@@ -17,7 +17,7 @@ import {
   getModelFieldNames,
 } from '../../domain/Models.js';
 import { findAll } from '../../utils/mdast.js';
-import { encodeHTMLEntities, stripNewlines } from '../../utils.js';
+import { escapeXmlAttribute, serializeXmlAttributes, stripNewlines } from '../../utils.js';
 import link from '../partials/supports/link.js';
 import image from '../partials/supports/image.js';
 
@@ -62,10 +62,8 @@ function buildPageMetadata(table, models) {
       } else {
         let value = stripNewlines(cells[1]);
         if (isMultiField(field)) {
-          value = value.split(',').map((v) => encodeHTMLEntities(v.trim()));
+          value = value.split(',').map((v) => v.trim());
           value = value.length > 0 ? `[${value.join(',')}]` : '';
-        } else {
-          value = encodeHTMLEntities(value);
         }
         metadata[field.name] = value;
       }
@@ -111,11 +109,11 @@ function pageHelper(options) {
 
   // pull the image reference out of the attributes
   const { 'xwalk:imageReference': imageRef, ...properties } = attributes;
-  const attributesStr = Object.entries(properties).map(([k, v]) => `${k}="${v}"`).join(' ');
+  const attributesStr = serializeXmlAttributes(properties);
 
   return `<jcr:content ${attributesStr}>
     ${options.fn(this)}
-    ${imageRef ? `<image jcr:primaryType="nt:unstructured" fileReference="${imageRef}" />` : ''}
+    ${imageRef ? `<image jcr:primaryType="nt:unstructured" fileReference="${escapeXmlAttribute(imageRef)}" />` : ''}
     </jcr:content>
   `;
 }

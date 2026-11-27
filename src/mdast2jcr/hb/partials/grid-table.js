@@ -26,7 +26,11 @@ import { distributeGroupOptions } from '../../domain/GroupOptions.js';
 import { findAll } from '../../utils/mdast.js';
 import link from './supports/link.js';
 import {
-  encodeHtml, encodeHTMLEntities, sortJcrProperties, stripNewlines,
+  encodeHtml,
+  preEncodedAttribute,
+  serializeXmlAttributes,
+  sortJcrProperties,
+  stripNewlines,
 } from '../../utils.js';
 import image from './supports/image.js';
 import FieldGroupFieldResolver from '../../domain/FieldGroupFieldResolver.js';
@@ -148,16 +152,16 @@ function collapseField(id, fields, node, parentNode, properties) {
       } else if (link.supports(node)) {
         if (suffix === 'Text' || suffix === 'Title') {
           const value = link.getProperties(node)[suffix.toLowerCase()];
-          properties[field.name] = encodeHTMLEntities(value);
+          properties[field.name] = value;
         } else {
-          properties[field.name] = encodeHTMLEntities(node[suffix.toLowerCase()]);
+          properties[field.name] = node[suffix.toLowerCase()];
         }
       } else if (suffix === 'MimeType') {
         // TODO: can we guess the mime type from the src?
         properties[field.name] = 'image/unknown';
       } else {
         // take the suffix and read the property from the node
-        properties[field.name] = encodeHTMLEntities(node[suffix.toLowerCase()]);
+        properties[field.name] = node[suffix.toLowerCase()];
       }
 
       // clean out any empty properties so that we don't pollute the output
@@ -196,11 +200,12 @@ function extractPropertiesForNode(field, currentNode, properties) {
     }
 
     // if the node is a code block then don't strip out the newlines
-    properties[field.name] = find(currentNode, { type: 'code' }) ? value : stripNewlines(value);
+    const encoded = find(currentNode, { type: 'code' }) ? value : stripNewlines(value);
+    properties[field.name] = preEncodedAttribute(encoded);
   } else if (find(currentNode, { type: 'image' })) {
     const imageNode = find(currentNode, { type: 'image' });
     const { url } = image.getProperties(imageNode);
-    properties[field.name] = encodeHTMLEntities(url);
+    properties[field.name] = url;
     collapseField(field.name, fields, imageNode, null, properties);
   } else {
     const linkNode = find(currentNode, { type: 'link' });
@@ -209,10 +214,10 @@ function extractPropertiesForNode(field, currentNode, properties) {
       properties[field.name] = linkNode.url;
       collapseField(field.name, fields, linkNode, currentNode, properties);
     } else if (headlineNode) {
-      properties[field.name] = encodeHTMLEntities(toString(headlineNode));
+      properties[field.name] = toString(headlineNode);
       collapseField(field.name, fields, headlineNode, null, properties);
     } else {
-      let value = encodeHTMLEntities(toString(currentNode));
+      let value = toString(currentNode);
       if (field.component === 'multiselect' || field.component === 'aem-tag') {
         value = `[${value.split(',')
           .map((v) => v.trim())
@@ -468,7 +473,13 @@ function getBlockItems(mdast, modelHelper, definitions, allowedComponents) {
         };
 
         extractProperties(row, fieldGroup.model, 'blockItem', component, fieldGroup.fields, properties, skipFirstCell);
-        items.push(`<item_${items.length} jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="${fieldGroup.model.id}" ${Object.entries(properties).map(([k, v]) => `${k}="${v}"`).join(' ')}></item_${items.length}>`);
+        const itemAttributes = {
+          'jcr:primaryType': 'nt:unstructured',
+          'sling:resourceType': 'core/franklin/components/block/v1/block/item',
+          name: fieldGroup.model.id,
+          ...properties,
+        };
+        items.push(`<item_${items.length} ${serializeXmlAttributes(itemAttributes)}></item_${items.length}>`);
       }
     }
   });
@@ -592,7 +603,7 @@ function gridTablePartial(context) {
     // sort all the properties so that they are in a consistent order
     // helpful for debugging and xml readability
     const sorted = Object.entries(properties).sort(sortJcrProperties);
-    blockProperties = sorted.map(([k, v]) => `${k}="${v}"`).join(' ');
+    blockProperties = serializeXmlAttributes(sorted);
 
     // *****************************************************
     // Component Block Processing

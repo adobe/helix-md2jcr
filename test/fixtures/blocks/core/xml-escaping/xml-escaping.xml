@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0" jcr:primaryType="cq:Page">
+  <jcr:content cq:template="/libs/core/franklin/templates/page" sling:resourceType="core/franklin/components/page/v1/page" jcr:primaryType="cq:PageContent" jcr:title="News &amp; &lt; &quot;Updates&quot; &gt;" og:url="https://example.com/page?utm_source=a&amp;utm_medium=b" modelFields="[jcr:title,image,og:url]">
+    <root jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/root/v1/root">
+      <section sling:resourceType="core/franklin/components/section/v1/section" jcr:primaryType="nt:unstructured" style="dark" label="Q&amp;A &lt; &quot;Section&quot; &gt;" model="custom-section" modelFields="[style,label]">
+        <block sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" action="https://example.com/form?site=cnv&amp;id=123" cta="https://example.com/go?a=1&amp;b=2" ctaText="&lt; Click to view &gt;" ctaTitle="Info &amp; &quot;details&quot; &lt; here &gt;" description="&lt;p&gt;It&#x27;s a &lt;a href&#x3D;&quot;https://example.com/help?x&#x3D;1&amp;#x26;y&#x3D;2&quot;&gt;form&lt;/a&gt; with &lt;strong&gt;bold&lt;/strong&gt; text.&lt;/p&gt;" model="form" modelFields="[action,cta,ctaText,ctaTitle,description]" name="Form"></block>
+        <block_1 sling:resourceType="core/franklin/components/block/v1/block" jcr:primaryType="nt:unstructured" filter="links" name="Links">
+          <item_0 jcr:primaryType="nt:unstructured" sling:resourceType="core/franklin/components/block/v1/block/item" name="Link Item" model="link-item" modelFields="[link,linkText]" link="https://example.com/item?p=1&amp;q=2" linkText="&lt; Item &amp; &quot;quote&quot; &gt;"></item_0>
+        </block_1>
+        <columns sling:resourceType="core/franklin/components/columns/v1/columns" jcr:primaryType="nt:unstructured" classes="[a&amp;b]" rows="1" columns="2">
+          <row1 jcr:primaryType="nt:unstructured">
+            <col1 jcr:primaryType="nt:unstructured">
+              <button sling:resourceType="core/franklin/components/button/v1/button" jcr:primaryType="nt:unstructured" link="https://example.com/?c=1&amp;d=2" linkText="&lt; Col link &gt;"/>
+            </col1>
+            <col2 jcr:primaryType="nt:unstructured">
+              <text sling:resourceType="core/franklin/components/text/v1/text" jcr:primaryType="nt:unstructured" text="&lt;p&gt;Plain text&lt;/p&gt;"/>
+            </col2>
+          </row1>
+        </columns>
+      </section>
+    </root>
+    <image jcr:primaryType="nt:unstructured" fileReference="https://example.com/hero.jpg?width=1200&amp;format=jpg"/>
+  </jcr:content>
+</jcr:root>

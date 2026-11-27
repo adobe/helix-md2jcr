@@ -313,6 +313,10 @@ describe('block tests', () => {
     it('tables', async () => {
       await testBlock('tables', `${folder}/tables`);
     });
+
+    it('xml-escaping', async () => {
+      await testBlock('xml-escaping', `${folder}/xml-escaping`);
+    });
   });
 
   /**
