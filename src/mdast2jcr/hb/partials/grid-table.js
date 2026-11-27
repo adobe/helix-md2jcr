@@ -153,8 +153,6 @@ function collapseField(id, fields, node, parentNode, properties) {
         if (suffix === 'Text' || suffix === 'Title') {
           const value = link.getProperties(node)[suffix.toLowerCase()];
           properties[field.name] = value;
-        } else {
-          properties[field.name] = node[suffix.toLowerCase()];
         }
       } else if (suffix === 'MimeType') {
         // TODO: can we guess the mime type from the src?
