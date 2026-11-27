@@ -184,7 +184,7 @@ export function unwrapImages(mdast) {
 
 class PreEncodedAttribute {
   constructor(value) {
-    this.value = value;
+    this.value = value === null || value === undefined ? '' : String(value);
   }
 }
 

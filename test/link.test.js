@@ -74,4 +74,24 @@ describe('Link Helper Tests', () => {
     assert(properties.href === 'https://adobe.com');
     assert(properties.text === '');
   });
+
+  it('verify link properties with multiple inline children', () => {
+    const child = {
+      type: 'paragraph',
+      children: [
+        {
+          type: 'link',
+          url: 'https://adobe.com/?a=1&b=2',
+          children: [
+            { type: 'text', value: 'Apply ' },
+            { type: 'inlineCode', value: '<now>' },
+            { type: 'text', value: ' & save' },
+          ],
+        },
+      ],
+    };
+    const properties = link.getProperties(child);
+    assert.strictEqual(properties.href, 'https://adobe.com/?a=1&b=2');
+    assert.strictEqual(properties.text, 'Apply <now> & save');
+  });
 });

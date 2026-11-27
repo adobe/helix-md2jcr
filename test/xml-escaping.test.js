@@ -45,6 +45,8 @@ describe('XML Attribute Escaping Tests', () => {
     it('preserves pre-encoded attribute values without double-escaping', () => {
       const encoded = '&lt;p&gt;It&#x27;s &lt;a href&#x3D;&quot;https://example.com&quot;&gt;ok&lt;/a&gt;&lt;/p&gt;';
       assert.strictEqual(escapeXmlAttribute(preEncodedAttribute(encoded)), encoded);
+      assert.strictEqual(escapeXmlAttribute(preEncodedAttribute(null)), '');
+      assert.strictEqual(escapeXmlAttribute(preEncodedAttribute(undefined)), '');
     });
   });
 

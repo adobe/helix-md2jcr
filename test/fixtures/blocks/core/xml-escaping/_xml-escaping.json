@@ -60,7 +60,11 @@
         },
         {
           "component": "text",
-          "name": "og:url"
+          "name": "cq:canonicalUrl"
+        },
+        {
+          "component": "aem-tag",
+          "name": "cq:tags"
         }
       ]
     },
@@ -80,6 +84,21 @@
     {
       "id": "form",
       "fields": [
+        {
+          "component": "reference",
+          "name": "image",
+          "label": "Image"
+        },
+        {
+          "component": "text",
+          "name": "imageAlt",
+          "label": "Image Alt"
+        },
+        {
+          "component": "text",
+          "name": "heading",
+          "label": "Heading"
+        },
         {
           "component": "aem-content",
           "name": "action",
