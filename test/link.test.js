@@ -58,6 +58,31 @@ describe('Link Helper Tests', () => {
     const properties = link.getProperties(child);
     assert(properties.href === 'https://adobe.com');
     assert(properties.text === 'Adobe');
+    assert.strictEqual(properties.title, '');
+  });
+
+  it('verify link properties with title', () => {
+    const url = 'https://delivery-p12345-e67890.adobeaemcloud.com/adobe/assets/urn:aaid:aem:12345/as/hero.avif';
+    const child = {
+      type: 'paragraph',
+      children: [
+        {
+          type: 'link',
+          url,
+          title: 'Hero banner alt text',
+          children: [
+            {
+              type: 'text',
+              value: url,
+            },
+          ],
+        },
+      ],
+    };
+    const properties = link.getProperties(child);
+    assert.strictEqual(properties.href, url);
+    assert.strictEqual(properties.text, url);
+    assert.strictEqual(properties.title, 'Hero banner alt text');
   });
 
   it('verify link properties with no text', () => {

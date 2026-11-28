@@ -18,12 +18,14 @@
 export interface FieldDef {
   component: 'group' | 'aem-tag' | 'aem-content' | 'boolean' | 'checkbox-group' | 'container' |
       'aem-content-fragment' | 'date-time' | 'aem-experience-fragment' | 'multiselect' |
-      'number' | 'radio-group' | 'reference' | 'richtext' | 'select' | 'tab' | 'text';
+      'number' | 'radio-group' | 'reference' | 'richtext' | 'select' | 'tab' | 'text' |
+      (string & {});
   valueType: string;
   name: string;
   label: string;
   value?: string;
   multi?: boolean;
+  configUrl?: string;
   fields?: FieldDef[]; // for nested fields that have a component value type "group"
 }
 
